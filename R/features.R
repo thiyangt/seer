@@ -8,11 +8,9 @@
 #' @author Thiyanga Talagala
 #' @export
 acf5 <- function(y){
-  acfy <- stats::acf(y, lag.max = 5L, plot = FALSE, na.action = na.pass)
-  acfdiff1y <- stats::acf(diff(y, 1), lag.max = 5L, plot = FALSE,
-                   na.action = na.pass)
-  acfdiff2y <- stats::acf(diff(y, 2), lag.max = 5L, plot = FALSE,
-                   na.action = na.pass)
+  acfy <- stats::acf(y, lag.max = 5L, plot = FALSE)
+  acfdiff1y <- stats::acf(diff(y, 1), lag.max = 5L, plot = FALSE)
+  acfdiff2y <- stats::acf(diff(y, 2), lag.max = 5L, plot = FALSE)
 
   sum_of_sq_acf5 <- sum((acfy$acf[2L:6L])^2)
   diff1_acf5 <- sum((acfdiff1y$acf[2L:6L])^2)
