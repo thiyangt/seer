@@ -4,10 +4,10 @@
 \alias{acf5}
 \title{Autocorrelation-based features}
 \usage{
-acf5(x)
+acf5(y)
 }
 \arguments{
-\item{x}{a univariate time series}
+\item{y}{a univariate time series}
 }
 \value{
 A vector of 3 values: sum of squared of first five autocorrelation coefficients of original series, first-differenced series,
