@@ -6,6 +6,7 @@
 #' @param m frequency of the time series
 #' @param lagmax maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)
 #' @return dataframe: each column represent a feature and each row represent a time series
+#' @importFrom magrittr %>%
 #' @author Thiyanga Talagala
 #' @export
 cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data_set = yearly_m1,

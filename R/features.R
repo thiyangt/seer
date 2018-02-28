@@ -21,3 +21,76 @@ acf5 <- function(y){
   return(output)
 
 }
+#' Autocorrelation coefficient at lag 1 of the residuals
+#'
+#' Computes the first order autocorrelation of the residual series of the deterministic trend model
+#' @param y a univariate time series
+#' @return A numeric value.
+#' @author Thiyanga Talagala
+#' @export
+e_acf1 <- function(y){
+  n <- length(y)
+  time <- 1:n
+  linear_mod <- stats::lm(y~time)
+  Res <- stats::resid(linear_mod)
+  lmres_acf1 <- stats::acf(Res,lag.max=1,plot=FALSE)$acf[-1]
+  output <- c(lmres_acf1 = unname(lmres_acf1))
+  return(output)
+}
+#' Unit root test statistics
+#'
+#' Computes the test statistics based on unit root tests Phillips–Perron test and
+#' KPSS test
+#' @param  y a univariate time series
+#' @return A vector of 3 values: test statistic based on PP-test and KPSS-test
+#' @author Thiyanga Talagala
+#' @export
+unitroot <- function(y){
+    ur_pp <- urca::ur.pp(y, type = "Z-alpha",
+                                   model = "constant")@teststat[1]
+    ur_kpss <- urca::ur.kpss(y, type = "tau")@teststat[1]
+
+  output <- c(
+    ur_pp = unname(ur_pp),
+    ur_kpss = unname(ur_kpss))
+  return(output)
+}
+#' Parameter estimates of Holt-Winters seasonal method
+#'
+#' Estimate the smoothing parameter for the level-alpha and
+#' the smoothing parameter for the trend-beta, and seasonality-gamma
+#' @param y a univariate time series
+#' @return A vector of 3 values: alpha, beta, gamma
+#' @author Thiyanga Talagala
+#' @export
+holtWinter_parameters <- function(y){
+  fit <- forecast::hw(y)
+  output <- c(hwalpha = unname(fit$model$par["alpha"]),
+              hwbeta = unname(fit$model$par["beta"]),
+              hwgamma = unname(fit$model$par["gamma"]))
+  return(output)
+}
+#' Autocorrelation coefficients based on seasonally differenced series
+#'
+#' @param y a univariate time series
+#' @param m frequency of the time series
+#' @param lagmax maximum lag at which to calculate the acf
+#' @return A vector of 3 values: first ACF value of seasonally-differenced series, ACF value at the first seasonal lag of seasonally-differenced series,
+#' sum of squares of first 5 autocorrelation coefficients of seasonally-differenced series.
+#' @author Thiyanga Talagala
+#' @export
+acf_seasonalDiff <- function(y,m, lagmax){ # monthly lagmax=13L, quarterly lagmax=5L
+  sdiff <- diff(y, lag=m, differences=1)
+  sEacfy <- stats::acf(sdiff, lag.max = lagmax, plot = FALSE)
+  SEacf_1 <- sEacfy$acf[2L]
+  SEseas_acf1 <- sEacfy$acf[m+1L]
+  SEsum_of_sq_acf5 <- sum((sEacfy$acf[2L:6L])^2)
+
+  output <- c(
+    sediff_acf1 = unname(SEacf_1),
+    sediff_seacf1 = unname(SEseas_acf1),
+    sediff_acf5 = unname(SEsum_of_sq_acf5))
+  return(output)
+}
+
+
