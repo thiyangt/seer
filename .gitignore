@@ -1,4 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^cran-comments\.md$
+^\.travis\.yml$
+^revdep$
+^README\.Rmd$
+^README-.*\.png$
 .Rproj.user
-.Rhistory
-.RData
-.Ruserdata

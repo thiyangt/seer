@@ -15,7 +15,8 @@ Imports:
         tsfeatures,
         dplyr,
         magrittr,
-        randomForest
+        randomForest,
+        Mcomp
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
