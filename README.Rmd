@@ -25,4 +25,15 @@ You can install seer from github with:
 devtools::install_github("thiyangt/seer")
 ```
 
+## Example
+
+```{r}
+library(Mcomp)
+library(seer)
+library(tsfeatures)
+data(M3)
+yearly_m3 <- subset(M3, "yearly")
+M3yearly_features <- cal_features(yearly_m3)
+head(M3yearly_features)
+```
 
