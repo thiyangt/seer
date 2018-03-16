@@ -7,11 +7,11 @@ Maintainer: Thiyanga Talagala <thiyanga.talagala@monash.edu>
 Description: Feature-based model selection framework for time series model selection.
 License: GPL-3
 Depends:
-    R (>= 2.10),
+    R (>= 3.2.3),
 Imports:
         stats,
         urca,
-        forecast,
+        forecast (>= 8.3),
         tsfeatures,
         dplyr,
         magrittr,
@@ -19,3 +19,4 @@ Imports:
         Mcomp
 Encoding: UTF-8
 RoxygenNote: 6.0.1
+LazyDate: true
