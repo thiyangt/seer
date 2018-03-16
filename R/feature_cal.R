@@ -53,16 +53,16 @@ cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data
 
   ts_featuresDF <- as.data.frame(ts_features)
 
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, spikiness = spike)
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, y_acf1 = x_acf1)
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, diff1y_acf1 = diff1_acf1)
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, diff2y_acf1 = diff2_acf1)
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, y_pacf5 = x_pacf5)
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, diff1y_pacf5 = diff1x_pacf5)
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, diff2y_pacf5 = diff2x_pacf5)
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "spikiness" = "spike")
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "y_acf1" = "x_acf1")
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "diff1y_acf1" = "diff1_acf1")
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "diff2y_acf1" = "diff2_acf1")
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "y_pacf5" = "x_pacf5")
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "diff1y_pacf5" = "diff1x_pacf5")
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "diff2y_pacf5" = "diff2x_pacf5")
 
   if(seasonal==TRUE){
-  ts_featuresDF <- dplyr::rename(ts_featuresDF, seasonality = seasonal_strength)
+  ts_featuresDF <- dplyr::rename(ts_featuresDF, "seasonality" = "seasonal_strength")
   }
 
   length <- lapply(ts_data_set, function(temp){length(temp$x)})
