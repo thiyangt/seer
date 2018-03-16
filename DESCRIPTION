@@ -17,6 +17,8 @@ Imports:
         magrittr,
         randomForest,
         Mcomp
+Remotes: robjhyndman/tsfeatures,
+         robjhyndman/forecast
 Encoding: UTF-8
 RoxygenNote: 6.0.1
 LazyDate: true
