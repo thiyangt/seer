@@ -3,4 +3,6 @@
 language: r
 sudo: false
 cache: packages
-r_github_packages: robjhyndman/forecast, robjhyndman/tsfeatures
+r_github_packages:
+ - robjhyndman/forecast
+ - robjhyndman/tsfeatures
