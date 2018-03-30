@@ -1,4 +1,6 @@
 
+------------------------------------------------------------------------
+
 [![Build Status](https://travis-ci.org/thiyangt/seer.svg?branch=master)](https://travis-ci.org/thiyangt/seer)
 
 seer
