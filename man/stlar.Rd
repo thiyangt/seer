@@ -14,10 +14,6 @@ stlar(y, h = 10, s.window = 11, robust = FALSE)
 \item{s.window}{Either the character string “periodic” or the span (in lags) of the loess window for seasonal extraction}
 
 \item{robust}{logical indicating if robust fitting be used in the loess procedue}
-
-\item{Combine}{if TRUE, training and test data in the M-competition data are combined and generate a time
-series corresponds to the full length of the series. Otherwise, it generate a time series
-based on the training period of the series.}
 }
 \value{
 return object of class forecast
