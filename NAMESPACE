@@ -2,6 +2,7 @@
 
 export(acf5)
 export(acf_seasonalDiff)
+export(cal_MASE)
 export(cal_features)
 export(e_acf1)
 export(head_ts)
