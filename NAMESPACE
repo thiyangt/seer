@@ -3,6 +3,7 @@
 export(acf5)
 export(acf_seasonalDiff)
 export(cal_MASE)
+export(cal_WA)
 export(cal_features)
 export(cal_sMAPE)
 export(e_acf1)
