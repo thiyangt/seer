@@ -4,7 +4,7 @@
 \alias{cal_MASE}
 \title{Mean Absolute Scaled Error(MASE)}
 \usage{
-cal_MASE(training, test, forecast, m = 1)
+cal_MASE(training, test, forecast)
 }
 \arguments{
 \item{training}{training peiod of the time series}
@@ -12,8 +12,6 @@ cal_MASE(training, test, forecast, m = 1)
 \item{test}{test period of the time series}
 
 \item{forecast}{forecast values of the series}
-
-\item{m}{frequency of the time series}
 }
 \value{
 returns a single value
