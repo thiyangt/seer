@@ -28,7 +28,7 @@ library(seer)
 library(tsfeatures)
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
-M3yearly_features <- cal_features(yearly_m3)
+M3yearly_features <- cal_features(yearly_m3, database="M3", h=6)
 head(M3yearly_features)
 #>     entropy lumpiness stability     hurst     trend    spikiness
 #> 1 0.7729350         0         0 0.9710509 0.9950394 2.373423e-07
@@ -67,8 +67,8 @@ fcast_accuracy(tslist=tslist,models= c("arima","ets","rw", "rwd", "theta", "stla
                database ="M3", cal_MASE, h=6)
 #> $accuracy
 #>          arima       ets       rw       rwd    theta    stlar        nn
-#> [1,] 0.1057683 0.1055410 7.703518 4.2035176 6.017236 1.566974 2.4649151
-#> [2,] 0.5563838 0.3011713 1.698388 0.6123443 1.096000 1.698388 0.2796355
+#> [1,] 0.1057683 0.1055410 7.703518 4.2035176 6.017236 1.566974 2.3793395
+#> [2,] 0.5563838 0.3011713 1.698388 0.6123443 1.096000 1.698388 0.2797137
 #>        snaive      mstl
 #> [1,] 7.703518 1.5636089
 #> [2,] 1.698388 0.9229687

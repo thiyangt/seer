@@ -36,7 +36,7 @@ library(seer)
 library(tsfeatures)
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
-M3yearly_features <- cal_features(yearly_m3)
+M3yearly_features <- cal_features(yearly_m3, database="M3", h=6)
 head(M3yearly_features)
 ```
 

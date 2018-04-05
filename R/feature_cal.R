@@ -1,17 +1,25 @@
 #' Calculate features for new time series instances
 #'
 #' Computes relevant time series features before applying them to the model
-#' @param ts_data_set a list of univariate time series
+#' @param tslist a list of univariate time series
 #' @param seasonal if FALSE, restricts to features suitable for non-seasonal data
 #' @param m frequency of the time series
 #' @param lagmax maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)
+#' @param database whether the time series is from mcomp or other
+#' @param h forecast horizon
 #' @return dataframe: each column represent a feature and each row represent a time series
 #' @importFrom magrittr %>%
 #' @author Thiyanga Talagala
 #' @export
-cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data_set = yearly_m1,
+cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ # tslist = yearly_m1,
 
-  train <- lapply(ts_data_set, function(temp){temp$x})
+  if (database == "other") {
+    train_test <- lapply(tslist, function(temp){list(training=head_ts(temp,h), test=tail_ts(temp, h))})
+  } else {
+    train_test <- lapply(tslist, function(temp){list(training=temp$x, test=temp$xx)})
+  }
+
+  train <- lapply(train_test, function(temp){temp$training})
   ts_features_pkg <- tsfeatures::tsfeatures(train, c("entropy",
                                       "lumpiness",
                                       "stability",
@@ -28,7 +36,7 @@ cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data
             "x_pacf5","diff1x_pacf5", "diff2x_pacf5", "alpha",
             "beta","nonlinearity")
 
-  seer_features_nonseasonal <- lapply(ts_data_set, function(temp1){c(
+  seer_features_nonseasonal <- lapply(tslist, function(temp1){c(
                                                          e_acf1(temp1$x),
                                                          unitroot(temp1$x))})
   seer_features_nonseasonal_DF <- as.data.frame(do.call("rbind", seer_features_nonseasonal))
@@ -42,7 +50,7 @@ cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data
                                                       "beta","nonlinearity", "seasonal_strength",
                                                     "seas_pacf")
 
-  seer_features_seasonal <- lapply(ts_data_set, function(temp1){c(holtWinter_parameters(temp1$x),
+  seer_features_seasonal <- lapply(tslist, function(temp1){c(holtWinter_parameters(temp1$x),
     acf_seasonalDiff(temp1$x, m, lagmax))})
 
   seer_features_seasonal_DF <- as.data.frame(do.call("rbind", seer_features_seasonal))
@@ -65,11 +73,11 @@ cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data
   ts_featuresDF <- dplyr::rename(ts_featuresDF, "seasonality" = "seasonal_strength")
   }
 
-  length <- lapply(ts_data_set, function(temp){length(temp$x)})
+  length <- lapply(tslist, function(temp){length(temp$x)})
   length <- unlist(length)
   ts_featuresDF$N <- length
 
-  seer_features <- lapply(ts_data_set, function(temp1){acf5(temp1$x)})
+  seer_features <- lapply(tslist, function(temp1){acf5(temp1$x)})
   seer_feature_DF <- as.data.frame(do.call("rbind", seer_features))
 
   featureDF <- dplyr::bind_cols(ts_featuresDF,seer_feature_DF)
@@ -80,11 +88,11 @@ cal_features <- function(ts_data_set, seasonal=FALSE, m=1, lagmax=2L){ # ts_data
 #'require(Mcomp)
 #'data(M3)
 #'yearly_m3 <- subset(M3, "yearly")
-#'cal_features(yearly_m3)
+#'cal_features(yearly_m3, database="M3", h=6)
 #'@examples
 #'require(Mcomp)
 #'data(M3)
 #'quarterly_m3 <- subset(M3, "quarterly")
-#'cal_features(quarterly_m3, seasonal=TRUE, m=4, lagmax=5L)
+#'cal_features(quarterly_m3, seasonal=TRUE, m=4, lagmax=5L, database="M3", h=8)
 
 

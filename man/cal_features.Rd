@@ -4,16 +4,20 @@
 \alias{cal_features}
 \title{Calculate features for new time series instances}
 \usage{
-cal_features(ts_data_set, seasonal = FALSE, m = 1, lagmax = 2L)
+cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database, h)
 }
 \arguments{
-\item{ts_data_set}{a list of univariate time series}
+\item{tslist}{a list of univariate time series}
 
 \item{seasonal}{if FALSE, restricts to features suitable for non-seasonal data}
 
 \item{m}{frequency of the time series}
 
 \item{lagmax}{maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)}
+
+\item{database}{whether the time series is from mcomp or other}
+
+\item{h}{forecast horizon}
 }
 \value{
 dataframe: each column represent a feature and each row represent a time series
