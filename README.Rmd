@@ -28,9 +28,9 @@ You can install seer from github with:
 devtools::install_github("thiyangt/seer")
 ```
 
-## Example
+## Usage
 
-```{r}
+```{r features}
 library(Mcomp)
 library(seer)
 library(tsfeatures)
@@ -40,3 +40,10 @@ M3yearly_features <- cal_features(yearly_m3)
 head(M3yearly_features)
 ```
 
+```{r accuracy}
+library(Mcomp)
+tslist <- list(M3[[1]], M3[[2]])
+fcast_accuracy(tslist=tslist,models= c("arima","ets","rw", "rwd", "theta", "stlar", "nn", "snaive", "mstl"),
+               database ="M3", cal_MASE, h=6)
+
+```

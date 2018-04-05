@@ -18,8 +18,8 @@ You can install seer from github with:
 devtools::install_github("thiyangt/seer")
 ```
 
-Example
--------
+Usage
+-----
 
 ``` r
 library(Mcomp)
@@ -58,4 +58,24 @@ head(M3yearly_features)
 #> 4  0.6322638 -2.516911 0.1253592 14 0.7259137  0.27099528   0.4791517
 #> 5  0.5030697 -5.721996 0.1149469 14 0.6476230  0.03192893   0.2940731
 #> 6  0.3791048 -1.928506 0.1315947 14 0.8320440  0.11524106   0.3031490
+```
+
+``` r
+library(Mcomp)
+tslist <- list(M3[[1]], M3[[2]])
+fcast_accuracy(tslist=tslist,models= c("arima","ets","rw", "rwd", "theta", "stlar", "nn", "snaive", "mstl"),
+               database ="M3", cal_MASE, h=6)
+#> $accuracy
+#>          arima       ets       rw       rwd    theta    stlar        nn
+#> [1,] 0.1057683 0.1055410 7.703518 4.2035176 6.017236 1.566974 2.4649151
+#> [2,] 0.5563838 0.3011713 1.698388 0.6123443 1.096000 1.698388 0.2796355
+#>        snaive      mstl
+#> [1,] 7.703518 1.5636089
+#> [2,] 1.698388 0.9229687
+#> 
+#> $ARIMA
+#> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
+#> 
+#> $ETS
+#> [1] "ETS(M,A,N)" "ETS(M,A,N)"
 ```
