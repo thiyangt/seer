@@ -62,19 +62,19 @@ head(M3yearly_features)
 
 ``` r
 library(Mcomp)
-tslist <- list(M3[[1]], M3[[645]])
+tslist <- list(M3[[1]], M3[[2]])
 fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "stlar", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
 #> $accuracy
-#>          arima       ets        rw       rwd    theta    stlar       nn
-#> [1,] 0.1057683 0.1055410 7.7035176 4.2035176 6.017236 1.566974 2.367959
-#> [2,] 0.6686596 0.6686077 0.9737028 0.9792743 1.135127 1.072311 1.035751
-#>         snaive     mstl
-#> [1,] 7.7035176 1.563609
-#> [2,] 0.9737028 1.072225
+#>         arima       ets       rw       rwd    theta    stlar        nn
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 1.566974 2.4042694
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 1.698388 0.2797882
+#>        snaive      mstl
+#> [1,] 7.703518 1.5636089
+#> [2,] 1.698388 0.9229687
 #> 
 #> $ARIMA
-#> [1] "ARIMA(0,2,0)"                    "ARIMA(0,0,0) with non-zero mean"
+#> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
 #> 
 #> $ETS
-#> [1] "ETS(M,A,N)" "ETS(A,N,N)"
+#> [1] "ETS(M,A,N)" "ETS(M,A,N)"
 ```

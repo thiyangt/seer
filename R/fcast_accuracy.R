@@ -24,12 +24,12 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
   }
 
   if ("arima"%in% models) {
-    arima_cal <- lapply(train_test, ARIMA, ACCURACY=cal_WA)
+    arima_cal <- lapply(train_test, ARIMA, ACCURACY=accuracyFun)
     arima_models <- sapply(arima_cal, function(temp){temp$ARIMAmodel})
   }
 
   if ("ets"%in% models) {
-    ets_cal <- lapply(train_test, ETS, ACCURACY=cal_WA)
+    ets_cal <- lapply(train_test, ETS, ACCURACY=accuracyFun)
     ets_models <- sapply(ets_cal, function(temp){temp$ETSmodel})
   }
 
