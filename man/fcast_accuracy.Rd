@@ -2,7 +2,7 @@
 % Please edit documentation in R/fcast_accuracy.R
 \name{fcast_accuracy}
 \alias{fcast_accuracy}
-\title{calculate forecast accuracy from different foecasting methods}
+\title{calculate forecast accuracy from different forecasting methods}
 \usage{
 fcast_accuracy(tslist, models = c("ets", "arima", "rw", "rwd", "wn", "theta",
   "stlar", "nn", "snaive", "mstl", "tbats"), database, accuracyFun, h)
@@ -23,7 +23,7 @@ for the accuracy function should be training, test and forecast}
 a list with accuracy matrix, vector of arima models and vector of ets models
 }
 \description{
-Calculate foecast accuracy on test set according to a specified citerion
+Calculate forecast accuracy on test set according to a specified criterion
 }
 \author{
 Thiyanga Talagala

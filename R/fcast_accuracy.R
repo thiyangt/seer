@@ -1,6 +1,6 @@
-#' calculate forecast accuracy from different foecasting methods
+#' calculate forecast accuracy from different forecasting methods
 #'
-#' Calculate foecast accuracy on test set according to a specified citerion
+#' Calculate forecast accuracy on test set according to a specified criterion
 #' @param tslist a list of time series
 #' @param models a vector of models to compute
 #' @param database whether the time series is from mcomp or other
@@ -54,3 +54,7 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
  return(list(accuracy=mat, ARIMA = arima_models, ETS =ets_models))
 
 }
+#'@examples
+#'library(Mcomp)
+#'tslist <- list(M3[[1]], M3[[2]])
+#'fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "stlar", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
