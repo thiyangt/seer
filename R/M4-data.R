@@ -5,8 +5,7 @@
 #'@format M4 is a list of 100000 series of class \code{Mcomp}. Each series within \code{M4} is
 #'of class \code{Mdata} with the following structure:
 #'\describe{
-#'   \item{sn}{Name of the series}
-#'   \item{st}{Series number and period. For example "Y1" denotes first yearly series,
+#'  \item{st}{M4id (Series number and period). For example "Y1" denotes first yearly series,
 #'   "Q20" denotes 20th quarterly series and so on.}
 #'   \item{n}{The number of observations in the time series}
 #'   \item{h}{The number of required forecasts}
