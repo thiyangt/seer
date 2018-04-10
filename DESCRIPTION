@@ -1,10 +1,10 @@
 Package: seer
 Type: Package
-Title: Meta-learning framework for forecast model selection
+Title: Feature-based FORcast-Model Selection (FFORMS)
 Version: 1.1.1
 Author: Thiyanga Talagala
 Maintainer: Thiyanga Talagala <thiyanga.talagala@monash.edu>
-Description: Feature-based model selection framework for time series model selection.
+Description: Meta-learning framework for forecast model selection.
 License: GPL-3
 Depends:
     R (>= 3.2.3),
@@ -18,8 +18,8 @@ Imports:
         randomForest,
         Mcomp,
         forecTheta
-Remotes: robjhyndman/tsfeatures,
-         robjhyndman/forecast
+Remotes: robjhyndman/forecast,
+         robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 6.0.1
 LazyDate: true

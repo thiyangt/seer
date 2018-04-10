@@ -14,7 +14,6 @@
 #' @param Length length of the simulated time series. If future = FALSE, the Length agument should be NA.
 #' @return A list of time series.
 #' @author Thiyanga Talagala
-#' @import forecast
 #' @export
 sim_arimabased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA){
     if (M ==TRUE){
@@ -28,7 +27,7 @@ sim_arimabased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=N
     }else{
       combined <- y
     }
-  fit <- auto.arima(combined)
+  fit <- forecast::auto.arima(combined)
   if (!is.na(Length)){length_series <- Length
   } else {
   length_series <- length(combined)
@@ -40,7 +39,6 @@ sim_arimabased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=N
 }
 #'@examples
 #'require(Mcomp)
-#'library(seer)
 #'quaterly_m3 <- subset(M3, "yearly")
 #'sim_arimabased(quarterly_m3[[1]], 2, Combine=TRUE, M=TRUE, Future=FALSE)
 #'
