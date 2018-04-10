@@ -5,7 +5,7 @@
 \title{Simulate time series based on ARIMA models}
 \usage{
 sim_arimabased(y, Nsim, Combine = TRUE, M = TRUE, Future = FALSE,
-  Length = NA)
+  Length = NA, extralength = NA)
 }
 \arguments{
 \item{y}{a time series or M-competition data time series (Mcomp)}
@@ -18,12 +18,14 @@ based on the training period of the series.}
 
 \item{M}{if TRUE, y is considered to be a Mcomp data object}
 
-\item{Future}{So if future=TRUE, the simulated observations are conditional on the historical observations.
+\item{Future}{if future=TRUE, the simulated observations are conditional on the historical observations.
 In other words, they are possible future sample paths of the time series. But if future=FALSE, the historical
 data are ignored, and the simulations are possible realizations of the time series model that
 are not connected to the original data.}
 
 \item{Length}{length of the simulated time series. If future = FALSE, the Length agument should be NA.}
+
+\item{extralength}{extra length need to be added for simulated time series}
 }
 \value{
 A list of time series.
