@@ -7,11 +7,16 @@
 #' series corresponds to the full length of the series. Otherwise, it generate a time series
 #' based on the training period of the series.
 #' @param M if TRUE, y is considered to be a Mcomp data object
+#' @param Future  So if future=TRUE, the simulated observations are conditional on the historical observations.
+#' In other words, they are possible future sample paths of the time series. But if future=FALSE, the historical
+#' data are ignored, and the simulations are possible realizations of the time series model that
+#' are not connected to the original data.
+#' @param Length length of the simulated time series. If future = FALSE, the Length agument should be NA.
 #' @return A list of time series.
 #' @author Thiyanga Talagala
 #' @import forecast
 #' @export
-sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE){
+sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA){
   if (M ==TRUE){
     if ("Combine"==TRUE){
       train <- y$x
@@ -24,7 +29,10 @@ sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE){
     combined <- y
   }
   fit <- ets(combined)
-  length_series <- length(combined)
+  if (!is.na(Length)){length_series <- Length
+  } else {
+    length_series <- length(combined)
+  }
   mat <- list()
   for(i in 1:Nsim){
     mat[[i]] <- simulate(fit, nsim=length_series, future=FALSE)}
@@ -32,10 +40,10 @@ sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE){
 }
 #'@examples
 #'require(Mcomp)
-#'libray(seer)
+#'library(seer)
 #'quaterly_m3 <- subset(M3, "yearly")
-#'sim_etsbased(quarterly_m3[[1]], 2, Combine=TRUE, M=TRUE)
+#'sim_etsbased(quarterly_m3[[1]], 2, Combine=TRUE, M=TRUE, Future=FALSE)
 #'
 #'set.seed(1)
 #'tsy <- ts(rnorm(8), frequency=1)
-#'sim_etsbased(tsy, 2, Combine=FALSE, M=FALSE)
+#'sim_etsbased(tsy, 2, Combine=FALSE, M=FALSE, Future=TRUE, Length=5)

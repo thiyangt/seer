@@ -4,7 +4,8 @@
 \alias{sim_etsbased}
 \title{Simulate time series based on ETS models}
 \usage{
-sim_etsbased(y, Nsim, Combine = TRUE, M = TRUE)
+sim_etsbased(y, Nsim, Combine = TRUE, M = TRUE, Future = FALSE,
+  Length = NA)
 }
 \arguments{
 \item{y}{a time series or M-competition data time series (Mcomp)}
@@ -16,6 +17,13 @@ series corresponds to the full length of the series. Otherwise, it generate a ti
 based on the training period of the series.}
 
 \item{M}{if TRUE, y is considered to be a Mcomp data object}
+
+\item{Future}{So if future=TRUE, the simulated observations are conditional on the historical observations.
+In other words, they are possible future sample paths of the time series. But if future=FALSE, the historical
+data are ignored, and the simulations are possible realizations of the time series model that
+are not connected to the original data.}
+
+\item{Length}{length of the simulated time series. If future = FALSE, the Length agument should be NA.}
 }
 \value{
 A list of time series.

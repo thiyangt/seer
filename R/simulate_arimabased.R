@@ -40,7 +40,7 @@ sim_arimabased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=N
 }
 #'@examples
 #'require(Mcomp)
-#'libray(seer)
+#'library(seer)
 #'quaterly_m3 <- subset(M3, "yearly")
 #'sim_arimabased(quarterly_m3[[1]], 2, Combine=TRUE, M=TRUE, Future=FALSE)
 #'
