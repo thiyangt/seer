@@ -10,7 +10,12 @@
 cal_MASE <- function(training, test, forecast){
 
  m <- frequency(training)
- q_t <- abs(test-forecast)/mean(abs(diff(training, lag=m)))
+ denominator <- mean(abs(diff(training, lag=m)))
+ if (denominator==0){qt_denominator=0.00000001
+ } else {
+   qt_denominator = denominator
+ }
+ q_t <- abs(test-forecast)/qt_denominator
  return(mean(q_t))
 }
 #'example
