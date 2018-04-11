@@ -44,6 +44,7 @@ RWD <- function(ts_info, ACCURACY){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+if (sd(training)==0){return(NA)}
 rwd_fit <- rwf(training,drift=TRUE, h=h)
 forecastRWD <- forecast(rwd_fit)$mean
 RWDaccuracy <- ACCURACY(forecast=forecastRWD, test=test, training=training)
