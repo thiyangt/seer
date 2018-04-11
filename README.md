@@ -25,6 +25,11 @@ Usage
 library(Mcomp)
 #> Loading required package: forecast
 library(seer)
+#> 
+#> Attaching package: 'seer'
+#> The following object is masked from 'package:Mcomp':
+#> 
+#>     subset.Mcomp
 library(tsfeatures)
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
@@ -66,8 +71,8 @@ tslist <- list(M3[[1]], M3[[2]])
 fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "stlar", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
 #> $accuracy
 #>         arima       ets       rw       rwd    theta    stlar        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 1.566974 2.4042694
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 1.698388 0.2797882
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 1.566974 2.4282019
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 1.698388 0.2795443
 #>        snaive      mstl
 #> [1,] 7.703518 1.5636089
 #> [2,] 1.698388 0.9229687

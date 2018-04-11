@@ -57,13 +57,13 @@ WN <- function(ts_info, ACCURACY){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
-fit_WN <- Arima(training,order=c(0,0,0))
+fit_WN <- auto.arima(training, d=0, D=0, max.p=0, max.q = 0,
+                     max.Q=0, max.P = 0)
 forecastWN <- forecast(fit_WN,h)$mean
 WNaccuracy <- ACCURACY(forecast=forecastWN,test=test, training=training)
 return(WNaccuracy)
 
 }
-
 
 # Theta Method
 THETA <- function(ts_info, ACCURACY){
