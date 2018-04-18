@@ -19,6 +19,13 @@ returns a single value: mean on MASE and sMAPE
 \description{
 Calculate mean of MASE and sMAPE for an individual time series
 }
+\examples{
+require(Mcomp)
+require(magrittr)
+ts <- M3[[1]]$x
+fcast_arima <- auto.arima(ts) \%>\% forecast(h=6)
+cal_avg(M3[[1]]$x, M3[[1]]$xx, fcast_arima$mean)
+}
 \author{
 Thiyanga Talagala
 }
