@@ -43,6 +43,6 @@ head(M3yearly_features)
 ```{r accuracy}
 library(Mcomp)
 tslist <- list(M3[[1]], M3[[2]])
-fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "stlar", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
+fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
 
 ```
