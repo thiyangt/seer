@@ -24,12 +24,12 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
   }
 
   if ("arima"%in% models) {
-    arima_cal <- lapply(train_test, ARIMA, ACCURACY=accuracyFun)
+    arima_cal <- lapply(train_test, accuracy_arima, ACCURACY=accuracyFun)
     arima_models <- sapply(arima_cal, function(temp){temp$ARIMAmodel})
   }
 
   if ("ets"%in% models) {
-    ets_cal <- lapply(train_test, ETS, ACCURACY=accuracyFun)
+    ets_cal <- lapply(train_test, accuracy_ets, ACCURACY=accuracyFun)
     ets_models <- sapply(ets_cal, function(temp){temp$ETSmodel})
   }
 
@@ -39,15 +39,15 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
    switch(f,
           arima = sapply(arima_cal, function(temp){temp$ARIMAaccuracy}),
           ets = sapply(ets_cal, function(temp){temp$ETSaccuracy}),
-          rw = sapply(train_test, RW, ACCURACY=accuracyFun),
-          rwd = sapply(train_test, RWD, ACCURACY=accuracyFun),
-          wn = sapply(train_test, WN, ACCURACY=accuracyFun),
-          theta = sapply(train_test, THETA, ACCURACY=accuracyFun),
-          stlar = sapply(train_test, STLAR, ACCURACY=accuracyFun),
-          nn = sapply(train_test, NN, ACCURACY=accuracyFun),
-          snaive = sapply(train_test, SNAIVE, ACCURACY=accuracyFun),
-          mstl = sapply(train_test, MSTL, ACCURACY=accuracyFun),
-          tbats = sapply(train_test, TBATS, ACCURACY=accuracyFun)
+          rw = sapply(train_test, accuracy_rw, ACCURACY=accuracyFun),
+          rwd = sapply(train_test, accuracy_rwd, ACCURACY=accuracyFun),
+          wn = sapply(train_test, accuracy_wn, ACCURACY=accuracyFun),
+          theta = sapply(train_test, accuracy_theta, ACCURACY=accuracyFun),
+          stlar = sapply(train_test, accuracy_stlar, ACCURACY=accuracyFun),
+          nn = sapply(train_test, accuracy_nn, ACCURACY=accuracyFun),
+          snaive = sapply(train_test, accuracy_snaive, ACCURACY=accuracyFun),
+          mstl = sapply(train_test, accuracy_mstl, ACCURACY=accuracyFun),
+          tbats = sapply(train_test, accuracy_tbats, ACCURACY=accuracyFun)
    )
  })
 
