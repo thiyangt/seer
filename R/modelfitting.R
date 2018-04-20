@@ -14,10 +14,10 @@
 #' \code{accuracy_snaive} returns accuracy measure calculated based on snaive method
 #' \code{accuracy_mstl} returns accuracy measure calculated based on multiple seasonal decomposition
 #' \code{accuracy_tbats} returns accuracy measure calculated based on TBATS models
-#' @name accuracy_ets
+#' @name accuracy_functions
 NULL
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_ets <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -30,7 +30,7 @@ ETSmodel <- as.character(ets_fit)
 return(list(ETSmodel=ETSmodel, ETSaccuracy=ETSaccuracy))
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_arima <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -43,7 +43,7 @@ ARIMAmodel <- as.character(arima_fit)
 return(list(ARIMAmodel=ARIMAmodel, ARIMAaccuracy=ARIMAaccuracy))
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_rw <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -56,7 +56,7 @@ return(RWaccuracy)
 
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_rwd <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -72,7 +72,7 @@ return(RWDaccuracy)
 
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_wn <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -86,7 +86,7 @@ return(WNaccuracy)
 
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_theta <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -106,7 +106,7 @@ if (m > 1){
 return(THETAaccuracy)
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_stlar <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -117,7 +117,7 @@ STLARaccuracy <- ACCURACY(forecast=forecastSTLAR, test=test, training=training)
 return(STLARaccuracy)
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_nn <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -129,7 +129,7 @@ nnetarACCURACY <- ACCURACY(forecast=forecastnnetar, test=test, training=training
 return(nnetarACCURACY)
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_snaive <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -140,7 +140,7 @@ SNAIVEaccuracy <- ACCURACY(forecast=forecastSNAIVE, test=test, training=training
 return(SNAIVEaccuracy)
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_mstl <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
@@ -152,7 +152,7 @@ MSTLaccuracy <- ACCURACY(forecast=forecastMSTL, test=test, training=training)
 return(MSTLaccuracy)
 }
 
-#' @rdname accuracy_ets
+#' @rdname accuracy_functions
 accuracy_tbats <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
