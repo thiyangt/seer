@@ -35,5 +35,5 @@ split_names <- function(models){
 #' split_names(vect_mod1)
 #' @example
 #' vect_mod2 <- c("ARIMA(2,1,0) with drift", "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(2,0,0) with non-zero mean" ,
-#' "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(0,0,1)")
+#' "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(0,0,1)", "ARIMA(2,0,0)(1,0,0)[12] with non-zero mean")
 #' split_names(vect_mod2)
