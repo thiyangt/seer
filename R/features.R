@@ -92,5 +92,21 @@ acf_seasonalDiff <- function(y,m, lagmax){ # monthly lagmax=13L, quarterly lagma
     sediff_acf5 = unname(SEsum_of_sq_acf5))
   return(output)
 }
+#' Parameter estimates of Holt's linear trend method
+#'
+#' Estimate the smoothing parameter for the level-alpha and
+#' the smoothing parameter for the trend-beta.
+#' @param x a univariate time series
+#' @return a vector of 2 values: alpha, beta.
+#' @author Thiyanga Talagala
+#' @export
+holt_parameters <- function(x){
+  # parameter estimates of holt linear trend model
+    fit <- forecast::holt(x)
+    output <- c(alpha = unname(fit$model$par["alpha"]),
+                beta = unname(fit$model$par["beta"]))
+    return(output)
+}
+
 
 
