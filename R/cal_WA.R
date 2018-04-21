@@ -12,11 +12,16 @@ cal_WA <- function(training, test, forecast){
   snaive_fcast <- snaive(training, length(test))$mean
   snaive_MASE <- cal_MASE(training, test, snaive_fcast)
   snaive_sMAPE <- cal_sMAPE(training, test, snaive_fcast)
-  if (snaive_MASE==0|snaive_sMAPE==0){return(Inf)}
-  method_MASE <- cal_MASE(training, test, forecast)
-  method_sMAPE <- cal_sMAPE(training, test, forecast)
-  WA <- mean(c(method_MASE/snaive_MASE, method_sMAPE/snaive_sMAPE))
-  return(WA)
+  if (is.nan(snaive_MASE)==TRUE| is.nan(snaive_sMAPE)==TRUE){
+    return(NaN)
+  } else if (snaive_MASE==0| snaive_sMAPE==0){
+    return(Inf)
+  } else {
+    method_MASE <- cal_MASE(training, test, forecast)
+    method_sMAPE <- cal_sMAPE(training, test, forecast)
+    WA <- mean(c(method_MASE/snaive_MASE, method_sMAPE/snaive_sMAPE))
+    return(WA)
+  }
 }
 #'example
 #'require(Mcomp)
