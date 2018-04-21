@@ -17,7 +17,8 @@ Imports:
         magrittr,
         randomForest,
         Mcomp,
-        forecTheta
+        forecTheta,
+        stringr
 Remotes: robjhyndman/forecast,
          robjhyndman/tsfeatures
 Encoding: UTF-8

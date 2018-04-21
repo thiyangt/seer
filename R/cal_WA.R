@@ -23,7 +23,7 @@ cal_WA <- function(training, test, forecast){
     return(WA)
   }
 }
-#'example
+#'@example
 #'require(Mcomp)
 #'require(seer)
 #'require(magrittr)
