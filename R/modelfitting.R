@@ -64,12 +64,11 @@ h <- length(test)
 if (forecast::is.constant(training)==TRUE){return(NA)}
 tryCatch({
 rwd_fit <- rwf(training,drift=TRUE, h=h)
-}, error=function(e){return(NA)})
 forecastRWD <- forecast(rwd_fit)$mean
 ACCURACY <- match.fun(function_name)
 RWDaccuracy <- ACCURACY(forecast=forecastRWD, test=test, training=training)
 return(RWDaccuracy)
-
+}, error=function(e){return(NA)})
 }
 
 #' @rdname accuracy_functions
