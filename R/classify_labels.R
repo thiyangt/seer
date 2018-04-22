@@ -1,11 +1,10 @@
 #' Classify labels according to the FFORMS famework
 #'
 #' This function further classify class labels as in FFORMS framework
-#' @param bestmethod a vector: names of best forecasting methods
 #' @param df_final a dataframe: output from split_names function
 #' @return a vector of class labels in FFORMS framewok
 #' @export
-classify_labels <- function(df_final, bestmethod){
+classify_labels <- function(df_final){
 
   length_df <- dim(df_final)[1]
   classlabel <- as.character(length_df)
@@ -58,19 +57,18 @@ for(i in 1:length_df){
       classlabel[i] <- "ETS-seasonal"
     }else
       classlabel[i] <- "ETS-notrendnoseasonal"
-
   } else {
-    classlabel[i] <- bestmethod[i]
+     classlabel[i] <- df_final[i, "Model"]
   }
 }
   return(classlabel)
 
 }
 #'@example
-#'vect <- c(c("ARIMA(2,1,0) with drift", "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(2,0,0) with non-zero mean" ,
-#' "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(0,0,1)", "ETS(A,A,A)", "rwd",
-#' "ETS(A,N,N)"))
+#' vect <- c("ARIMA(2,1,0) with drift", "ARIMA(2,1,0) with non-zero mean" ,"ARIMA(2,1,2) with non-zero mean" ,
+#' "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(0,0,1)", "ARIMA(2,0,0)(1,0,0)[12] with non-zero mean", "ARIMA(0,1,0)",
+#' "ARIMA(0,1,0) with drift", "ARIMA(0,0,0)(0,1,0)[4]", "ETS(A,A,A)", "ETS(A,N,A)")
 #' df_modnames <- split_names(vect)
-#' classlabels <- classify_labels(df_modnames, vect)
+#' classlabels <- classify_labels(df_modnames)
 #' classlabels
 

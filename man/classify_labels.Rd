@@ -4,12 +4,10 @@
 \alias{classify_labels}
 \title{Classify labels according to the FFORMS famework}
 \usage{
-classify_labels(df_final, bestmethod)
+classify_labels(df_final)
 }
 \arguments{
 \item{df_final}{a dataframe: output from split_names function}
-
-\item{bestmethod}{a vector: names of best forecasting methods}
 }
 \value{
 a vector of class labels in FFORMS framewok

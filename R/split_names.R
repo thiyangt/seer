@@ -8,6 +8,21 @@
 #' @export
 split_names <- function(models){
 
+  # code random walk, random walk with drift, snaive and white noise
+  models <- dplyr::recode(models, "ARIMA(0,1,0)" = "rw")
+  models <- dplyr::recode(models, "ARIMA(0,1,0) with drift"="rwd")
+  models <- dplyr::recode(models, "ARIMA(0,0,0) with non-zero mean"="wn")
+  models <- dplyr::recode(models, "ARIMA(0,0,0) with zero mean"="wn")
+  models <- dplyr::recode(models, "ARIMA(0,0,0)(0,1,0)[4]"="snaive")
+  models <- dplyr::recode(models, "ARIMA(0,0,0)(0,1,0)[12]"="snaive")
+
+  # First identify the sarima models and rename them as "SARIMA"
+  toMatch_frequency <- c("[12]", "[4]")
+  index_sarima <- grepl(paste0(gsub("(\\[)","\\\\[", toMatch_frequency), collapse = "|"), models)
+  df1 <- data.frame(models=models, ind_sarima = index_sarima)
+  df1$models <- as.character(df1$models)
+  models <- ifelse(df1$ind_sarima == TRUE, "SARIMA", df1$models)
+
   ###Here we have choosen the separator as space(\\s), parenthesis ( \\( and \\) ) and commas (,)
   df <- data.frame(stringr::str_split_fixed(models,"\\s|\\(|\\)|,",n=5))
   #Rename basis the question, into follwing:
@@ -18,6 +33,7 @@ split_names <- function(models){
   # If the outcome column contains all "" stop the code from here
   if(length(which(nchar(trimws(df$outcome))==0))==dim(df)[1]){
     df <- dplyr::select(df, c("Model", "p", "d", "q"))
+    df$Model <- as.character(df$Model)
     return(df)}
 
   #cleaning the outcome column by replacing spaces and dashes with underscores
@@ -27,13 +43,15 @@ split_names <- function(models){
   dummy_mat <- data.frame(model.matrix(~outcome_-1,data=df))
   df_final <- data.frame(df[,1:4],dummy_mat)
   df_final <- df_final[,c("Model", "p", "d", "q", "outcome_with_drift", "outcome_with_non_zero_mean")]
+  df_final$Model <- as.character(df_final$Model)
   return(df_final)
 }
 #' @example
 #' library(seer)
-#' vect_mod1 <- c("ARIMA(2,1,0)", "ARIMA(2,0,0)" )
+#' vect_mod1 <- c("ARIMA(2,1,0)", "ARIMA(2,0,0)", "ARIMA(0,1,0)")
 #' split_names(vect_mod1)
 #' @example
 #' vect_mod2 <- c("ARIMA(2,1,0) with drift", "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(2,0,0) with non-zero mean" ,
-#' "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(0,0,1)", "ARIMA(2,0,0)(1,0,0)[12] with non-zero mean")
+#' "ARIMA(2,0,0) with non-zero mean" ,"ARIMA(0,0,1)", "ARIMA(2,0,0)(1,0,0)[12] with non-zero mean", "ARIMA(0,1,0)",
+#' "ARIMA(0,1,0) with drift", "ARIMA(0,0,0)(0,1,0)[4]")
 #' split_names(vect_mod2)
