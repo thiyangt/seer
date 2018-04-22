@@ -31,7 +31,12 @@ prepare_trainingset <- function(accuracy_set, feature_set){
   training_set$classlabels <- classlabel
   # extract complete cases only
   training_set <- training_set[complete.cases(training_set),]
-  return(training_set)
+  models <- data.frame(ARIMA_name=training_set$ARIMA_name, ETS_name=training_set$ETS_name,
+                       min_label=training_set$min_label, model_names=training_set$model_names)
+  training_set <- dplyr::select(training_set, c(colnames(feature_set), "classlabels"))
+  train <- list(modelinfo=models, trainingset=training_set)
+
+  return(train)
 }
 #'@example
 #'library(Mcomp)
@@ -40,5 +45,7 @@ prepare_trainingset <- function(accuracy_set, feature_set){
 #'models= c("arima","ets","rw","rwd", "theta", "nn", "snaive", "mstl"),
 #'database ="M3", cal_MASE, h=6)
 #'fea_set <- cal_features(tslist, database="M3", h=6)
-#'prepare_trainingset(acc_set, fea_set)
+#'outcome <- prepare_trainingset(acc_set, fea_set)
+#'outcome$trainingset
+#'outcome$modelinfo
 
