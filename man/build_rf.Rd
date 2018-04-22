@@ -4,7 +4,7 @@
 \alias{build_rf}
 \title{build random forest classifier}
 \usage{
-build_rf(training_set, testset, rf_type = c("ru", "rcp"), ntree)
+build_rf(training_set, testset, rf_type = c("ru", "rcp"), ntree, seed)
 }
 \arguments{
 \item{training_set}{data frame of features and class labels}
@@ -15,6 +15,8 @@ build_rf(training_set, testset, rf_type = c("ru", "rcp"), ntree)
 forest based on class priors)}
 
 \item{ntree}{number of trees in the forest}
+
+\item{seed}{a vlue for seed}
 }
 \value{
 a list containing the random forest and forecast-models for new series
