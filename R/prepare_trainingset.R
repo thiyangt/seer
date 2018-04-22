@@ -5,7 +5,7 @@
 #' @param feature_set output from the cal_features
 #' @return dataframe consisting features and classlabels
 #' @export
-prepare_traingset <- function(accuracy_set, feature_set){
+prepare_trainingset <- function(accuracy_set, feature_set){
 
   accuracy_measures <- as.data.frame(accuracy_set$accuracy)
   minimum_accuracy <- apply(accuracy_measures,1,min)
@@ -40,5 +40,5 @@ prepare_traingset <- function(accuracy_set, feature_set){
 #'models= c("arima","ets","rw","rwd", "theta", "nn", "snaive", "mstl"),
 #'database ="M3", cal_MASE, h=6)
 #'fea_set <- cal_features(tslist, database="M3", h=6)
-#'prepare_traingset(acc_set, fea_set)
+#'prepare_trainingset(acc_set, fea_set)
 
