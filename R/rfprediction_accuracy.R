@@ -76,32 +76,32 @@ rfprediction_accuracy <- function(predictions, tslist, database, function_name, 
 
     }else if (predictions[i] == "snaive") {
       fit_snaive <- snaive(training, h=h)$mean
-      accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+      accuracy_value[i] <- accuracyFun(forecast=fit_snaive, training=training, test=test)
 
     }else if (predictions[i] == "rw") {
       fit_rw <- rwf(training, drift = FALSE)
       forecast_rw <- forecast(fit_rw,h)$mean
-      accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+      accuracy_value[i] <- accuracyFun(forecast=forecast_rw, training=training, test=test)
 
     } else if (predictions[i] == "rwd") {
       fit_rwd <- rwf(training, drift = TRUE)
       forecast_rwd <- forecast(fit_rwd,h)$mean
-      accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+      accuracy_value[i] <- accuracyFun(forecast=forecast_rwd, training=training, test=test)
 
     } else if (predictions[i] == "stlar") {
-      STLAR <- stlar(training,h=h)$mean
-      accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+      forecast_stlar <- stlar(training,h=h)$mean
+      accuracy_value[i] <- accuracyFun(forecast=forecast_stlar, training=training, test=test)
 
     } else if (predictions[i] == "theta") {
       if (m > 1){
         # using stheta method with seasonal adjustment
         # require(forecTheta)
         fitTheta <- forecTheta::stheta(training,h=h, s='additive')$mean
-        accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+        accuracy_value[i] <- accuracyFun(forecast=fitTheta, training=training, test=test)
       }else{
         # using thetaf method
         fitTheta <-forecast::thetaf(training,h=length(test))$mean
-        accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+        accuracy_value[i] <- accuracyFun(forecast=fitTheta, training=training, test=test)
       }
     } else if (predictions[i] == "nn"){
       fit_nnetar <- forecast::nnetar(training)
@@ -121,7 +121,7 @@ rfprediction_accuracy <- function(predictions, tslist, database, function_name, 
     } else {
       fit_wn <- Arima(training,order=c(0,0,0))
       forecast_wn <- forecast(fit_wn,h)$mean
-      accuracy_value[i] <- accuracyFun(forecast=forecast_ets, training=training, test=test)
+      accuracy_value[i] <- accuracyFun(forecast=forecast_wn, training=training, test=test)
 
     }
 
