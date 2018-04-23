@@ -22,7 +22,7 @@ prepare_trainingset <- function(accuracy_set, feature_set){
   df_accuracy <- dplyr::select(training_set, colnames_accuracyMatrix)
   training_set$min_label <- as.character(seer::classlabel(df_accuracy))
   training_set$model_names <- ifelse(training_set$min_label == "arima", training_set$ARIMA_name, training_set$min_label)
-  training_set$model_names <- ifelse(training_set$min_label == "ets", training_set$ETS_name, training_set$min_label)
+  training_set$model_names <- ifelse(training_set$min_label == "ets", training_set$ETS_name, training_set$model_names)
   training_set$model_names <- as.character(training_set$model_names)
 
   # classify labe names
