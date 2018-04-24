@@ -84,13 +84,14 @@ accuracy_wn <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 fit_WN <- forecast::auto.arima(training, d=0, D=0, max.p=0, max.q = 0,
                      max.Q=0, max.P = 0)
 forecastWN <- forecast(fit_WN,h)$mean
 ACCURACY <- match.fun(function_name)
 WNaccuracy <- ACCURACY(forecast=forecastWN,test=test, training=training)
 return(WNaccuracy)
-
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy measure based on Theta method
@@ -105,6 +106,7 @@ test <- ts_info$test
 h <- length(test)
 m <- frequency(training)
 ACCURACY <- match.fun(function_name)
+tryCatch({
 if (m > 1){
   # using stheta method with seasonal adjustment
   # require(forecTheta)
@@ -116,6 +118,7 @@ if (m > 1){
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 }
 return(THETAaccuracy)
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy measure based on STL-AR method
@@ -130,8 +133,10 @@ test <- ts_info$test
 h <- length(test)
 forecastSTLAR <- stlar(training,h=h)$mean
 ACCURACY <- match.fun(function_name)
+tryCatch({
 STLARaccuracy <- ACCURACY(forecast=forecastSTLAR, test=test, training=training)
 return(STLARaccuracy)
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy measure calculated based on neural network forecasts
@@ -144,11 +149,13 @@ accuracy_nn <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 fit_nnetar <- forecast::nnetar(training)
 forecastnnetar <- forecast(fit_nnetar, h=h)$mean
 ACCURACY <- match.fun(function_name)
 nnetarACCURACY <- ACCURACY(forecast=forecastnnetar, test=test, training=training)
 return(nnetarACCURACY)
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy measure based on snaive method
@@ -161,10 +168,12 @@ accuracy_snaive <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 forecastSNAIVE <- forecast::snaive(training, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 SNAIVEaccuracy <- ACCURACY(forecast=forecastSNAIVE, test=test, training=training)
 return(SNAIVEaccuracy)
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy based on MSTL
@@ -177,11 +186,13 @@ accuracy_mstl <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 fit_mstl <- forecast::mstl(training)
 forecastMSTL <- forecast(training, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 MSTLaccuracy <- ACCURACY(forecast=forecastMSTL, test=test, training=training)
 return(MSTLaccuracy)
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy measure based on TBATS
@@ -194,9 +205,11 @@ accuracy_tbats <- function(ts_info, function_name){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+ACCURACY <- match.fun(function_name)
+tryCatch({
 fitTBAT <- forecast::tbats(training)
 forecastTBATS <- forecast(fitTBAT, h=h)$mean
-ACCURACY <- match.fun(function_name)
 TBATSaccuracy <- ACCURACY(forecast=forecastTBATS, test=test, training=training)
 return(TBATSaccuracy)
+}, error=function(e){return(NULL)})
 }
