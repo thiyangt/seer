@@ -12,11 +12,12 @@
 #' data are ignored, and the simulations are possible realizations of the time series model that
 #' are not connected to the original data.
 #' @param Length length of the simulated time series. If future = FALSE, the Length agument should be NA.
+#' @param seed_value a value for the seed
 #' @param extralength extra length need to be added for simulated time series
 #' @return A list of time series.
 #' @author Thiyanga Talagala
 #' @export
-sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA){
+sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA, seed_value){
   if (M ==TRUE){
     if ("Combine"==TRUE){
       train <- y$x
@@ -37,14 +38,14 @@ sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA,
   }
   mat <- list()
   for(i in 1:Nsim){
-    mat[[i]] <- simulate(fit, nsim=length_series, future=FALSE)}
+    mat[[i]] <- simulate(fit, nsim=length_series, future=FALSE, seed=seed_value)}
   return (mat)
 }
 #'@examples
 #'require(Mcomp)
 #'quaterly_m3 <- subset(M3, "yearly")
-#'sim_etsbased(quarterly_m3[[1]], 2, Combine=TRUE, M=TRUE, Future=FALSE)
+#'sim_etsbased(quarterly_m3[[1]], 2, Combine=TRUE, M=TRUE, Future=FALSE, seed_value=8)
 #'
 #'set.seed(1)
 #'tsy <- ts(rnorm(8), frequency=1)
-#'sim_etsbased(tsy, 2, Combine=FALSE, M=FALSE, Future=TRUE, Length=5)
+#'sim_etsbased(tsy, 2, Combine=FALSE, M=FALSE, Future=TRUE, Length=5, seed_value=8)

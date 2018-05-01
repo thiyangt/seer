@@ -5,7 +5,7 @@
 \title{Simulate time series based on ETS models}
 \usage{
 sim_etsbased(y, Nsim, Combine = TRUE, M = TRUE, Future = FALSE,
-  Length = NA, extralength = NA)
+  Length = NA, extralength = NA, seed_value)
 }
 \arguments{
 \item{y}{a time series or M-competition data time series (Mcomp)}
@@ -26,6 +26,8 @@ are not connected to the original data.}
 \item{Length}{length of the simulated time series. If future = FALSE, the Length agument should be NA.}
 
 \item{extralength}{extra length need to be added for simulated time series}
+
+\item{seed_value}{a value for the seed}
 }
 \value{
 A list of time series.
