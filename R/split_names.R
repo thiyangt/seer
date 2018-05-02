@@ -42,7 +42,9 @@ split_names <- function(models){
   #for the value of 1 meaning True and 0 meaning False
   dummy_mat <- data.frame(model.matrix(~outcome_-1,data=df))
   df_final <- data.frame(df[,1:4],dummy_mat)
-  df_final <- df_final[,c("Model", "p", "d", "q", "outcome_with_drift", "outcome_with_non_zero_mean")]
+  col_names_wanted <- c("Model", "p", "d", "q", "outcome_with_drift", "outcome_with_non_zero_mean")
+  col_names_available <- col_names_wanted[col_names_wanted %in% names(df_final)]
+  df_final <- df_final[,col_names_available]
   df_final$Model <- as.character(df_final$Model)
   return(df_final)
 }
