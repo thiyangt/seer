@@ -35,8 +35,8 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ #
             "x_pacf5","diff1x_pacf5", "diff2x_pacf5", "nonlinearity")
 
   seer_features_nonseasonal <- lapply(train, function(temp1){c(
-                                                         e_acf1(temp1),
-                                                         unitroot(temp1))})
+                                                         seer::e_acf1(temp1),
+                                                         seer::unitroot(temp1))})
   seer_features_nonseasonal_DF <- as.data.frame(do.call("rbind", seer_features_nonseasonal))
   ts_features <- dplyr::bind_cols(ts_features1, seer_features_nonseasonal_DF)
 
@@ -47,7 +47,7 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ #
                                                       "x_pacf5","diff1x_pacf5", "diff2x_pacf5","nonlinearity", "seasonal_strength",
                                                     "seas_pacf")
 
-  seer_features_seasonal <- lapply(train, function(temp1){c(holtWinter_parameters(temp1),
+  seer_features_seasonal <- lapply(train, function(temp1){c(seer::holtWinter_parameters(temp1),
     acf_seasonalDiff(temp1, m, lagmax))})
 
   seer_features_seasonal_DF <- as.data.frame(do.call("rbind", seer_features_seasonal))
@@ -74,7 +74,7 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ #
   length <- unlist(length)
   ts_featuresDF$N <- length
 
-  seer_features <- lapply(train, function(temp1){c(acf5(temp1), holt_parameters(temp1))})
+  seer_features <- lapply(train, function(temp1){c(seer::acf5(temp1), seer::holt_parameters(temp1))})
   seer_feature_DF <- as.data.frame(do.call("rbind", seer_features))
 
   featureDF <- dplyr::bind_cols(ts_featuresDF,seer_feature_DF)
