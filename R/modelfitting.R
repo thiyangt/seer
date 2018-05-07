@@ -71,7 +71,7 @@ forecastRWD <- forecast(rwd_fit)$mean
 ACCURACY <- match.fun(function_name)
 RWDaccuracy <- ACCURACY(forecast=forecastRWD, test=test, training=training)
 return(RWDaccuracy)
-}, error=function(e){return(NA)})
+}, error=function(e){return(NULL)})
 }
 
 #' Calculate accuracy measure based on white noise process
