@@ -8,7 +8,7 @@
 prepare_trainingset <- function(accuracy_set, feature_set){
 
   accuracy_measures <- as.data.frame(accuracy_set$accuracy)
-  minimum_accuracy <- apply(accuracy_measures,1,min)
+  minimum_accuracy <- apply(accuracy_measures,1,min, na.rm=TRUE)
   inf_indices <- which(minimum_accuracy==Inf)
   na_indices <- which(is.na(minimum_accuracy)==TRUE)
   rmv_indices <- c(inf_indices, na_indices)
