@@ -58,9 +58,10 @@ return(RWaccuracy)
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return accuracy measure calculated baded on random walk with drift model
 #' @export
-accuracy_rwd <- function(ts_info, function_name){
+accuracy_rwd <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -71,16 +72,17 @@ forecastRWD <- forecast(rwd_fit)$mean
 ACCURACY <- match.fun(function_name)
 RWDaccuracy <- ACCURACY(forecast=forecastRWD, test=test, training=training)
 return(RWDaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy measure based on white noise process
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return returns accuracy measure calculated based on white noise process
 #' @export
-accuracy_wn <- function(ts_info, function_name){
+accuracy_wn <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -91,16 +93,17 @@ forecastWN <- forecast(fit_WN,h)$mean
 ACCURACY <- match.fun(function_name)
 WNaccuracy <- ACCURACY(forecast=forecastWN,test=test, training=training)
 return(WNaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy measure based on Theta method
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return returns accuracy measure calculated based on theta method
 #' @export
-accuracy_theta <- function(ts_info, function_name){
+accuracy_theta <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -118,16 +121,17 @@ if (m > 1){
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 }
 return(THETAaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy measure based on STL-AR method
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return accuracy measure calculated based on stlar method
 #' @export
-accuracy_stlar <- function(ts_info, function_name){
+accuracy_stlar <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -136,16 +140,17 @@ ACCURACY <- match.fun(function_name)
 tryCatch({
 STLARaccuracy <- ACCURACY(forecast=forecastSTLAR, test=test, training=training)
 return(STLARaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy measure calculated based on neural network forecasts
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return accuracy measure calculated based on neural network forecasts
 #' @export
-accuracy_nn <- function(ts_info, function_name){
+accuracy_nn <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -155,16 +160,17 @@ forecastnnetar <- forecast(fit_nnetar, h=h)$mean
 ACCURACY <- match.fun(function_name)
 nnetarACCURACY <- ACCURACY(forecast=forecastnnetar, test=test, training=training)
 return(nnetarACCURACY)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy measure based on snaive method
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return accuracy measure calculated based on snaive method
 #' @export
-accuracy_snaive <- function(ts_info, function_name){
+accuracy_snaive <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -173,16 +179,17 @@ forecastSNAIVE <- forecast::snaive(training, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 SNAIVEaccuracy <- ACCURACY(forecast=forecastSNAIVE, test=test, training=training)
 return(SNAIVEaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy based on MSTL
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return accuracy measure calculated based on multiple seasonal decomposition
 #' @export
-accuracy_mstl <- function(ts_info, function_name){
+accuracy_mstl <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -192,16 +199,17 @@ forecastMSTL <- forecast(training, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 MSTLaccuracy <- ACCURACY(forecast=forecastMSTL, test=test, training=training)
 return(MSTLaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }
 
 #' Calculate accuracy measure based on TBATS
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return accuracy measure calculated based on TBATS models
 #' @export
-accuracy_tbats <- function(ts_info, function_name){
+accuracy_tbats <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
@@ -211,5 +219,5 @@ fitTBAT <- forecast::tbats(training)
 forecastTBATS <- forecast(fitTBAT, h=h)$mean
 TBATSaccuracy <- ACCURACY(forecast=forecastTBATS, test=test, training=training)
 return(TBATSaccuracy)
-}, error=function(e){return(NULL)})
+}, error=function(e){return(rep(NA, length_out))})
 }

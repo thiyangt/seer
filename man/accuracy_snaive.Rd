@@ -4,13 +4,15 @@
 \alias{accuracy_snaive}
 \title{Calculate accuracy measure based on snaive method}
 \usage{
-accuracy_snaive(ts_info, function_name)
+accuracy_snaive(ts_info, function_name, length_out)
 }
 \arguments{
 \item{ts_info}{list containing training and test part of a time series}
 
 \item{function_name}{function to calculate the accuracy function, the arguments of this function
 should be forecast, training and test set of the time series}
+
+\item{length_out}{number of measures calculated by the function}
 }
 \value{
 accuracy measure calculated based on snaive method

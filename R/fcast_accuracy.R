@@ -7,12 +7,13 @@
 #' @param accuracyFun function to calculate the accuracy measure, the arguments
 #' for the accuracy function should be training, test and forecast
 #' @param h forecast horizon
+#' @param length_out number of measures calculated by a single function
 #' @return a list with accuracy matrix, vector of arima models and vector of ets models
 #' @author Thiyanga Talagala
 #' @export
 fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
                                          "theta", "stlar", "nn", "snaive", "mstl", "tbats"), database
-                           , accuracyFun, h){
+                           , accuracyFun, h, length_out){
 
   arima_models <- NA
   ets_models <- NA
@@ -40,14 +41,14 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
           arima = sapply(arima_cal, function(temp){temp$ARIMAaccuracy}),
           ets = sapply(ets_cal, function(temp){temp$ETSaccuracy}),
           rw = sapply(train_test, accuracy_rw, function_name=accuracyFun),
-          rwd = sapply(train_test, accuracy_rwd, function_name=accuracyFun),
-          wn = sapply(train_test, accuracy_wn, function_name=accuracyFun),
-          theta = sapply(train_test, accuracy_theta, function_name=accuracyFun),
-          stlar = sapply(train_test, accuracy_stlar, function_name=accuracyFun),
-          nn = sapply(train_test, accuracy_nn, function_name=accuracyFun),
-          snaive = sapply(train_test, accuracy_snaive, function_name=accuracyFun),
-          mstl = sapply(train_test, accuracy_mstl, function_name=accuracyFun),
-          tbats = sapply(train_test, accuracy_tbats, function_name=accuracyFun)
+          rwd = sapply(train_test, accuracy_rwd, function_name=accuracyFun, length_out=length_out),
+          wn = sapply(train_test, accuracy_wn, function_name=accuracyFun, length_out=length_out),
+          theta = sapply(train_test, accuracy_theta, function_name=accuracyFun, length_out=length_out),
+          stlar = sapply(train_test, accuracy_stlar, function_name=accuracyFun, length_out=length_out),
+          nn = sapply(train_test, accuracy_nn, function_name=accuracyFun, length_out=length_out),
+          snaive = sapply(train_test, accuracy_snaive, function_name=accuracyFun, length_out=length_out),
+          mstl = sapply(train_test, accuracy_mstl, function_name=accuracyFun, length_out=length_out),
+          tbats = sapply(train_test, accuracy_tbats, function_name=accuracyFun, length_out=length_out)
    )
  })
 

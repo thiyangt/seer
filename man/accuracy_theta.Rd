@@ -4,13 +4,15 @@
 \alias{accuracy_theta}
 \title{Calculate accuracy measure based on Theta method}
 \usage{
-accuracy_theta(ts_info, function_name)
+accuracy_theta(ts_info, function_name, length_out)
 }
 \arguments{
 \item{ts_info}{list containing training and test part of a time series}
 
 \item{function_name}{function to calculate the accuracy function, the arguments of this function
 should be forecast, training and test set of the time series}
+
+\item{length_out}{number of measures calculated by the function}
 }
 \value{
 returns accuracy measure calculated based on theta method

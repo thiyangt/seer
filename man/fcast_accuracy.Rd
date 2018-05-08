@@ -5,7 +5,8 @@
 \title{calculate forecast accuracy from different forecasting methods}
 \usage{
 fcast_accuracy(tslist, models = c("ets", "arima", "rw", "rwd", "wn", "theta",
-  "stlar", "nn", "snaive", "mstl", "tbats"), database, accuracyFun, h)
+  "stlar", "nn", "snaive", "mstl", "tbats"), database, accuracyFun, h,
+  length_out)
 }
 \arguments{
 \item{tslist}{a list of time series}
@@ -18,6 +19,8 @@ fcast_accuracy(tslist, models = c("ets", "arima", "rw", "rwd", "wn", "theta",
 for the accuracy function should be training, test and forecast}
 
 \item{h}{forecast horizon}
+
+\item{length_out}{number of measures calculated by a single function}
 }
 \value{
 a list with accuracy matrix, vector of arima models and vector of ets models
