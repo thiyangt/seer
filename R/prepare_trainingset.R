@@ -4,6 +4,7 @@
 #' @param accuracy_set output from the fcast_accuracy
 #' @param feature_set output from the cal_features
 #' @return dataframe consisting features and classlabels
+#' @importFrom magrittr %>%
 #' @export
 prepare_trainingset <- function(accuracy_set, feature_set){
 
@@ -31,7 +32,7 @@ prepare_trainingset <- function(accuracy_set, feature_set){
   training_set$classlabels <- classlabel
   # extract complete cases only
   drop.cols <- colnames(accuracy_set$accuracy)
-  training_set <- training_set %>% select(-one_of(drop.cols))
+  training_set <- training_set %>% dplyr::select(-dplyr::one_of(drop.cols))
   training_set <- training_set[complete.cases(training_set),]
   models <- data.frame(ARIMA_name=training_set$ARIMA_name, ETS_name=training_set$ETS_name,
                        min_label=training_set$min_label, model_names=training_set$model_names)
