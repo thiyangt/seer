@@ -64,11 +64,13 @@ unitroot <- function(y){
 #' @author Thiyanga Talagala
 #' @export
 holtWinter_parameters <- function(y){
+  tryCatch({
   fit <- forecast::hw(y)
   output <- c(hwalpha = unname(fit$model$par["alpha"]),
               hwbeta = unname(fit$model$par["beta"]),
               hwgamma = unname(fit$model$par["gamma"]))
   return(output)
+  }, error=function(e){return(c(hwalpha=NA, hwbeta=NA, hwgamma=NA))})
 }
 #' Autocorrelation coefficients based on seasonally differenced series
 #'
@@ -102,10 +104,12 @@ acf_seasonalDiff <- function(y,m, lagmax){ # monthly lagmax=13L, quarterly lagma
 #' @export
 holt_parameters <- function(x){
   # parameter estimates of holt linear trend model
+ # tryCatch({
     fit <- forecast::holt(x)
     output <- c(alpha = unname(fit$model$par["alpha"]),
                 beta = unname(fit$model$par["beta"]))
     return(output)
+#  }, error=function(e){return(c(alpha=NA, beta=NA))})
 }
 
 
