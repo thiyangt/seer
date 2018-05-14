@@ -12,11 +12,12 @@
 #' data are ignored, and the simulations are possible realizations of the time series model that
 #' are not connected to the original data.
 #' @param Length length of the simulated time series. If future = FALSE, the Length agument should be NA.
+#' @param mtd method to use for forecasting seasonally adjusted time series
 #' @param extralength extra length need to be added for simulated time series
 #' @return A list of time series.
 #' @author Thiyanga Talagala
 #' @export
-sim_mstlbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA){
+sim_mstlbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA, mtd="ets"){
     if (M ==TRUE){
       if ("Combine"==TRUE){
       train <- y$x
@@ -32,7 +33,7 @@ sim_mstlbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA
   if(frequency(combined)==1 | length(combined) <= 2*frequency(combined))
     return(NA)
 
-  fit <- forecast::stlf(combined)
+  fit <- forecast::stlf(combined, method=mtd)
   if (!is.na(Length)){length_series <- Length
   } else if (!is.na(extralength)) {
     length_series <- length(combined)+extralength
@@ -48,7 +49,7 @@ sim_mstlbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA
 #'library(seer)
 #'data(M4)
 #'weekly_m4 <- subset(M4, "weekly")
-#'sim_mstlbased(weekly_m4[[1]], 2, Combine=FALSE, M=TRUE, Future=FALSE)
+#'sim_mstlbased(weekly_m4[[1]], 2, Combine=FALSE, M=TRUE, Future=FALSE, mtd="arima")
 #'
 #'daily_m4 <- subset(M4, "daily") # series with length < 2*frequency
-#'sim_mstlbased(daily_m4[[3]], 2, Combine=FALSE, M=FALSE, Future=TRUE)
+#'sim_mstlbased(daily_m4[[3]], 2, Combine=FALSE, M=FALSE, Future=TRUE, mtd="ets")
