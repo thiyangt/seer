@@ -4,7 +4,7 @@
 \alias{accuracy_mstl}
 \title{Calculate accuracy based on MSTL}
 \usage{
-accuracy_mstl(ts_info, function_name, length_out)
+accuracy_mstl(ts_info, function_name, length_out, mtd)
 }
 \arguments{
 \item{ts_info}{list containing training and test part of a time series}
@@ -13,6 +13,8 @@ accuracy_mstl(ts_info, function_name, length_out)
 should be forecast, training and test set of the time series}
 
 \item{length_out}{number of measures calculated by the function}
+
+\item{mtd}{Method to use for forecasting the seasonally adjusted series}
 }
 \value{
 accuracy measure calculated based on multiple seasonal decomposition

@@ -12,7 +12,7 @@
 #' @author Thiyanga Talagala
 #' @export
 fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
-                                         "theta", "stlar", "nn", "snaive", "mstl", "tbats"), database
+                                         "theta", "stlar", "nn", "snaive", "mstlarima","mstlets", "tbats"), database
                            , accuracyFun, h, length_out){
 
   arima_models <- NA
@@ -47,7 +47,8 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
           stlar = sapply(train_test, accuracy_stlar, function_name=accuracyFun, length_out=length_out),
           nn = sapply(train_test, accuracy_nn, function_name=accuracyFun, length_out=length_out),
           snaive = sapply(train_test, accuracy_snaive, function_name=accuracyFun, length_out=length_out),
-          mstl = sapply(train_test, accuracy_mstl, function_name=accuracyFun, length_out=length_out),
+          mstlets = sapply(train_test, accuracy_mstl, function_name=accuracyFun, length_out=length_out, method="ets"),
+          mstlarima = sapply(train_test, accuracy_mstl, function_name=accuracyFun, length_out=length_out, method="arima"),
           tbats = sapply(train_test, accuracy_tbats, function_name=accuracyFun, length_out=length_out)
    )
  })

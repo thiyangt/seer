@@ -187,15 +187,16 @@ return(SNAIVEaccuracy)
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
 #' @param length_out number of measures calculated by the function
+#' @param mtd Method to use for forecasting the seasonally adjusted series
 #' @return accuracy measure calculated based on multiple seasonal decomposition
 #' @export
-accuracy_mstl <- function(ts_info, function_name, length_out){
+accuracy_mstl <- function(ts_info, function_name, length_out, mtd){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
 tryCatch({
-fit_mstl <- forecast::mstl(training)
-forecastMSTL <- forecast(training, h=length(test))$mean
+fit_stlf <- forecast::stlf(training, method=mtd)
+forecastMSTL <- forecast(fit_stlf, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 MSTLaccuracy <- ACCURACY(forecast=forecastMSTL, test=test, training=training)
 return(MSTLaccuracy)
