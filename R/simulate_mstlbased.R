@@ -30,9 +30,13 @@ sim_mstlbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA
       combined <- y
     }
 
+  class_combined <- class(combined)
+
+  if (!("msts" %in% class_combined)==TRUE){
+
   if(frequency(combined)==1 | length(combined) <= 2*frequency(combined))
     return(NA)
-
+}
   fit <- forecast::stlf(combined, method=mtd)
   if (!is.na(Length)){length_series <- Length
   } else if (!is.na(extralength)) {
