@@ -4,7 +4,8 @@
 \alias{cal_features}
 \title{Calculate features for new time series instances}
 \usage{
-cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database, h)
+cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database, h,
+  highfreq)
 }
 \arguments{
 \item{tslist}{a list of univariate time series}
@@ -18,6 +19,8 @@ cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database, h)
 \item{database}{whether the time series is from mcomp or other}
 
 \item{h}{forecast horizon}
+
+\item{highfreq}{whether the time series is weekly, daily or hourly}
 }
 \value{
 dataframe: each column represent a feature and each row represent a time series

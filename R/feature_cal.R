@@ -7,11 +7,12 @@
 #' @param lagmax maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)
 #' @param database whether the time series is from mcomp or other
 #' @param h forecast horizon
+#' @param highfreq whether the time series is weekly, daily or hourly
 #' @return dataframe: each column represent a feature and each row represent a time series
 #' @importFrom magrittr %>%
 #' @author Thiyanga Talagala
 #' @export
-cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ # tslist = yearly_m1,
+cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, highfreq){ # tslist = yearly_m1,
 
   if (database == "other") {
     train_test <- lapply(tslist, function(temp){list(training=head_ts(temp,h), test=tail_ts(temp, h))})
@@ -46,9 +47,13 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ #
                                                       "e_acf1", "x_acf1", "diff1_acf1", "diff2_acf1",
                                                       "x_pacf5","diff1x_pacf5", "diff2x_pacf5","nonlinearity", "seasonal_strength",
                                                     "seas_pacf")
-
-  seer_features_seasonal <- lapply(train, function(temp1){c(seer::holtWinter_parameters(temp1),
-    acf_seasonalDiff(temp1, m, lagmax))})
+  if(highfreq==TRUE){
+  seer_features_seasonal <- lapply(train, function(temp1){
+    acf_seasonalDiff(temp1, m, lagmax)})
+  } else {
+    seer_features_seasonal <- lapply(train, function(temp1){c(seer::holtWinter_parameters(temp1),
+                                                              acf_seasonalDiff(temp1, m, lagmax))})
+  }
 
   seer_features_seasonal_DF <- as.data.frame(do.call("rbind", seer_features_seasonal))
 
@@ -74,7 +79,12 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ #
   length <- unlist(length)
   ts_featuresDF$N <- length
 
+  if (highfreq==FALSE){
   seer_features <- lapply(train, function(temp1){c(seer::acf5(temp1), seer::holt_parameters(temp1))})
+  } else {
+    seer_features <- lapply(train, function(temp1){seer::acf5(temp1)})
+  }
+
   seer_feature_DF <- as.data.frame(do.call("rbind", seer_features))
 
   featureDF <- dplyr::bind_cols(ts_featuresDF,seer_feature_DF)
@@ -85,14 +95,14 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h){ #
 #'require(Mcomp)
 #'data(M3)
 #'yearly_m3 <- subset(M3, "yearly")
-#'cal_features(yearly_m3, database="M3", h=6)
+#'cal_features(yearly_m3, database="M3", h=6, highfreq=FALSE)
 #'@examples
 #'require(Mcomp)
 #'data(M3)
 #'quarterly_m3 <- subset(M3, "quarterly")
-#'cal_features(quarterly_m3, seasonal=TRUE, m=4, lagmax=5L, database="M3", h=8)
+#'cal_features(quarterly_m3, seasonal=TRUE, m=4, lagmax=5L, database="M3", h=8, highfreq=FALSE)
 #'@example
 #'myts <- list(ts(rnorm(20)), ts(rnorm(25)))
-#'cal_features(myts, database="other", h=6)
+#'cal_features(myts, database="other", h=6, highfreq=FALSE)
 
 
