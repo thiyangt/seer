@@ -38,13 +38,13 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   # calculation of stl features: handling short and long time series
   stl_ftrs <- lapply(train, function(temp){
     length_temp <- length(temp)
-    required_length <- 2*frequency(temp)
+    required_length <- 2*frequency(temp)+1
     if (length_temp > required_length) {tsfeatures::stl_features(temp)
     } else {
     fcast_h <- required_length-length_temp
     fcast <- forecast::forecast(temp, fcast_h)$mean
     com <- ts(c(temp,fcast), start=start(temp), frequency=frequency(temp))
-    tsfeatures::stl_features(temp)
+    tsfeatures::stl_features(com)
     }
 
   })
