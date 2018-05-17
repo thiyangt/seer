@@ -21,14 +21,36 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   }
 
   train <- lapply(train_test, function(temp){temp$training})
+
+
+
+
   ts_features_pkg <- tsfeatures::tsfeatures(train, c("entropy",
                                       "lumpiness",
                                       "stability",
                                       "hurst",
-                                      "stl_features",
+                                     # "stl_features",
                                      "acf_features",
                                       "pacf_features",
                                       "nonlinearity"))
+
+
+  # calculation of stl features: handling short and long time series
+  stl_ftrs <- lapply(train, function(temp){
+    length_temp <- length(temp)
+    required_length <- 2*frequency(temp)
+    if (length_temp > required_length) {tsfeatures::stl_features(temp)
+    } else {
+    fcast_h <- required_length-length_temp
+    fcast <- forecast::forecast(temp, fcast_h)$mean
+    com <- ts(c(temp,fcast), start=start(temp), frequency=frequency(temp))
+    tsfeatures::stl_features(temp)
+    }
+
+  })
+  stl_df <- as.data.frame(do.call("rbind", stl_ftrs))
+  ts_features_pkg <- dplyr::bind_cols(ts_features_pkg,stl_df)
+
   if (seasonal==FALSE){
   ts_features1 <- ts_features_pkg %>% dplyr::select ("entropy", "lumpiness", "stability", "hurst",
             "trend", "spike", "linearity", "curvature",
