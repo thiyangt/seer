@@ -67,11 +67,15 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   ts_features <- dplyr::bind_cols(ts_features1, seer_features_nonseasonal_DF)
 
     } else {
-  ts_features1 <- ts_features_pkg %>% dplyr::select ("entropy", "lumpiness", "stability", "hurst",
-                                                      "trend", "spike", "linearity", "curvature",
-                                                      "e_acf1", "x_acf1", "diff1_acf1", "diff2_acf1",
-                                                      "x_pacf5","diff1x_pacf5", "diff2x_pacf5","nonlinearity", "seasonal_strength",
-                                                    "seas_pacf")
+  ts_features_pkg_name <- names(ts_features_pkg)
+  seasonalFeatures <- grep("seasonal_strength",ts_features_pkg_name, value = TRUE)
+  select_features <- c("entropy", "lumpiness", "stability", "hurst",
+                      "trend", "spike", "linearity", "curvature",
+                      "e_acf1", "x_acf1", "diff1_acf1", "diff2_acf1",
+                      "x_pacf5","diff1x_pacf5", "diff2x_pacf5","nonlinearity",
+                      "seas_pacf", seasonalFeatures)
+
+  ts_features1 <- ts_features_pkg %>% dplyr::select (select_features)
   if(highfreq==TRUE){
   seer_features_seasonal <- lapply(train, function(temp1){
     acf_seasonalDiff(temp1, m, lagmax)})
