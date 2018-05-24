@@ -1,7 +1,8 @@
-#' function to calculate forecast-accuracy for new series
+#' function to calculate point forecast, 95\% confidence intervals, forecast-accuracy for new series
 #'
-#' Given the prediction results of random forest calculate the
+#' Given the prediction results of random forest calculate point forecast, 95\% confidence intervals,
 #' forecast-accuracy for the test set
+#'
 #' @param predictions prediction results obtained from  random forest classifier
 #' @param tslist list of new time series
 #' @param database whethe the time series is from mcom or other
@@ -9,9 +10,9 @@
 #' @param  function_name to calculate accuracy measure, the arguments for the
 #' accuracy function should be training period, test period and forecast
 #' @param h length of the forecast horizon
-#' @return a numeric vector contains the forecast accuracy for each series
+#' @return a list containing, point forecast, confidence interval, accuracy measure
 #' @export
-rfprediction_accuracy <- function(predictions, tslist, database, function_name, h, accuracy){
+rf_forecast <- function(predictions, tslist, database, function_name, h, accuracy){
 
   if (database == "other") {
     train_test <- lapply(tslist, function(temp){list(training=head_ts(temp,h), test=tail_ts(temp, h))})
@@ -128,7 +129,7 @@ rfprediction_accuracy <- function(predictions, tslist, database, function_name, 
 
   }
 
-  forecast_results <- list(mean = forecast_mean, lower=forecast_lower, upper=forecast_upper)
+  forecast_results <- list(mean = forecast_mean, lower=forecast_lower, upper=forecast_upper, accuracy=accuracy_value)
   return(forecast_results)
 
 }
