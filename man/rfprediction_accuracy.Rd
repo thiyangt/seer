@@ -4,7 +4,7 @@
 \alias{rfprediction_accuracy}
 \title{function to calculate forecast-accuracy for new series}
 \usage{
-rfprediction_accuracy(predictions, tslist, database, function_name, h)
+rfprediction_accuracy(predictions, tslist, database, function_name, h, accuracy)
 }
 \arguments{
 \item{predictions}{prediction results obtained from  random forest classifier}
@@ -17,6 +17,8 @@ rfprediction_accuracy(predictions, tslist, database, function_name, h)
 accuracy function should be training period, test period and forecast}
 
 \item{h}{length of the forecast horizon}
+
+\item{accuracy}{if true a accuaracy measure will be calculated}
 }
 \value{
 a numeric vector contains the forecast accuracy for each series

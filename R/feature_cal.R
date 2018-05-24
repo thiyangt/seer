@@ -3,7 +3,7 @@
 #' Computes relevant time series features before applying them to the model
 #' @param tslist a list of univariate time series
 #' @param seasonal if FALSE, restricts to features suitable for non-seasonal data
-#' @param m frequency of the time series
+#' @param m frequency of the time series or minimum frequency in the case of msts objects
 #' @param lagmax maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)
 #' @param database whether the time series is from mcomp or other
 #' @param h forecast horizon
@@ -39,7 +39,8 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   stl_ftrs <- lapply(train, function(temp){
     length_temp <- length(temp)
    # tryCatch({
-      freq_temp <- frequency(temp)
+      #freq_temp <- frequency(temp)
+      freq_temp <- m
    # }, error=function(e){freq_temp <- m})
     required_length <- 2*freq_temp+1
     if (length_temp > required_length) {tsfeatures::stl_features(temp)
@@ -51,7 +52,17 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
     }
 
   })
+
+  if (highfreq==FALSE){
   stl_df <- as.data.frame(do.call("rbind", stl_ftrs))
+  } else {
+  stl_df <- dplyr::bind_rows(lapply(stl_ftrs, as.data.frame.list))
+  stl_df$seasonal_strength1[is.na(stl_df$seasonal_strength1)==TRUE] =
+    stl_df$seasonal_strength[is.na(stl_df$"seasonal_strength")==FALSE]
+  stl_df$seasonal_strength2[is.na(stl_df$seasonal_strength2)==TRUE]=0
+  stl_df <- stl_df %>% dplyr::select(-dplyr::one_of("seasonal_strength"))
+  }
+
   ts_features_pkg <- dplyr::bind_cols(ts_features_pkg,stl_df)
 
   if (seasonal==FALSE){
@@ -75,7 +86,7 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
                       "x_pacf5","diff1x_pacf5", "diff2x_pacf5","nonlinearity",
                       "seas_pacf", seasonalFeatures)
 
-  ts_features1 <- ts_features_pkg %>% dplyr::select (select_features)
+  ts_features1 <- ts_features_pkg %>% dplyr::select(select_features)
   if(highfreq==TRUE){
   seer_features_seasonal <- lapply(train, function(temp1){
     acf_seasonalDiff(temp1, m, lagmax)})
@@ -100,7 +111,8 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   ts_featuresDF <- dplyr::rename(ts_featuresDF, "diff1y_pacf5" = "diff1x_pacf5")
   ts_featuresDF <- dplyr::rename(ts_featuresDF, "diff2y_pacf5" = "diff2x_pacf5")
 
-  if(seasonal==TRUE){
+  names_slt_df <- names(stl_df)
+  if("seasonal_strength" %in% names_slt_df ==TRUE){
   ts_featuresDF <- dplyr::rename(ts_featuresDF, "seasonality" = "seasonal_strength")
   }
 

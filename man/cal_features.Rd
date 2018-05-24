@@ -12,7 +12,7 @@ cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database, h,
 
 \item{seasonal}{if FALSE, restricts to features suitable for non-seasonal data}
 
-\item{m}{frequency of the time series}
+\item{m}{frequency of the time series or minimum frequency in the case of msts objects}
 
 \item{lagmax}{maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)}
 
