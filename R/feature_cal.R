@@ -57,10 +57,13 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   stl_df <- as.data.frame(do.call("rbind", stl_ftrs))
   } else {
   stl_df <- dplyr::bind_rows(lapply(stl_ftrs, as.data.frame.list))
+  namestldf <- names(stl_df)
+  if ("seasonal_strength1" %in% namestldf==T & "seasonal_strength2" %in% namestldf ==T){
   stl_df$seasonal_strength1[is.na(stl_df$seasonal_strength1)==TRUE] =
     stl_df$seasonal_strength[is.na(stl_df$"seasonal_strength")==FALSE]
   stl_df$seasonal_strength2[is.na(stl_df$seasonal_strength2)==TRUE]=0
   stl_df <- stl_df %>% dplyr::select(-dplyr::one_of("seasonal_strength"))
+  }
   }
 
   ts_features_pkg <- dplyr::bind_cols(ts_features_pkg,stl_df)
