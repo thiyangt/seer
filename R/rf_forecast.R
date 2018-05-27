@@ -103,22 +103,22 @@ rf_forecast <- function(predictions, tslist, database, function_name, h, accurac
       fcast <- forecast(fit_nnetar, PI=TRUE, h=h, level=c(95))
 
     } else if (predictions[i] == "mstl"| predictions[i] == "mstlets"){
-      if(frequency(training)==1 | length(training) <= 2*frequency(training)){
-        fit_ets <- ets(training)
-        fcast <- forecast(fit_ets,h, level=c(95))
-      } else {
+     # if(frequency(training)==1 | length(training) <= 2*frequency(training)){
+     #   fit_ets <- ets(training)
+     #   fcast <- forecast(fit_ets,h, level=c(95))
+     # } else {
       fit_mstl <- stlf(training, level=c(95))
       fcast <- forecast(fit_mstl, h=h)
-      }
+    #  }
 
     } else if (predictions[i] == "mstlarima"){
-      if(frequency(training)==1 | length(training) <= 2*frequency(training)){
-        fit_ets <- ets(training)
-        fcast <- forecast(fit_ets,h, level=c(95))
-      } else {
+     # if(frequency(training)==1 | length(training) <= 2*frequency(training)){
+    #    fit_ets <- ets(training)
+     #   fcast <- forecast(fit_ets,h, level=c(95))
+    #  } else {
       fit_mstl <- stlf(training, method="arima", level=c(95))
       fcast <- forecast(fit_mstl, h=h)
-      }
+    #  }
 
     } else if (predictions[i] == "tbats"){
       fit_tbats <- forecast::tbats(training)
