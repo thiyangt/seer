@@ -15,9 +15,10 @@ split_names <- function(models){
   models <- dplyr::recode(models, "ARIMA(0,0,0) with zero mean"="wn")
   models <- dplyr::recode(models, "ARIMA(0,0,0)(0,1,0)[4]"="snaive")
   models <- dplyr::recode(models, "ARIMA(0,0,0)(0,1,0)[12]"="snaive")
+  models <- dplyr::recode(models, "ARIMA(0,0,0)(0,1,0)[52]"="snaive")
 
   # First identify the sarima models and rename them as "SARIMA"
-  toMatch_frequency <- c("[12]", "[4]")
+  toMatch_frequency <- c("[12]", "[4]", "[52]")
   index_sarima <- grepl(paste0(gsub("(\\[)","\\\\[", toMatch_frequency), collapse = "|"), models)
   df1 <- data.frame(models=models, ind_sarima = index_sarima)
   df1$models <- as.character(df1$models)
