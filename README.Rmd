@@ -2,8 +2,6 @@
 output: github_document
 ---
 
----
- 
 [![Build Status](https://travis-ci.org/thiyangt/seer.svg?branch=master)](https://travis-ci.org/thiyangt/seer)
  
 
@@ -14,6 +12,8 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
+
+
 
 # seer
 
@@ -36,13 +36,13 @@ library(seer)
 library(tsfeatures)
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
-M3yearly_features <- cal_features(yearly_m3, database="M3", h=6)
+M3yearly_features <- cal_features(yearly_m3,database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 ```
 
 ```{r accuracy}
 library(Mcomp)
 tslist <- list(M3[[1]], M3[[2]])
-fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
+fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
 
 ```

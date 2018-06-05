@@ -59,4 +59,4 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
 #'@examples
 #'library(Mcomp)
 #'tslist <- list(M3[[1]], M3[[2]])
-#'fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "stlar", "nn", "snaive", "mstl"),database ="M3", cal_MASE, h=6)
+#'fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "stlar", "nn"),database ="M3", cal_MASE, h=6, length_out=1)
