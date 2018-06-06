@@ -108,13 +108,13 @@ prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = featu
 # provides the training set to build a rf classifier
 head(prep_tset$trainingset)
 
-# provides addition information about fitted models
+# provides additional information about the fitted models
 head(prep_tset$modelinfo)
 ```
 
 #### FFORMS: online phase is activated.
 
-**5. train a random forest and predict class labels for new series (FFORMS: online phase)**
+**5. Train a random forest and predict class labels for new series (FFORMS: online phase)**
 
 `build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. 
 
@@ -127,6 +127,7 @@ table(predictedlabels_m3)
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
+
 ```
 
 **6. Generate point foecasts and 95% prediction intervals**
