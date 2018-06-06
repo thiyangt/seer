@@ -45,7 +45,7 @@ m3y <- M3[1:2]
 
 **1. Augmenting the observed sample with simulated time series.**
 
-`sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
+We augment our reference set of time series by simulating new time series. In order to produce simulated series, we use several standard automatic forecasting algorithms such as ETS or automatic ARIMA models, and then simulate multiple time series from the selected model within each model class. `sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
 
 ```{r, message=FALSE}
 library(seer)
@@ -63,7 +63,8 @@ simulated_ets
 
 **2. Calculate features based on the training period of time series.**
 
-`cal_features` function can be used to calculate relevant features.
+Our proposed framework operates on the features of the time series.
+`cal_features` function can be used to calculate relevant features for a given list of time series.
 
 ```{r features, warning=FALSE, message=FALSE}
 library(tsfeatures)
@@ -73,8 +74,77 @@ head(M3yearly_features)
 
 **3. Calculate forecast accuracy measure(s)**
 
+`fcast_accuracy` function can be used to calculate forecast error measure (in the following example MASE) from each candidate model. This step is the most computationally intensive and time-consuming, as each candidate model has to be estimated on each series. In the following example ARIMA(arima), ETS(ets), random walk(rw), random walk with drift(rwd),  standard theta method(theta) and neural network time series forecasts(nn) are used as possible models. In addition to these models following models can also be used in the case of handling seasonal time series,
+
+* snaive: seasoonal naive method
+* stlar: STL decomposition is applied to the time series and then
+seasonal naive method is used to forecast seasonal component. AR model is used to forecast seasonally adjusted data.
+* mstlets:STL decomposition is applied to the time series and then
+seasonal naive method is used to forecast seasonal component. ETS model is used to forecast seasonally adjusted data.
+* mstlarima:STL decomposition is applied to the time series and then
+seasonal naive method is used to forecast seasonal component. ARIMA model is used to forecast seasonally adjusted data.
+* tbats: TBATS models
+
 ```{r accuracy, message=FALSE}
 tslist <- list(M3[[1]], M3[[2]])
-fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
+accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1)
+accuracy_info
+```
 
+**4. Construct a dataframe of input:features and output:lables to train a random forest** 
+
+`prepae_trainingset` can be used to create a data frame of input:features and output: labels. 
+
+```{r}
+# steps 3 and 4 applied to yearly series of M1 competition
+data(M1)
+yearly_m1 <- subset(M1, "yearly")
+accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1)
+features_m1 <- cal_features(yearly_m1, database="M1", h=6, highfreq = FALSE)
+
+# prepae training set
+prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = features_m1)
+
+# provides the training set to build a rf classifier
+head(prep_tset$trainingset)
+
+# provides addition information about fitted models
+head(prep_tset$modelinfo)
+```
+
+#### FFORMS: online phase is activated.
+
+**5. train a random forest and predict class labels for new series (FFORMS: online phase)**
+
+`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yealy series on M1 data and predicted class labels for yearly series in the M3 competition. 
+
+```{r}
+rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
+
+# to get the predicted class labels
+predictedlabels_m3 <- rf$predictions
+table(predictedlabels_m3)
+
+# to obtain the random forest for future use
+randomforest <- rf$randomforest
+```
+
+**6. Generate point foecasts and 95% prediction intervals**
+
+`rf_forecast` function can be used to generate point forecasts and 95% prediction intervals based on the predicted class labels obtained in step 5.
+
+```{r}
+forecasts <- rf_forecast(predictions=predictedlabels_m3[1:2], tslist=yearly_m3[1:2], database="M3", function_name="cal_MASE", h=6, accuracy=TRUE)
+
+# to obtain point forecasts
+forecasts$mean
+
+# to obtain lower boundary of 95% prediction intervals
+forecasts$lower
+
+# to obtain upper boundary of 95% prediction intervals
+forecasts$upper
+
+# to obtain MASE
+forecasts$accuracy
 ```

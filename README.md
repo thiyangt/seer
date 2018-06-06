@@ -35,7 +35,7 @@ m3y <- M3[1:2]
 
 **1. Augmenting the observed sample with simulated time series.**
 
-`sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
+We augment our reference set of time series by simulating new time series. In order to produce simulated series, we use several standard automatic forecasting algorithms such as ETS or automatic ARIMA models, and then simulate multiple time series from the selected model within each model class. `sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
 
 ``` r
 library(seer)
@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5471.323  5955.093  6489.125  7308.471  8063.817  8790.792  9452.211
-#>  [8] 10302.778 11019.237 11789.308 12538.104 13256.554 14061.509 14749.990
-#> [15] 15516.023 16243.748 17248.158 18247.069 19119.439 19931.034
+#>  [1]  5371.414  5890.344  6480.208  7077.869  7637.510  8226.604  8765.985
+#>  [8]  9230.521  9538.322  9740.545  9810.762  9904.495  9943.101 10027.344
+#> [15] 10203.163 10578.990 10875.870 10985.939 10992.770 11099.999
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5629.080  6276.844  6866.413  7525.295  8148.422  8797.130  9290.304
-#>  [8]  9754.642 10087.227 10424.330 10839.675 11102.611 11409.244 11829.678
-#> [15] 12147.704 12535.777 12840.829 13134.374 13180.556 13318.011
+#>  [1]  5442.456  5765.343  6065.882  6195.765  6249.574  6383.093  6567.269
+#>  [8]  6608.624  6560.218  6602.138  6682.461  6789.962  7007.539  7324.771
+#> [15]  7749.514  8186.576  8602.379  9082.504  9645.556 10141.193
 #> 
 #> 
 #> $N0002
@@ -67,18 +67,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 3156.207 3157.823 4368.224 3955.319 4238.336 4929.824 4740.987
-#>  [8] 4809.813 5259.133 4704.674 4300.746 3388.959 2607.458 2761.274
-#> [15] 2732.462 3662.939 3989.140 2997.289 1895.273 1067.429
+#>  [1] 2603.897 3115.424 3433.316 2422.939 1655.690 1548.859 2107.091
+#>  [8] 2876.909 1643.699 1876.035 1822.886 3731.276 2736.629 2996.561
+#> [15] 3365.214 2850.233 1829.292 1489.613 2560.542 3731.908
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 5180.317 6361.326 7467.639 6075.572 6547.428 5873.356 6564.299
-#>  [8] 6425.769 6456.682 5543.886 6491.954 5130.930 5017.734 4192.019
-#> [15] 4288.737 5620.805 5844.835 4815.298 6135.662 5616.873
+#>  [1] 3692.675 3251.824 2600.768 2687.159 3539.350 3257.925 3269.863
+#>  [8] 4304.800 5004.061 5123.604 5691.072 4423.188 5007.263 5343.219
+#> [15] 6211.478 6804.357 6145.715 7503.303 7092.201 7881.515
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -90,7 +90,7 @@ simulated_ets
 
 **2. Calculate features based on the training period of time series.**
 
-`cal_features` function can be used to calculate relevant features.
+Our proposed framework operates on the features of the time series. `cal_features` function can be used to calculate relevant features for a given list of time series.
 
 ``` r
 library(tsfeatures)
@@ -128,17 +128,145 @@ head(M3yearly_features)
 
 **3. Calculate forecast accuracy measure(s)**
 
+`fcast_accuracy` function can be used to calculate forecast error measure (in the following example MASE) from each candidate model. This step is the most computationally intensive and time-consuming, as each candidate model has to be estimated on each series. In the following example ARIMA(arima), ETS(ets), random walk(rw), random walk with drift(rwd), standard theta method(theta) and neural network time series forecasts(nn) are used as possible models. In addition to these models following models can also be used in the case of handling seasonal time series,
+
+-   snaive: seasoonal naive method
+-   stlar: STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. AR model is used to forecast seasonally adjusted data.
+-   mstlets:STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ETS model is used to forecast seasonally adjusted data.
+-   mstlarima:STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ARIMA model is used to forecast seasonally adjusted data.
+-   tbats: TBATS models
+
 ``` r
 tslist <- list(M3[[1]], M3[[2]])
-fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
+accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1)
+accuracy_info
 #> $accuracy
-#>         arima       ets       rw       rwd    theta       nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.422665
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.279709
+#>         arima       ets       rw       rwd    theta        nn
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5782618
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797527
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
 #> 
 #> $ETS
 #> [1] "ETS(M,A,N)" "ETS(M,A,N)"
+```
+
+**4. Construct a dataframe of input:features and output:lables to train a random forest**
+
+`prepae_trainingset` can be used to create a data frame of input:features and output: labels.
+
+``` r
+# steps 3 and 4 applied to yearly series of M1 competition
+data(M1)
+yearly_m1 <- subset(M1, "yearly")
+accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1)
+features_m1 <- cal_features(yearly_m1, database="M1", h=6, highfreq = FALSE)
+
+# prepae training set
+prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = features_m1)
+
+# provides the training set to build a rf classifier
+head(prep_tset$trainingset)
+#>     entropy   lumpiness stability     hurst     trend    spikiness
+#> 1 0.6834977 0.039954623 0.9769784 0.9849926 0.9850371 1.017214e+15
+#> 2 0.7111939 0.079004273 0.8942551 0.9875651 0.9886314 6.578014e+14
+#> 3 0.7159449 0.016023114 0.8575642 0.9869744 0.9889526 2.092182e+14
+#> 4 0.7614693 0.002012414 1.3188444 0.9818805 0.9573949 1.536452e+15
+#> 5 0.6282809 0.001119965 0.4455716 0.9926890 0.9731881 4.697275e+21
+#> 6 0.7079567 0.007742860 0.5784716 0.9859727 0.9750517 1.112001e+09
+#>     linearity   curvature      e_acf1    y_acf1 diff1y_acf1 diff2y_acf1
+#> 1   743661.90  117634.759 -0.06034303 0.8332267 -0.01613382 -0.15858240
+#> 2   643182.89   88179.645  0.27247240 0.9060644  0.28997787 -0.23409565
+#> 3   536004.16   80971.484  0.17194227 0.8687823  0.08556123 -0.05780273
+#> 4   512741.95    8408.668 -0.39597048 0.8242861 -0.60279324 -0.73661717
+#> 5 41188862.04 8651866.687  0.01126973 0.9281709 -0.17972587 -0.40129440
+#> 6    20322.33    3201.696 -0.38536114 0.8395461 -0.56036199 -0.72372407
+#>     y_pacf5 diff1y_pacf5 diff2y_pacf5 nonlinearity lmres_acf1        ur_pp
+#> 1 0.7317718    0.4678099    0.7872667   0.09788676 0.43737025  1.600224447
+#> 2 0.9134830    0.3685785    0.3087412   8.03078490 0.72996605 -0.331484960
+#> 3 0.8003519    0.3633001    0.4027709   1.87585478 0.67234619  0.761913821
+#> 4 0.8029142    0.4082855    0.7547024   1.06354893 0.01395566  0.006654736
+#> 5 0.9211049    0.0870958    0.2514310   2.42522204 0.66419101 -0.426695213
+#> 6 0.7516687    0.3981432    1.0484015   0.29465502 0.34441088  0.664898414
+#>      ur_kpss  N   y_acf5 diff1y_acf5 diff2y_acf5        alpha         beta
+#> 1 0.21070271 22 1.836573  0.43635058  0.17487483 0.1350376735 0.1350376734
+#> 2 0.16817558 23 2.192964  0.25237684  0.27786274 0.9998999584 0.5437148338
+#> 3 0.20361099 23 1.959167  0.37443160  0.20979630 0.4413862921 0.1354501704
+#> 4 0.08654678 23 2.049330  0.48071760  0.10950686 0.0001000893 0.0001000886
+#> 5 0.20202815 39 2.872714  0.09763561  0.08923302 0.6774775679 0.0326474990
+#> 6 0.20347758 25 1.934410  0.34526089  0.14236605 0.1413996697 0.1413403346
+#>   classlabels
+#> 1   ETS-trend
+#> 2         rwd
+#> 3   ETS-trend
+#> 4         rwd
+#> 5       ARIMA
+#> 6   ETS-trend
+
+# provides addition information about fitted models
+head(prep_tset$modelinfo)
+#>                ARIMA_name   ETS_name min_label             model_names
+#> 1 ARIMA(0,1,0) with drift ETS(A,A,N)       ets              ETS(A,A,N)
+#> 2 ARIMA(0,1,1) with drift ETS(M,A,N)       rwd                     rwd
+#> 3 ARIMA(0,1,2) with drift ETS(M,A,N)       ets              ETS(M,A,N)
+#> 4 ARIMA(1,1,0) with drift ETS(M,A,N)       rwd                     rwd
+#> 5 ARIMA(0,1,1) with drift ETS(M,A,N)     arima ARIMA(0,1,1) with drift
+#> 6 ARIMA(1,1,0) with drift ETS(M,A,N)       ets              ETS(M,A,N)
+```
+
+#### FFORMS: online phase is activated.
+
+**5. train a random forest and predict class labels for new series (FFORMS: online phase)**
+
+`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yealy series on M1 data and predicted class labels for yearly series in the M3 competition.
+
+``` r
+rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
+
+# to get the predicted class labels
+predictedlabels_m3 <- rf$predictions
+table(predictedlabels_m3)
+#> predictedlabels_m3
+#>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
+#>                    49                     3                     0 
+#> ETS-notrendnoseasonal             ETS-trend                    nn 
+#>                     0                    52                     7 
+#>                    rw                   rwd                 theta 
+#>                     2                   523                     4 
+#>                    wn 
+#>                     5
+
+# to obtain the random forest for future use
+randomforest <- rf$randomforest
+```
+
+**6. Generate point foecasts and 95% prediction intervals**
+
+`rf_forecast` function can be used to generate point forecasts and 95% prediction intervals based on the predicted class labels obtained in step 5.
+
+``` r
+forecasts <- rf_forecast(predictions=predictedlabels_m3[1:2], tslist=yearly_m3[1:2], database="M3", function_name="cal_MASE", h=6, accuracy=TRUE)
+
+# to obtain point forecasts
+forecasts$mean
+#>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
+#> [1,] 5486.429 6035.865 6585.301 7134.737 7684.173 8233.609
+#> [2,] 4402.227 4574.454 4746.681 4918.908 5091.135 5263.362
+
+# to obtain lower boundary of 95% prediction intervals
+forecasts$lower
+#>          [,1]     [,2]     [,3]     [,4]     [,5]      [,6]
+#> [1,] 4984.162 4893.098 4629.135 4199.745 3606.858 2848.8735
+#> [2,] 2890.401 2366.671 1959.916 1608.186 1288.666  990.2221
+
+# to obtain upper boundary of 95% prediction intervals
+forecasts$upper
+#>          [,1]     [,2]     [,3]      [,4]      [,5]      [,6]
+#> [1,] 5988.696 7178.632 8541.467 10069.729 11761.488 13618.344
+#> [2,] 5914.053 6782.236 7533.445  8229.629  8893.603  9536.501
+
+# to obtain MASE
+forecasts$accuracy
+#> [1] 1.5636089 0.6123443
 ```
