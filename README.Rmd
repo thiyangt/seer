@@ -41,9 +41,9 @@ yearly_m3 <- subset(M3, "yearly")
 m3y <- M3[1:2]
 ```
 
-**FFORMS: offline phase **
+### FFORMS: offline phase 
 
-Augmenting the observed sample with simulated time series. 
+**Augmenting the observed sample with simulated time series.**
 
 `sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
 
@@ -61,7 +61,7 @@ simulated_ets <- lapply(m3y, sim_etsbased, Future=TRUE, Nsim=2, extralength=6, C
 simulated_ets
 ```
 
-Calculate features based on the training period of time series.
+**Calculate features based on the training period of time series.**
 
 `cal_features` function can be used to calculate relevant features.
 
@@ -71,7 +71,7 @@ M3yearly_features <- cal_features(yearly_m3,database="M3", h=6, highfreq = FALSE
 head(M3yearly_features)
 ```
 
-Calculate forecast accuracy measures
+**Calculate forecast accuracy measure(s)**
 
 ```{r accuracy, message=FALSE}
 tslist <- list(M3[[1]], M3[[2]])
