@@ -22,7 +22,7 @@ library(seer)
 Usage
 -----
 
-The FFORMS framework consists of two main phases: i) offline phase, which includes the development of a classification model and ii) online phase, use the classification model developed in the offline phase to identify "best" forecast-model. This document explains the main functions using a simple dataset based on M3-competition data. To load data
+The FFORMS framework consists of two main phases: i) offline phase, which includes the development of a classification model and ii) online phase, use the classification model developed in the offline phase to identify "best" forecast-model. This document explains the main functions using a simple dataset based on M3-competition data. To load data,
 
 ``` r
 library(Mcomp)
@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5371.414  5890.344  6480.208  7077.869  7637.510  8226.604  8765.985
-#>  [8]  9230.521  9538.322  9740.545  9810.762  9904.495  9943.101 10027.344
-#> [15] 10203.163 10578.990 10875.870 10985.939 10992.770 11099.999
+#>  [1]  5478.733  5972.033  6498.605  7012.155  7464.385  7937.193  8377.987
+#>  [8]  8747.520  9017.137  9271.296  9457.368  9637.105  9813.834 10122.645
+#> [15] 10253.490 10406.911 10606.827 10835.471 11125.309 11502.314
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5442.456  5765.343  6065.882  6195.765  6249.574  6383.093  6567.269
-#>  [8]  6608.624  6560.218  6602.138  6682.461  6789.962  7007.539  7324.771
-#> [15]  7749.514  8186.576  8602.379  9082.504  9645.556 10141.193
+#>  [1] 5506.183 5901.439 6167.806 6305.171 6446.722 6539.843 6530.144
+#>  [8] 6566.285 6553.163 6618.276 6758.541 6862.384 6990.125 7144.724
+#> [15] 7301.344 7527.051 7654.312 7824.085 8189.062 8676.421
 #> 
 #> 
 #> $N0002
@@ -67,18 +67,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 2603.897 3115.424 3433.316 2422.939 1655.690 1548.859 2107.091
-#>  [8] 2876.909 1643.699 1876.035 1822.886 3731.276 2736.629 2996.561
-#> [15] 3365.214 2850.233 1829.292 1489.613 2560.542 3731.908
+#>  [1] 4902.162 4000.717 4299.702 4670.590 5141.927 4914.763 4577.368
+#>  [8] 3628.886 2388.137 3408.320 4754.083 5215.604 6344.958 5939.982
+#> [15] 6524.959 6324.301 6580.611 6823.273 6495.186 5431.927
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 3692.675 3251.824 2600.768 2687.159 3539.350 3257.925 3269.863
-#>  [8] 4304.800 5004.061 5123.604 5691.072 4423.188 5007.263 5343.219
-#> [15] 6211.478 6804.357 6145.715 7503.303 7092.201 7881.515
+#>  [1] 4718.771 5496.235 4787.135 5144.035 5640.077 6307.295 6269.278
+#>  [8] 5970.782 4073.372 5212.323 5019.523 5302.747 5707.532 5341.978
+#> [15] 4572.615 4769.498 4439.915 4377.913 4725.122 4408.528
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -130,7 +130,7 @@ head(M3yearly_features)
 
 `fcast_accuracy` function can be used to calculate forecast error measure (in the following example MASE) from each candidate model. This step is the most computationally intensive and time-consuming, as each candidate model has to be estimated on each series. In the following example ARIMA(arima), ETS(ets), random walk(rw), random walk with drift(rwd), standard theta method(theta) and neural network time series forecasts(nn) are used as possible models. In addition to these models following models can also be used in the case of handling seasonal time series,
 
--   snaive: seasoonal naive method
+-   snaive: seasonal naive method
 -   stlar: STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. AR model is used to forecast seasonally adjusted data.
 -   mstlets:STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ETS model is used to forecast seasonally adjusted data.
 -   mstlarima:STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ARIMA model is used to forecast seasonally adjusted data.
@@ -141,9 +141,9 @@ tslist <- list(M3[[1]], M3[[2]])
 accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1)
 accuracy_info
 #> $accuracy
-#>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5782618
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797527
+#>         arima       ets       rw       rwd    theta       nn
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.256175
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.280066
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -219,7 +219,7 @@ head(prep_tset$modelinfo)
 
 **5. train a random forest and predict class labels for new series (FFORMS: online phase)**
 
-`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yealy series on M1 data and predicted class labels for yearly series in the M3 competition.
+`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition.
 
 ``` r
 rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
@@ -229,13 +229,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    49                     3                     0 
+#>                    44                     3                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     0                    52                     7 
+#>                     1                    34                    11 
 #>                    rw                   rwd                 theta 
-#>                     2                   523                     4 
+#>                     0                   547                     2 
 #>                    wn 
-#>                     5
+#>                     3
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest

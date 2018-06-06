@@ -32,7 +32,7 @@ library(seer)
 
 ## Usage
 
-The FFORMS framework consists of two main phases: i) offline phase, which includes the development of a classification model and ii) online phase, use the classification model developed in the offline phase to identify "best" forecast-model. This document explains the main functions using a simple dataset based on M3-competition data. To load data
+The FFORMS framework consists of two main phases: i) offline phase, which includes the development of a classification model and ii) online phase, use the classification model developed in the offline phase to identify "best" forecast-model. This document explains the main functions using a simple dataset based on M3-competition data. To load data,
 
 ```{r, warning=FALSE, message=FALSE}
 library(Mcomp)
@@ -76,7 +76,7 @@ head(M3yearly_features)
 
 `fcast_accuracy` function can be used to calculate forecast error measure (in the following example MASE) from each candidate model. This step is the most computationally intensive and time-consuming, as each candidate model has to be estimated on each series. In the following example ARIMA(arima), ETS(ets), random walk(rw), random walk with drift(rwd),  standard theta method(theta) and neural network time series forecasts(nn) are used as possible models. In addition to these models following models can also be used in the case of handling seasonal time series,
 
-* snaive: seasoonal naive method
+* snaive: seasonal naive method
 * stlar: STL decomposition is applied to the time series and then
 seasonal naive method is used to forecast seasonal component. AR model is used to forecast seasonally adjusted data.
 * mstlets:STL decomposition is applied to the time series and then
@@ -116,7 +116,7 @@ head(prep_tset$modelinfo)
 
 **5. train a random forest and predict class labels for new series (FFORMS: online phase)**
 
-`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yealy series on M1 data and predicted class labels for yearly series in the M3 competition. 
+`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. 
 
 ```{r}
 rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
