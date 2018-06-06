@@ -1,4 +1,7 @@
 
+seer <img src="logo/seer.png" align="right" height="200"/>
+==========================================================
+
 [![Build Status](https://travis-ci.org/thiyangt/seer.svg?branch=master)](https://travis-ci.org/thiyangt/seer)
 
 seer
@@ -21,19 +24,8 @@ Usage
 
 ``` r
 library(Mcomp)
-#> Loading required package: forecast
 library(seer)
-#> 
-#> Attaching package: 'seer'
-#> The following object is masked from 'package:Mcomp':
-#> 
-#>     subset.Mcomp
 library(tsfeatures)
-#> 
-#> Attaching package: 'tsfeatures'
-#> The following object is masked from 'package:seer':
-#> 
-#>     holt_parameters
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
 M3yearly_features <- cal_features(yearly_m3,database="M3", h=6, highfreq = FALSE)
@@ -74,8 +66,8 @@ tslist <- list(M3[[1]], M3[[2]])
 fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.4353317
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2798837
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3990783
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797596
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
