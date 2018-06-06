@@ -79,9 +79,9 @@ head(M3yearly_features)
 * snaive: seasonal naive method
 * stlar: STL decomposition is applied to the time series and then
 seasonal naive method is used to forecast seasonal component. AR model is used to forecast seasonally adjusted data.
-* mstlets:STL decomposition is applied to the time series and then
+* mstlets: STL decomposition is applied to the time series and then
 seasonal naive method is used to forecast seasonal component. ETS model is used to forecast seasonally adjusted data.
-* mstlarima:STL decomposition is applied to the time series and then
+* mstlarima: STL decomposition is applied to the time series and then
 seasonal naive method is used to forecast seasonal component. ARIMA model is used to forecast seasonally adjusted data.
 * tbats: TBATS models
 

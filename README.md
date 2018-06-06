@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5503.057  6212.327  6958.981  7647.219  8149.907  8777.184  9406.483
-#>  [8]  9943.925 10528.681 11210.599 11843.219 12504.161 13223.208 14003.603
-#> [15] 14722.398 15389.641 16144.458 16730.166 17342.551 17828.209
+#>  [1]  5540.105  6110.353  6787.063  7380.772  7947.560  8362.653  8820.335
+#>  [8]  9372.442 10063.523 10830.014 11599.343 12462.228 13280.624 14223.043
+#> [15] 15265.141 16242.678 17319.500 18310.030 19401.157 20359.634
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5596.877  6157.068  6765.105  7414.639  8089.828  8878.993  9684.455
-#>  [8] 10413.278 11227.223 12141.221 13082.770 13988.289 14878.630 15749.030
-#> [15] 16464.517 17215.303 18012.908 18971.176 19927.279 20743.315
+#>  [1]  5455.982  6047.476  6737.457  7515.621  8228.468  8933.007  9602.691
+#>  [8] 10292.539 10976.954 11789.886 12583.345 13366.499 14253.391 15005.336
+#> [15] 15857.564 16609.359 17375.460 18048.394 18665.940 19255.649
 #> 
 #> 
 #> $N0002
@@ -67,19 +67,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5048.0174  3581.7891  3359.0315  3003.0719  1638.0157  1170.4662
-#>  [7]  1185.0775   480.2693  1475.3181  1185.6422   849.9364  -438.8983
-#> [13] -1190.6189  -666.4186  -578.3231 -1256.5652  -491.1426 -1238.3735
-#> [19] -1100.5549  -945.4961
+#>  [1] 4928.451 6340.348 7022.666 7420.273 8128.708 7247.493 6948.599
+#>  [8] 7010.268 7544.249 7845.738 8627.323 8434.784 8994.217 7633.896
+#> [15] 6825.957 6389.656 5948.792 5342.391 4844.255 5563.338
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 6306.570 6276.121 7171.051 7260.936 7058.171 7532.126 6625.933
-#>  [8] 6869.272 7302.906 7288.688 7795.101 7002.524 7581.435 8808.916
-#> [15] 8689.204 9196.577 9706.939 8820.873 8588.657 7365.290
+#>  [1] 4898.8522 4627.3975 4827.9362 4935.2261 4882.7571 3493.9802 2722.8648
+#>  [8] 2397.1150 1975.7003 3259.0625 2246.8300 2289.6617 2201.9029  924.6183
+#> [15] 1490.9606 2192.6135 2133.7134 2311.4049 1340.4666 1366.5238
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -133,8 +132,8 @@ head(M3yearly_features)
 
 -   snaive: seasonal naive method
 -   stlar: STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. AR model is used to forecast seasonally adjusted data.
--   mstlets:STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ETS model is used to forecast seasonally adjusted data.
--   mstlarima:STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ARIMA model is used to forecast seasonally adjusted data.
+-   mstlets: STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ETS model is used to forecast seasonally adjusted data.
+-   mstlarima: STL decomposition is applied to the time series and then seasonal naive method is used to forecast seasonal component. ARIMA model is used to forecast seasonally adjusted data.
 -   tbats: TBATS models
 
 ``` r
@@ -143,8 +142,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.4290072
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2799933
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3617701
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2795008
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -230,13 +229,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    47                     2                     0 
+#>                    44                     3                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     0                    52                     8 
+#>                     1                    34                    11 
 #>                    rw                   rwd                 theta 
-#>                     1                   527                     3 
+#>                     0                   547                     2 
 #>                    wn 
-#>                     5
+#>                     3
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
