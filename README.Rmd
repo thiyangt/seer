@@ -93,7 +93,7 @@ accuracy_info
 
 **4. Construct a dataframe of input:features and output:lables to train a random forest** 
 
-`prepae_trainingset` can be used to create a data frame of input:features and output: labels. 
+`prepare_trainingset` can be used to create a data frame of input:features and output: labels. 
 
 ```{r}
 # steps 3 and 4 applied to yearly series of M1 competition
@@ -102,7 +102,7 @@ yearly_m1 <- subset(M1, "yearly")
 accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1)
 features_m1 <- cal_features(yearly_m1, database="M1", h=6, highfreq = FALSE)
 
-# prepae training set
+# prepare training set
 prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = features_m1)
 
 # provides the training set to build a rf classifier

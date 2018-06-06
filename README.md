@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5540.105  6110.353  6787.063  7380.772  7947.560  8362.653  8820.335
-#>  [8]  9372.442 10063.523 10830.014 11599.343 12462.228 13280.624 14223.043
-#> [15] 15265.141 16242.678 17319.500 18310.030 19401.157 20359.634
+#>  [1]  5474.132  6026.487  6620.427  7350.529  7980.404  8401.889  8934.050
+#>  [8]  9435.750  9949.732 10371.807 10744.043 11145.219 11476.405 11550.113
+#> [15] 11697.089 11856.141 12072.965 12092.555 11950.302 11849.277
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5455.982  6047.476  6737.457  7515.621  8228.468  8933.007  9602.691
-#>  [8] 10292.539 10976.954 11789.886 12583.345 13366.499 14253.391 15005.336
-#> [15] 15857.564 16609.359 17375.460 18048.394 18665.940 19255.649
+#>  [1]  5560.417  6118.792  6670.733  7167.495  7664.917  8097.341  8347.873
+#>  [8]  8607.582  8932.133  9320.475  9731.903 10196.591 10713.376 11248.765
+#> [15] 11646.657 11781.828 11895.243 11947.403 12058.114 12359.065
 #> 
 #> 
 #> $N0002
@@ -67,18 +67,19 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4928.451 6340.348 7022.666 7420.273 8128.708 7247.493 6948.599
-#>  [8] 7010.268 7544.249 7845.738 8627.323 8434.784 8994.217 7633.896
-#> [15] 6825.957 6389.656 5948.792 5342.391 4844.255 5563.338
+#>  [1] 4203.210 3770.038 4125.482 4509.170 3806.847 4126.846 3588.662
+#>  [8] 4209.434 3747.471 3905.001 3159.880 3826.524 3589.911 3650.923
+#> [15] 3338.799 2674.288 3353.918 3348.163 4584.949 5168.992
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4898.8522 4627.3975 4827.9362 4935.2261 4882.7571 3493.9802 2722.8648
-#>  [8] 2397.1150 1975.7003 3259.0625 2246.8300 2289.6617 2201.9029  924.6183
-#> [15] 1490.9606 2192.6135 2133.7134 2311.4049 1340.4666 1366.5238
+#>  [1]  3817.7658  3834.8391  3696.1583  2399.6422  1626.1979  1971.2423
+#>  [7]   909.4272   849.9814   832.4800   455.4255  -322.2797  -792.1627
+#> [13] -2205.5222 -2507.9514 -2733.1898 -2575.4199 -2443.6923 -1394.7119
+#> [19]  -429.3514   427.2389
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -142,8 +143,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3617701
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2795008
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3953027
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2798073
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -154,7 +155,7 @@ accuracy_info
 
 **4. Construct a dataframe of input:features and output:lables to train a random forest**
 
-`prepae_trainingset` can be used to create a data frame of input:features and output: labels.
+`prepare_trainingset` can be used to create a data frame of input:features and output: labels.
 
 ``` r
 # steps 3 and 4 applied to yearly series of M1 competition
@@ -163,7 +164,7 @@ yearly_m1 <- subset(M1, "yearly")
 accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1)
 features_m1 <- cal_features(yearly_m1, database="M1", h=6, highfreq = FALSE)
 
-# prepae training set
+# prepare training set
 prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = features_m1)
 
 # provides the training set to build a rf classifier
@@ -229,13 +230,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    44                     3                     0 
+#>                    48                     2                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     1                    34                    11 
+#>                     1                    56                     9 
 #>                    rw                   rwd                 theta 
-#>                     0                   547                     2 
+#>                     3                   515                    10 
 #>                    wn 
-#>                     3
+#>                     1
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
