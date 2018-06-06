@@ -16,17 +16,85 @@ You can install seer from github with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("thiyangt/seer")
+library(seer)
 ```
 
 Usage
 -----
 
+The FFORMS framework consists of two main phases: i) offline phase, which includes the development of a classification model and ii) online phase, use the classification model developed in the offline phase to identify "best" forecast-model. This document explains the main functions using a simple dataset based on M3-competition data. To load data
+
 ``` r
 library(Mcomp)
-library(seer)
-library(tsfeatures)
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
+m3y <- M3[1:2]
+```
+
+**FFORMS: offline phase **
+
+Augmenting the observed sample with simulated time series.
+
+`sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
+
+``` r
+library(seer)
+simulated_arima <- lapply(m3y, sim_arimabased, Future=TRUE, Nsim=2, extralength=6, Combine=FALSE)
+simulated_arima
+#> $N0001
+#> $N0001[[1]]
+#> Time Series:
+#> Start = 1989 
+#> End = 2008 
+#> Frequency = 1 
+#>  [1]  5519.299  6226.387  7025.630  7839.298  8669.836  9614.123 10548.357
+#>  [8] 11379.795 12329.346 13239.124 14014.073 14890.971 15866.408 16878.932
+#> [15] 17853.579 18829.107 19656.232 20460.987 21219.581 21907.067
+#> 
+#> $N0001[[2]]
+#> Time Series:
+#> Start = 1989 
+#> End = 2008 
+#> Frequency = 1 
+#>  [1]  5505.019  6088.506  6576.212  7017.670  7554.010  8068.398  8701.627
+#>  [8]  9392.835 10108.130 10862.810 11747.781 12660.091 13649.940 14823.974
+#> [15] 15887.510 16790.826 17836.767 18749.503 19636.700 20509.879
+#> 
+#> 
+#> $N0002
+#> $N0002[[1]]
+#> Time Series:
+#> Start = 1989 
+#> End = 2008 
+#> Frequency = 1 
+#>  [1] 3112.6960 4722.2523 5295.1574 5570.2010 4834.9705 4355.2355 4763.6273
+#>  [8] 4573.4270 4582.8747 3675.1281 2912.3663 1571.1368 1315.4058 2093.3903
+#> [15] 1298.8673 1218.3408  684.0334 1931.7761 2215.2703 2279.5410
+#> 
+#> $N0002[[2]]
+#> Time Series:
+#> Start = 1989 
+#> End = 2008 
+#> Frequency = 1 
+#>  [1]  4642.7554  4075.1313  2743.2531  4804.9946  3298.4484  3230.8649
+#>  [7]  3134.4922  2466.5466  2351.3711  1709.5303  1428.4462  2072.9468
+#> [13]  2202.3710  1297.5353   847.5323   477.0597   190.6337 -1458.4751
+#> [19]  -801.8079 -1570.1235
+```
+
+Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
+
+``` r
+simulated_ets <- lapply(m3y, sim_etsbased, Future=TRUE, Nsim=2, extralength=6, Combine=FALSE)
+simulated_ets
+```
+
+Calculate features based on the training period of time series.
+
+`cal_features` function can be used to calculate relevant features.
+
+``` r
+library(tsfeatures)
 M3yearly_features <- cal_features(yearly_m3,database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 #>     entropy lumpiness stability     hurst     trend    spikiness linearity
@@ -59,14 +127,15 @@ head(M3yearly_features)
 #> 6 0.8320440  0.11524106   0.3031490 0.6714580 0.0001000046
 ```
 
+Calculate forecast accuracy measures
+
 ``` r
-library(Mcomp)
 tslist <- list(M3[[1]], M3[[2]])
 fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3890243
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2798878
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3483442
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2798433
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"

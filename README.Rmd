@@ -26,22 +26,54 @@ You can install seer from github with:
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("thiyangt/seer")
+library(seer)
 ```
+
 
 ## Usage
 
-```{r features, warning=FALSE, message=FALSE}
+The FFORMS framework consists of two main phases: i) offline phase, which includes the development of a classification model and ii) online phase, use the classification model developed in the offline phase to identify "best" forecast-model. This document explains the main functions using a simple dataset based on M3-competition data. To load data
+
+```{r, warning=FALSE, message=FALSE}
 library(Mcomp)
-library(seer)
-library(tsfeatures)
 data(M3)
 yearly_m3 <- subset(M3, "yearly")
+m3y <- M3[1:2]
+```
+
+**FFORMS: offline phase **
+
+Augmenting the observed sample with simulated time series. 
+
+`sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
+
+```{r, message=FALSE}
+library(seer)
+simulated_arima <- lapply(m3y, sim_arimabased, Future=TRUE, Nsim=2, extralength=6, Combine=FALSE)
+simulated_arima
+
+```
+
+Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
+
+```{r, message=FALSE, eval=FALSE}
+simulated_ets <- lapply(m3y, sim_etsbased, Future=TRUE, Nsim=2, extralength=6, Combine=FALSE)
+simulated_ets
+```
+
+Calculate features based on the training period of time series.
+
+`cal_features` function can be used to calculate relevant features.
+
+```{r features, warning=FALSE, message=FALSE}
+library(tsfeatures)
 M3yearly_features <- cal_features(yearly_m3,database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 ```
 
+Calculate forecast accuracy measures
+
 ```{r accuracy, message=FALSE}
-library(Mcomp)
 tslist <- list(M3[[1]], M3[[2]])
 fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
 
