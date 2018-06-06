@@ -31,9 +31,9 @@ yearly_m3 <- subset(M3, "yearly")
 m3y <- M3[1:2]
 ```
 
-### FFORMS: offline phase
+#### FFORMS: offline phase
 
-**Augmenting the observed sample with simulated time series. **
+**1. Augmenting the observed sample with simulated time series.**
 
 `sim_arimabased` can be used to simulate time series based on (S)ARIMA models.
 
@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 5253.636 5488.371 5825.386 6194.098 6472.040 6738.068 6961.747
-#>  [8] 7062.313 7044.789 7100.988 7225.718 7343.548 7373.268 7474.959
-#> [15] 7771.906 8065.254 8161.068 8326.088 8469.396 8584.735
+#>  [1]  5471.323  5955.093  6489.125  7308.471  8063.817  8790.792  9452.211
+#>  [8] 10302.778 11019.237 11789.308 12538.104 13256.554 14061.509 14749.990
+#> [15] 15516.023 16243.748 17248.158 18247.069 19119.439 19931.034
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5548.363  6121.680  6651.523  7149.400  7621.509  8093.009  8607.217
-#>  [8]  9335.182 10185.425 11030.177 11862.528 12695.499 13408.778 13956.058
-#> [15] 14554.013 14982.835 15473.843 15947.155 16462.302 16901.205
+#>  [1]  5629.080  6276.844  6866.413  7525.295  8148.422  8797.130  9290.304
+#>  [8]  9754.642 10087.227 10424.330 10839.675 11102.611 11409.244 11829.678
+#> [15] 12147.704 12535.777 12840.829 13134.374 13180.556 13318.011
 #> 
 #> 
 #> $N0002
@@ -67,19 +67,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  3841.5167  3452.6561  3138.2266  3277.3695  3132.1195  3826.8572
-#>  [7]  3744.0216  2910.2974  2280.9332  1824.2161  2057.2880   996.3306
-#> [13]   382.8249   705.8674   192.9101  -767.1088 -1996.2569 -1409.1844
-#> [19]  -320.2801  -103.6882
+#>  [1] 3156.207 3157.823 4368.224 3955.319 4238.336 4929.824 4740.987
+#>  [8] 4809.813 5259.133 4704.674 4300.746 3388.959 2607.458 2761.274
+#> [15] 2732.462 3662.939 3989.140 2997.289 1895.273 1067.429
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  3961.272  4481.660  4871.182  6336.108  7295.358  7212.685  6938.452
-#>  [8]  8730.303  9994.763 10717.098 10143.572 12211.462 10982.754 10275.211
-#> [15] 10321.056  9390.359  9594.415  9913.476 10169.185  8998.994
+#>  [1] 5180.317 6361.326 7467.639 6075.572 6547.428 5873.356 6564.299
+#>  [8] 6425.769 6456.682 5543.886 6491.954 5130.930 5017.734 4192.019
+#> [15] 4288.737 5620.805 5844.835 4815.298 6135.662 5616.873
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -89,13 +88,13 @@ simulated_ets <- lapply(m3y, sim_etsbased, Future=TRUE, Nsim=2, extralength=6, C
 simulated_ets
 ```
 
-**Calculate features based on the training period of time series.**
+**2. Calculate features based on the training period of time series.**
 
 `cal_features` function can be used to calculate relevant features.
 
 ``` r
 library(tsfeatures)
-M3yearly_features <- cal_features(yearly_m3,database="M3", h=6, highfreq = FALSE)
+M3yearly_features <- cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 #>     entropy lumpiness stability     hurst     trend    spikiness linearity
 #> 1 0.7729350         0         0 0.9710509 0.9950394     589054.2 4497.2290
@@ -127,15 +126,15 @@ head(M3yearly_features)
 #> 6 0.8320440  0.11524106   0.3031490 0.6714580 0.0001000046
 ```
 
-**Calculate forecast accuracy measure(s)**
+**3. Calculate forecast accuracy measure(s)**
 
 ``` r
 tslist <- list(M3[[1]], M3[[2]])
 fcast_accuracy(tslist=tslist,models= c("arima","ets","rw","rwd", "theta", "nn"),database ="M3", cal_MASE, h=6, length_out = 1)
 #> $accuracy
-#>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5465231
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2796584
+#>         arima       ets       rw       rwd    theta       nn
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.422665
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.279709
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
