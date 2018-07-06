@@ -43,12 +43,12 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
       freq_temp <- m
    # }, error=function(e){freq_temp <- m})
     required_length <- 2*freq_temp+1
-    if (length_temp >= required_length) {tsfeatures::stl_features(temp)
+    if (length_temp >= required_length) {tsfeatures::tsfeatures(temp, features = c("stl_features"))
     } else {
     fcast_h <- required_length-length_temp
     fcast <- forecast::forecast(temp, fcast_h)$mean
     com <- ts(c(temp,fcast), start=start(temp), frequency=frequency(temp))
-    tsfeatures::stl_features(com)
+    tsfeatures::tsfeatures(com, features=c("stl_features"))
     }
 
   })
