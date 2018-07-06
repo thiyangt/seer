@@ -21,7 +21,9 @@ Imports:
         randomForest,
         Mcomp,
         forecTheta,
-        stringr
+        stringr,
+        tibble,
+        ForeCA
 Remotes: robjhyndman/forecast,
          robjhyndman/tsfeatures
 Encoding: UTF-8
