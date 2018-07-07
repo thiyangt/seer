@@ -34,9 +34,10 @@ prepare_trainingset <- function(accuracy_set, feature_set){
   drop.cols <- colnames(accuracy_set$accuracy)
   training_set <- training_set %>% dplyr::select(-dplyr::one_of(drop.cols))
   training_set <- training_set[complete.cases(training_set),]
-  models <- data.frame(ARIMA_name=training_set$ARIMA_name, ETS_name=training_set$ETS_name,
+  models <- tibble::tibble(ARIMA_name=training_set$ARIMA_name, ETS_name=training_set$ETS_name,
                        min_label=training_set$min_label, model_names=training_set$model_names)
   training_set <- dplyr::select(training_set, c(colnames(feature_set), "classlabels"))
+  training_set <- tibble::as_tibble(training_set)
   train <- list(modelinfo=models, trainingset=training_set)
 
   return(train)
@@ -45,9 +46,9 @@ prepare_trainingset <- function(accuracy_set, feature_set){
 #'library(Mcomp)
 #'tslist <- list(M3[[1]], M3[[2]], M3[[3]], M3[[4]], M3[[5]])
 #'acc_set <- fcast_accuracy(tslist=tslist,
-#'models= c("arima","ets","rw","rwd", "theta", "nn", "snaive", "mstl"),
+#'models= c("arima","ets","rw","rwd", "theta", "nn", "snaive"),
 #'database ="M3", cal_MASE, h=6)
-#'fea_set <- cal_features(tslist, database="M3", h=6)
+#'fea_set <- cal_features(tslist, database="M3", h=6, highfreq=FALSE)
 #'outcome <- prepare_trainingset(acc_set, fea_set)
 #'outcome$trainingset
 #'outcome$modelinfo

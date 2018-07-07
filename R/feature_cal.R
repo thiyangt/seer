@@ -132,6 +132,7 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   seer_feature_DF <- as.data.frame(do.call("rbind", seer_features))
 
   featureDF <- dplyr::bind_cols(ts_featuresDF,seer_feature_DF)
+  featureDF <- tibble::as_tibble(featureDF)
   return(featureDF)
 
 }
