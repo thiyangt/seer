@@ -68,9 +68,19 @@ Our proposed framework operates on the features of the time series.
 
 ```{r features, warning=FALSE, message=FALSE}
 library(tsfeatures)
-M3yearly_features <- cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
+M3yearly_features <- seer::cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 ```
+
+**Calculate features from the simulated time series in the step 1**
+
+```{r features_simulated}
+features_simulated_arima <- lapply(simulated_arima, function(temp){
+	lapply(temp, cal_features, h=6, database="other", highfreq=FALSE)})
+fea_sim <- lapply(features_simulated_arima, function(temp){do.call(rbind, temp)})
+do.call(rbind, fea_sim)
+```
+
 
 **3. Calculate forecast accuracy measure(s)**
 
@@ -116,7 +126,7 @@ head(prep_tset$modelinfo)
 
 **5. Train a random forest and predict class labels for new series (FFORMS: online phase)**
 
-`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. 
+`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. Users can further add the features and classlabel information calculated based on the simulated time series.
 
 ```{r}
 rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)

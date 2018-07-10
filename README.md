@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5510.329  6085.196  6678.613  7304.928  7770.226  8300.262  8852.694
-#>  [8]  9514.992 10183.617 10740.274 11199.427 11675.560 12124.461 12508.221
-#> [15] 12917.786 13416.802 13796.550 14288.267 14753.657 15341.877
+#>  [1]  5502.981  6039.700  6543.768  7074.822  7617.867  8132.125  8697.460
+#>  [8]  9196.514  9578.127  9931.793 10162.880 10541.750 10833.819 11190.664
+#> [15] 11430.559 11847.598 12266.847 12623.438 12883.927 13038.141
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5443.689  5918.473  6497.031  7251.582  8077.367  8956.957  9802.451
-#>  [8] 10513.918 11223.640 11921.339 12830.453 13811.077 14777.665 15576.948
-#> [15] 16317.419 17056.926 17650.803 18487.507 19301.612 20199.555
+#>  [1]  5424.126  5969.090  6829.353  7780.855  8556.370  9284.492 10091.853
+#>  [8] 10899.032 11697.469 12558.747 13485.736 14439.659 15407.947 16297.434
+#> [15] 17110.261 17668.426 18376.127 19124.564 19809.235 20446.112
 #> 
 #> 
 #> $N0002
@@ -67,19 +67,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 3932.55169 3664.72931 4406.69232 5290.35685 4872.04573 4888.36662
-#>  [7] 5090.01715 5759.89192 4462.46446 3739.26198 2861.76564 2842.76871
-#> [13] 2208.55451 1021.47073  692.86844  678.51264  336.81009  -83.01278
-#> [19]  839.05131  597.05384
+#>  [1] 5552.816 6185.176 5906.697 5781.580 5046.073 4640.911 4315.080
+#>  [8] 4943.844 5530.476 4158.374 4626.694 5263.665 5519.519 6246.075
+#> [15] 5815.767 4706.952 3952.248 3893.357 3659.237 3884.406
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4335.346 3824.831 4026.542 5933.576 6643.915 7727.079 7052.860
-#>  [8] 7529.521 5627.917 5307.766 4800.322 4717.460 5638.771 5995.799
-#> [15] 7070.465 7158.312 7498.233 7258.599 7797.156 8485.251
+#>  [1] 5394.466 5934.255 5624.784 4368.360 3274.271 3528.251 3809.485
+#>  [8] 4793.599 5555.248 5548.560 4598.849 4285.629 4373.166 4409.114
+#> [15] 4385.172 5878.530 5266.489 4934.202 5263.296 6121.699
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -95,7 +94,7 @@ Our proposed framework operates on the features of the time series. `cal_feature
 
 ``` r
 library(tsfeatures)
-M3yearly_features <- cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
+M3yearly_features <- seer::cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 #> # A tibble: 6 x 25
 #>   entropy lumpiness stability hurst trend   spikiness linearity curvature
@@ -106,6 +105,27 @@ head(M3yearly_features)
 #> 4   0.854         0         0 0.949 0.853 0.000368        2.87     -1.25 
 #> 5   0.899         0         0 0.855 0.586 0.00127        -0.765    -1.77 
 #> 6   0.798         0         0 0.964 0.964 0.0000217       3.56     -0.574
+#> # ... with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
+#> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
+#> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   lmres_acf1 <dbl>, ur_pp <dbl>, ur_kpss <dbl>, N <int>, y_acf5 <dbl>,
+#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>
+```
+
+**Calculate features from the simulated time series in the step 1**
+
+``` r
+features_simulated_arima <- lapply(simulated_arima, function(temp){
+    lapply(temp, cal_features, h=6, database="other", highfreq=FALSE)})
+fea_sim <- lapply(features_simulated_arima, function(temp){do.call(rbind, temp)})
+do.call(rbind, fea_sim)
+#> # A tibble: 4 x 25
+#>   entropy lumpiness stability hurst trend    spikiness linearity curvature
+#> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>        <dbl>     <dbl>     <dbl>
+#> 1   0.768         0         0 0.973 0.999      5.98e-9     3.57     -0.343
+#> 2   0.771         0         0 0.973 1.000      1.45e-9     3.61      0.104
+#> 3   0.933         0         0 0.798 0.563      1.03e-3    -0.196     1.98 
+#> 4   0.890         0         0 0.860 0.438      2.16e-3    -0.747     0.446
 #> # ... with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
 #> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
 #> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
@@ -129,8 +149,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3120501
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797454
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5100445
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2799302
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -188,7 +208,7 @@ head(prep_tset$modelinfo)
 
 **5. Train a random forest and predict class labels for new series (FFORMS: online phase)**
 
-`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition.
+`build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. Users can further add the features and classlabel information calculated based on the simulated time series.
 
 ``` r
 rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
@@ -198,13 +218,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    66                     2                     0 
+#>                    72                     0                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     5                    27                     8 
+#>                     4                    29                    11 
 #>                    rw                   rwd                 theta 
-#>                     4                   529                     3 
+#>                    10                   510                     4 
 #>                    wn 
-#>                     1
+#>                     5
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
