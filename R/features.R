@@ -9,8 +9,8 @@
 #' @export
 acf5 <- function(y){
   acfy <- stats::acf(y, lag.max = 5L, plot = FALSE)
-  acfdiff1y <- stats::acf(diff(y, 1), lag.max = 5L, plot = FALSE)
-  acfdiff2y <- stats::acf(diff(y, 2), lag.max = 5L, plot = FALSE)
+  acfdiff1y <- stats::acf(diff(y,  differences = 1), lag.max = 5L, plot = FALSE)
+  acfdiff2y <- stats::acf(diff(y,  differences = 2), lag.max = 5L, plot = FALSE)
 
   sum_of_sq_acf5 <- sum((acfy$acf[-1L])^2)
   diff1_acf5 <- sum((acfdiff1y$acf[-1L])^2)
