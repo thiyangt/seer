@@ -19,7 +19,7 @@
 #' @export
 sim_mstlbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA, mtd="ets"){
     if (M ==TRUE){
-      if ("Combine"==TRUE){
+      if (Combine==TRUE){
       train <- y$x
       test <-  y$xx
       combined <- ts.union(train, test)

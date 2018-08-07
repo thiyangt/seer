@@ -87,7 +87,6 @@ acf_seasonalDiff <- function(y,m, lagmax){ # monthly lagmax=13L, quarterly lagma
   SEacf_1 <- sEacfy$acf[2L]
   SEseas_acf1 <- sEacfy$acf[m+1L]
   SEsum_of_sq_acf5 <- sum((sEacfy$acf[2L:6L])^2, na.rm=TRUE)
-
   output <- c(
     sediff_acf1 = unname(SEacf_1),
     sediff_seacf1 = unname(SEseas_acf1),
