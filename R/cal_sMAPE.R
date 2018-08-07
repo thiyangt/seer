@@ -9,7 +9,7 @@
 #'@export
 cal_sMAPE <- function(training, test, forecast){
 
-  q_t <- 2*(abs(test-forecast))/(abs(test)+abs(forecast))
+  q_t <- 200*(abs(test-forecast))/(abs(test)+abs(forecast))
   mean(q_t)
 }
 #'example
