@@ -8,9 +8,10 @@
 #' forest based on class priors)
 #' @param seed a vlue for seed
 #' @param import Should importance of predictors be assessed?, TRUE of FALSE
+#' @param mtry number of features to be selected at each node
 #' @return a list containing the random forest and forecast-models for new series
 #' @export
-build_rf <- function(training_set, testset, rf_type=c("ru", "rcp"), ntree, seed, import=FALSE){
+build_rf <- function(training_set, testset, rf_type=c("ru", "rcp"), ntree, seed, import=FALSE, mtry=8){
 
   training_set$classlabels <- as.factor(training_set$classlabels)
   # extract training columns
@@ -18,14 +19,14 @@ build_rf <- function(training_set, testset, rf_type=c("ru", "rcp"), ntree, seed,
   if (rf_type=="ru"){
     set.seed(seed)
     rf <- randomForest::randomForest(classlabels~ .,
-          data = training_set,importance = import, ntree=ntree, mtry=8)
+          data = training_set,importance = import, ntree=ntree, mtry=mtry)
   }
   # random forest based on class priors
   if (rf_type=="rcp"){
     classWT <- 1/as.vector(table(training_set$classlabels))
     set.seed(seed)
     rf <- randomForest::randomForest(classlabels~ .,
-          data = training_set,importance = import, ntree=ntree, mtry=8,
+          data = training_set,importance = import, ntree=ntree, mtry=mtry,
           classwt=classWT)
   }
 

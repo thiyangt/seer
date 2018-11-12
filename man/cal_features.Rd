@@ -4,8 +4,8 @@
 \alias{cal_features}
 \title{Calculate features for new time series instances}
 \usage{
-cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database, h,
-  highfreq)
+cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database,
+  h, highfreq)
 }
 \arguments{
 \item{tslist}{a list of univariate time series}

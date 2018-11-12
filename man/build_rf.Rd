@@ -5,7 +5,7 @@
 \title{build random forest classifier}
 \usage{
 build_rf(training_set, testset, rf_type = c("ru", "rcp"), ntree, seed,
-  import = FALSE)
+  import = FALSE, mtry = 8)
 }
 \arguments{
 \item{training_set}{data frame of features and class labels}
@@ -20,6 +20,8 @@ forest based on class priors)}
 \item{seed}{a vlue for seed}
 
 \item{import}{Should importance of predictors be assessed?, TRUE of FALSE}
+
+\item{mtry}{number of features to be selected at each node}
 }
 \value{
 a list containing the random forest and forecast-models for new series

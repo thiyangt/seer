@@ -15,7 +15,7 @@ forecastETS <- forecast(ets_fit,h)$mean
 ACCURACY <- match.fun(function_name)
 ETSaccuracy <- ACCURACY(forecast=forecastETS,test=test, training=training)
 ETSmodel <- as.character(ets_fit)
-return(list(ETSmodel=ETSmodel, ETSaccuracy=ETSaccuracy))
+return(list(ETSmodel=ETSmodel, ETSaccuracy=ETSaccuracy, ETSfcast=forecastETS))
 }
 
 #' Calculate accuracy measue based on ARIMA models
@@ -33,7 +33,7 @@ forecastARIMA <- forecast(arima_fit,h)$mean
 ACCURACY <- match.fun(function_name)
 ARIMAaccuracy <- ACCURACY(forecast=forecastARIMA, test=test, training=training)
 ARIMAmodel <- as.character(arima_fit)
-return(list(ARIMAmodel=ARIMAmodel, ARIMAaccuracy=ARIMAaccuracy))
+return(list(ARIMAmodel=ARIMAmodel, ARIMAaccuracy=ARIMAaccuracy, ARIMAfcast=forecastARIMA))
 }
 
 #' Calculate accuracy measure based on random walk models
@@ -50,7 +50,7 @@ rw_fit <- forecast::rwf(training,drift=FALSE, h=h)
 forecastRW <- forecast(rw_fit)$mean
 ACCURACY <- match.fun(function_name)
 RWaccuracy <- ACCURACY(forecast=forecastRW,test=test, training=training)
-return(RWaccuracy)
+return(list(RWaccuracy=RWaccuracy, rwfcast=forecastRW))
 
 }
 
@@ -71,8 +71,8 @@ rwd_fit <- rwf(training,drift=TRUE, h=h)
 forecastRWD <- forecast(rwd_fit)$mean
 ACCURACY <- match.fun(function_name)
 RWDaccuracy <- ACCURACY(forecast=forecastRWD, test=test, training=training)
-return(RWDaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(RWDaccuracy=RWDaccuracy, rwdfcast=forecastRWD))
+}, error=function(e){return(list(RWDaccuracy=rep(NA, length_out), rwdfcast=forecastRWD))})
 }
 
 #' Calculate accuracy measure based on white noise process
@@ -92,8 +92,8 @@ fit_WN <- forecast::auto.arima(training, d=0, D=0, max.p=0, max.q = 0,
 forecastWN <- forecast(fit_WN,h)$mean
 ACCURACY <- match.fun(function_name)
 WNaccuracy <- ACCURACY(forecast=forecastWN,test=test, training=training)
-return(WNaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(WNaccuracy=WNaccuracy, wnfcast=forecastWN))
+}, error=function(e){return(list(WNaccuracy=rep(NA, length_out), wnfcast=forecastWN))})
 }
 
 #' Calculate accuracy measure based on Theta method
@@ -120,8 +120,8 @@ if (m > 1){
   forecastTheta <-forecast::thetaf(training,h=length(test))$mean
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 }
-return(THETAaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(THETAaccuracy=THETAaccuracy, thetafcast=forecastTheta))
+}, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=forecastTheta))})
 }
 
 #' Calculate accuracy measure based on STL-AR method
@@ -139,8 +139,8 @@ forecastSTLAR <- stlar(training,h=h)$mean
 ACCURACY <- match.fun(function_name)
 tryCatch({
 STLARaccuracy <- ACCURACY(forecast=forecastSTLAR, test=test, training=training)
-return(STLARaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(STLARaccuracy=STLARaccuracy, STLARfcast=forecastSTLAR))
+}, error=function(e){return(list(STLARaccuracy=rep(NA, length_out), STLARfcast=forecastSTLAR))})
 }
 
 #' Calculate accuracy measure calculated based on neural network forecasts
@@ -159,8 +159,8 @@ fit_nnetar <- forecast::nnetar(training)
 forecastnnetar <- forecast(fit_nnetar, h=h)$mean
 ACCURACY <- match.fun(function_name)
 nnetarACCURACY <- ACCURACY(forecast=forecastnnetar, test=test, training=training)
-return(nnetarACCURACY)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(nnetarACCURACY=nnetarACCURACY, nnfcast=forecastnnetar))
+}, error=function(e){return(list(nnetarACCURACY=rep(NA, length_out), nnfcast=forecastnnetar))})
 }
 
 #' Calculate accuracy measure based on snaive method
@@ -178,8 +178,8 @@ tryCatch({
 forecastSNAIVE <- forecast::snaive(training, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 SNAIVEaccuracy <- ACCURACY(forecast=forecastSNAIVE, test=test, training=training)
-return(SNAIVEaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(SNAIVEaccuracy=SNAIVEaccuracy, SNAIVEfcast=forecastSNAIVE))
+}, error=function(e){return(list(SNAIVEaccuracy=rep(NA, length_out), SNAIVEfcast=forecastSNAIVE))})
 }
 
 #' Calculate accuracy based on MSTL
@@ -199,8 +199,8 @@ fit_stlf <- forecast::stlf(training, method=mtd)
 forecastMSTL <- forecast(fit_stlf, h=length(test))$mean
 ACCURACY <- match.fun(function_name)
 MSTLaccuracy <- ACCURACY(forecast=forecastMSTL, test=test, training=training)
-return(MSTLaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(MSTLaccuracy=MSTLaccuracy, MSTLfcast=forecastMSTL))
+}, error=function(e){return(list(MSTLaccuracy=rep(NA, length_out), MSTLfcast=forecastMSTL))})
 }
 
 #' Calculate accuracy measure based on TBATS
@@ -219,6 +219,6 @@ tryCatch({
 fitTBAT <- forecast::tbats(training)
 forecastTBATS <- forecast(fitTBAT, h=h)$mean
 TBATSaccuracy <- ACCURACY(forecast=forecastTBATS, test=test, training=training)
-return(TBATSaccuracy)
-}, error=function(e){return(rep(NA, length_out))})
+return(list(TBATSaccuracy=TBATSaccuracy, TBATSfcast=forecastTBATS))
+}, error=function(e){return(list(TBATSaccuracy=rep(NA, length_out), TBATSfcast=forecastTBATS))})
 }
