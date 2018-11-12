@@ -97,7 +97,7 @@ seasonal naive method is used to forecast seasonal component. ARIMA model is use
 
 ```{r accuracy, message=FALSE}
 tslist <- list(M3[[1]], M3[[2]])
-accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1)
+accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1, fcast_save = TRUE)
 accuracy_info
 ```
 
@@ -109,7 +109,7 @@ accuracy_info
 # steps 3 and 4 applied to yearly series of M1 competition
 data(M1)
 yearly_m1 <- subset(M1, "yearly")
-accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1)
+accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1, fcast_save = TRUE)
 features_m1 <- cal_features(yearly_m1, database="M1", h=6, highfreq = FALSE)
 
 # prepare training set
@@ -129,7 +129,7 @@ head(prep_tset$modelinfo)
 `build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. Users can further add the features and classlabel information calculated based on the simulated time series.
 
 ```{r}
-rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
+rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE, mtry = 8)
 
 # to get the predicted class labels
 predictedlabels_m3 <- rf$predictions

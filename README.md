@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5453.772  6016.450  6604.240  7092.630  7559.098  8071.938  8537.964
-#>  [8]  9065.004  9797.441 10571.946 11287.122 11893.166 12481.719 13108.927
-#> [15] 13859.352 14640.781 15164.886 15678.255 16250.519 16908.181
+#>  [1]  5414.824  5849.847  6274.976  6852.495  7581.164  8341.471  8981.470
+#>  [8]  9489.206  9981.326 10400.895 10615.609 10779.351 10983.763 11303.596
+#> [15] 11601.199 11900.172 11895.055 11975.461 11854.085 11779.720
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5536.177  6142.765  6776.684  7552.807  8188.768  8750.526  9381.679
-#>  [8] 10091.772 10715.239 11252.036 11836.032 12545.363 13229.882 14111.411
-#> [15] 15138.695 15927.866 16661.309 17405.112 18149.428 18748.351
+#>  [1]  5683.771  6526.538  7369.359  8067.270  8813.194  9727.176 10460.120
+#>  [8] 11197.024 12002.582 12727.626 13442.375 14330.396 15205.693 15997.787
+#> [15] 16902.844 17896.689 18795.435 19758.570 20807.634 21987.036
 #> 
 #> 
 #> $N0002
@@ -67,19 +67,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 2805.364 2991.263 2914.156 2346.831 4124.765 4420.648 5224.628
-#>  [8] 4303.063 3964.275 3365.732 3850.490 4895.599 7142.343 6953.917
-#> [15] 5867.213 5531.534 5424.229 6149.965 5517.100 5320.932
+#>  [1]  4646.422  4726.857  5260.344  5091.632  5673.381  5628.838  6361.066
+#>  [8]  7375.407  8435.575  8402.207  9475.625  8876.801  9208.429 10445.490
+#> [15]  9547.164  9276.327  8328.395  8787.262  9135.295  9412.538
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  3492.9173  2144.7718   776.3319   913.3468   691.6596   374.2269
-#>  [7]  1166.8270   315.2994  -186.3017   494.2248  -144.8806 -1041.3375
-#> [13]  -265.1142   403.9318  1002.4570  1368.1669  2001.2622  3384.7384
-#> [19]  3883.8989  4821.2514
+#>  [1] 4275.957 4739.504 4536.228 4018.092 3635.428 3391.039 2986.189
+#>  [8] 2398.418 3204.863 3629.517 4528.906 4528.221 4321.681 3997.003
+#> [15] 3138.987 4025.984 3786.563 4276.186 3619.138 2633.617
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -98,14 +97,14 @@ library(tsfeatures)
 M3yearly_features <- seer::cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 #> # A tibble: 6 x 25
-#>   entropy lumpiness stability hurst trend   spikiness linearity curvature
-#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>       <dbl>     <dbl>     <dbl>
-#> 1   0.773         0         0 0.971 0.995 0.000000237     3.58      0.424
-#> 2   0.837         0         0 0.947 0.869 0.000179        2.05     -2.08 
-#> 3   0.825         0         0 0.949 0.865 0.000193        1.75     -2.26 
-#> 4   0.854         0         0 0.949 0.853 0.000368        2.87     -1.25 
-#> 5   0.899         0         0 0.855 0.586 0.00127        -0.765    -1.77 
-#> 6   0.798         0         0 0.964 0.964 0.0000217       3.56     -0.574
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
+#> 1   0.773         0         0 0.971 0.995   2.37e-7     3.58      0.424
+#> 2   0.837         0         0 0.947 0.869   1.79e-4     2.05     -2.08 
+#> 3   0.825         0         0 0.949 0.865   1.93e-4     1.75     -2.26 
+#> 4   0.854         0         0 0.949 0.853   3.68e-4     2.87     -1.25 
+#> 5   0.899         0         0 0.855 0.586   1.27e-3    -0.765    -1.77 
+#> 6   0.798         0         0 0.964 0.964   2.17e-5     3.56     -0.574
 #> # ... with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
 #> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
 #> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
@@ -121,12 +120,12 @@ features_simulated_arima <- lapply(simulated_arima, function(temp){
 fea_sim <- lapply(features_simulated_arima, function(temp){do.call(rbind, temp)})
 do.call(rbind, fea_sim)
 #> # A tibble: 4 x 25
-#>   entropy lumpiness stability hurst trend    spikiness linearity curvature
-#> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>        <dbl>     <dbl>     <dbl>
-#> 1   0.769         0         0 0.973 0.999      1.19e-8      3.59    0.185 
-#> 2   0.768         0         0 0.972 0.999      2.62e-9      3.62    0.0249
-#> 3   0.879         0         0 0.926 0.774      3.60e-4      3.04    0.676 
-#> 4   0.896         0         0 0.909 0.768      4.33e-4     -2.99    1.01  
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature
+#> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
+#> 1   0.769         0         0 0.973 0.996  8.11e- 8     3.49    -0.495 
+#> 2   0.769         0         0 0.973 1.000  6.26e-10     3.61     0.0187
+#> 3   0.805         0         0 0.968 0.965  9.87e- 6     3.51     0.291 
+#> 4   0.885         0         0 0.914 0.664  1.35e- 3    -0.369    2.24  
 #> # ... with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
 #> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
 #> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
@@ -146,18 +145,73 @@ do.call(rbind, fea_sim)
 
 ``` r
 tslist <- list(M3[[1]], M3[[2]])
-accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1)
+accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M3", cal_MASE, h=6, length_out = 1, fcast_save = TRUE)
 accuracy_info
 #> $accuracy
-#>         arima       ets       rw       rwd    theta       nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.466368
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.280082
+#>         arima       ets       rw       rwd    theta        nn
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3420008
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2798183
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
 #> 
 #> $ETS
 #> [1] "ETS(M,A,N)" "ETS(M,A,N)"
+#> 
+#> $forecasts
+#> $forecasts$arima
+#>         [,1] [,2]
+#> [1,] 5486.10 4230
+#> [2,] 6035.21 4230
+#> [3,] 6584.32 4230
+#> [4,] 7133.43 4230
+#> [5,] 7682.54 4230
+#> [6,] 8231.65 4230
+#> 
+#> $forecasts$ets
+#>          [,1]     [,2]
+#> [1,] 5486.429 4347.678
+#> [2,] 6035.865 4465.365
+#> [3,] 6585.301 4583.052
+#> [4,] 7134.737 4700.738
+#> [5,] 7684.173 4818.425
+#> [6,] 8233.609 4936.112
+#> 
+#> $forecasts$rw
+#>         [,1] [,2]
+#> [1,] 4936.99 4230
+#> [2,] 4936.99 4230
+#> [3,] 4936.99 4230
+#> [4,] 4936.99 4230
+#> [5,] 4936.99 4230
+#> [6,] 4936.99 4230
+#> 
+#> $forecasts$rwd
+#>         [,1]     [,2]
+#> [1,] 5244.40 4402.227
+#> [2,] 5551.81 4574.454
+#> [3,] 5859.22 4746.681
+#> [4,] 6166.63 4918.908
+#> [5,] 6474.04 5091.135
+#> [6,] 6781.45 5263.362
+#> 
+#> $forecasts$theta
+#>         [,1]     [,2]
+#> [1,] 5085.07 4321.416
+#> [2,] 5233.19 4412.843
+#> [3,] 5381.31 4504.269
+#> [4,] 5529.43 4595.696
+#> [5,] 5677.55 4687.122
+#> [6,] 5825.67 4778.549
+#> 
+#> $forecasts$nn
+#>          [,1]     [,2]
+#> [1,] 5518.298 4791.063
+#> [2,] 6084.593 5061.035
+#> [3,] 6580.239 5151.663
+#> [4,] 6965.695 5177.523
+#> [5,] 7234.111 5184.522
+#> [6,] 7405.202 5186.388
 ```
 
 **4. Construct a dataframe of input:features and output:lables to train a random forest**
@@ -168,7 +222,7 @@ accuracy_info
 # steps 3 and 4 applied to yearly series of M1 competition
 data(M1)
 yearly_m1 <- subset(M1, "yearly")
-accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1)
+accuracy_m1 <- fcast_accuracy(tslist=yearly_m1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE, h=6, length_out = 1, fcast_save = TRUE)
 features_m1 <- cal_features(yearly_m1, database="M1", h=6, highfreq = FALSE)
 
 # prepare training set
@@ -177,14 +231,14 @@ prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = featu
 # provides the training set to build a rf classifier
 head(prep_tset$trainingset)
 #> # A tibble: 6 x 26
-#>   entropy lumpiness stability hurst trend  spikiness linearity curvature
-#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>      <dbl>     <dbl>     <dbl>
-#> 1   0.683   0.0400      0.977 0.985 0.985 0.00000132      4.46    0.705 
-#> 2   0.711   0.0790      0.894 0.988 0.989 0.00000154      4.47    0.613 
-#> 3   0.716   0.0160      0.858 0.987 0.989 0.00000113      4.60    0.695 
-#> 4   0.761   0.00201     1.32  0.982 0.957 0.00000896      4.48    0.0735
-#> 5   0.628   0.00112     0.446 0.993 0.973 0.00000180      5.77    1.21  
-#> 6   0.708   0.00774     0.578 0.986 0.975 0.00000331      4.75    0.748 
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
+#> 1   0.683   0.0400      0.977 0.985 0.985   1.32e-6      4.46    0.705 
+#> 2   0.711   0.0790      0.894 0.988 0.989   1.54e-6      4.47    0.613 
+#> 3   0.716   0.0160      0.858 0.987 0.989   1.13e-6      4.60    0.695 
+#> 4   0.761   0.00201     1.32  0.982 0.957   8.96e-6      4.48    0.0735
+#> 5   0.628   0.00112     0.446 0.993 0.973   1.80e-6      5.77    1.21  
+#> 6   0.708   0.00774     0.578 0.986 0.975   3.31e-6      4.75    0.748 
 #> # ... with 18 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
 #> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
 #> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
@@ -212,20 +266,20 @@ head(prep_tset$modelinfo)
 `build_rf` in the `seer` package enables the training of a random forest model and predict class labels ("best" forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. Users can further add the features and classlabel information calculated based on the simulated time series.
 
 ``` r
-rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE)
+rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE, mtry = 8)
 
 # to get the predicted class labels
 predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    77                     1                     0 
+#>                    63                     0                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     6                    24                    16 
+#>                     3                    34                    13 
 #>                    rw                   rwd                 theta 
-#>                    16                   500                     2 
+#>                     4                   521                     5 
 #>                    wn 
-#>                     3
+#>                     2
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
