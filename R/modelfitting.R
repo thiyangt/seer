@@ -122,9 +122,9 @@ tryCatch({
 if (m > 1){
   # using stheta method with seasonal adjustment
   # require(forecTheta)
-  tryCatch({
-  forecastTheta <- forecTheta::stheta(training,h=h, s='additive')$mean
-  }, error=function(e){forecastTheta <- forecTheta::stheta(training,h=h)$mean})
+  forecastTheta <- tryCatch({
+  forecTheta::stheta(training,h=h, s='additive')$mean
+  }, error=function(e){forecTheta::stheta(training,h=h)$mean})
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 } else {
   # using thetaf method
