@@ -4,13 +4,15 @@
 \alias{accuracy_ets}
 \title{Forecast-accuracy calculation}
 \usage{
-accuracy_ets(ts_info, function_name)
+accuracy_ets(ts_info, function_name, length_out)
 }
 \arguments{
 \item{ts_info}{list containing training and test part of a time series}
 
 \item{function_name}{function to calculate the accuracy function, the arguments of this function
 should be forecast, training and test set of the time series}
+
+\item{length_out}{number of measures calculated by the function}
 }
 \value{
 a list which contains the accuracy and name of the specific ETS model.

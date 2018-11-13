@@ -24,8 +24,7 @@ Imports:
         stringr,
         tibble,
         ForeCA
-Remotes: robjhyndman/forecast,
-         robjhyndman/tsfeatures
+Remotes: robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 6.1.0
 LazyDate: true

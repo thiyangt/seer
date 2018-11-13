@@ -4,53 +4,62 @@
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return a list which contains the accuracy and name of the specific ETS model.
 #' @export
-accuracy_ets <- function(ts_info, function_name){
+accuracy_ets <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 ets_fit <- forecast::ets(training)
 forecastETS <- forecast(ets_fit,h)$mean
 ACCURACY <- match.fun(function_name)
 ETSaccuracy <- ACCURACY(forecast=forecastETS,test=test, training=training)
 ETSmodel <- as.character(ets_fit)
 return(list(ETSmodel=ETSmodel, ETSaccuracy=ETSaccuracy, ETSfcast=forecastETS))
+}, error=function(e){return(list(ETSaccuracy=rep(NA, length_out), ETSmodel=ETSmodel, ETSfcast=forecastETS))})
 }
 
 #' Calculate accuracy measue based on ARIMA models
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return a list which contains the accuracy and name of the specific ARIMA model.
 #' @export
-accuracy_arima <- function(ts_info, function_name){
+accuracy_arima <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 arima_fit <- forecast::auto.arima(training)
 forecastARIMA <- forecast(arima_fit,h)$mean
 ACCURACY <- match.fun(function_name)
 ARIMAaccuracy <- ACCURACY(forecast=forecastARIMA, test=test, training=training)
 ARIMAmodel <- as.character(arima_fit)
 return(list(ARIMAmodel=ARIMAmodel, ARIMAaccuracy=ARIMAaccuracy, ARIMAfcast=forecastARIMA))
+}, error=function(e){return(list(ARIMAaccuracy=rep(NA, length_out), ARIMAfcast=forecastARIMA, ARIMAmodel=ARIMAmodel))})
 }
 
 #' Calculate accuracy measure based on random walk models
 #' @param ts_info list containing training and test part of a time series
 #' @param function_name function to calculate the accuracy function, the arguments of this function
 #' should be forecast, training and test set of the time series
+#' @param length_out number of measures calculated by the function
 #' @return returns accuracy measure calculated baded on random walk model
 #' @export
-accuracy_rw <- function(ts_info, function_name){
+accuracy_rw <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 rw_fit <- forecast::rwf(training,drift=FALSE, h=h)
 forecastRW <- forecast(rw_fit)$mean
 ACCURACY <- match.fun(function_name)
 RWaccuracy <- ACCURACY(forecast=forecastRW,test=test, training=training)
 return(list(RWaccuracy=RWaccuracy, rwfcast=forecastRW))
+}, error=function(e){return(list(RWaccuracy=rep(NA, length_out), rwfcast=forecastRW))})
 
 }
 
@@ -113,7 +122,9 @@ tryCatch({
 if (m > 1){
   # using stheta method with seasonal adjustment
   # require(forecTheta)
+  tryCatch({
   forecastTheta <- forecTheta::stheta(training,h=h, s='additive')$mean
+  }, error=function(e){forecastTheta <- forecTheta::stheta(training,h=h)$mean})
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 } else {
   # using thetaf method
