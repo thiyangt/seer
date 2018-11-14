@@ -124,6 +124,8 @@ if (m > 1){
   # require(forecTheta)
   tryCatch({
     forecastTheta <- forecTheta::stheta(training,h=h, s='additive')$mean
+  }, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
+  tryCatch({
     THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
   }, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
 } else {
@@ -132,7 +134,7 @@ if (m > 1){
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 }
 return(list(THETAaccuracy=THETAaccuracy, thetafcast=forecastTheta))
-}, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=forecastTheta))})
+}, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
 }
 
 #' Calculate accuracy measure based on STL-AR method
