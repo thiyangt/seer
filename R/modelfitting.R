@@ -118,8 +118,9 @@ test <- ts_info$test
 h <- length(test)
 m <- frequency(training)
 ACCURACY <- match.fun(function_name)
+length_training <- length(training)
 tryCatch({
-if (m > 1 & length(training) > (2*m)){
+if (m > 1 & length_training > (2*m)){
   # using stheta method with seasonal adjustment
   # require(forecTheta)
   tryCatch({
@@ -128,6 +129,10 @@ if (m > 1 & length(training) > (2*m)){
   tryCatch({
     THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
   }, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
+} else if(m > 1 & length_training < (2*m)) {
+  # using thetaf method
+  forecastTheta <-forecast::thetaf(training,h=length(test))$mean
+  THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
 } else {
   # using thetaf method
   forecastTheta <-forecast::thetaf(training,h=length(test))$mean
