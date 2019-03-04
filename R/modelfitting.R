@@ -129,7 +129,7 @@ if (m > 1 & length_training > (2*m)){
   tryCatch({
     THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
   }, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
-} else if(m > 1 & length_training < (2*m)) {
+} else if(m > 1 & length_training <= (2*m)) {
   # using thetaf method
   forecastTheta <-forecast::thetaf(training,h=length(test))$mean
   THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
