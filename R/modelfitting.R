@@ -119,7 +119,7 @@ h <- length(test)
 m <- frequency(training)
 ACCURACY <- match.fun(function_name)
 tryCatch({
-if (m > 1 & length(training)>m){
+if (m > 1 & length(training) > (2*m)){
   # using stheta method with seasonal adjustment
   # require(forecTheta)
   tryCatch({
