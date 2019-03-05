@@ -153,7 +153,9 @@ accuracy_stlar <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
+tryCatch({
 forecastSTLAR <- stlar(training,h=h)$mean
+}, error=function(e){return(list(STLARaccuracy=rep(NA, length_out), STLARfcast=rep(NA, h)))})
 ACCURACY <- match.fun(function_name)
 tryCatch({
 STLARaccuracy <- ACCURACY(forecast=forecastSTLAR, test=test, training=training)
