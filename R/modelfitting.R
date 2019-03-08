@@ -125,7 +125,8 @@ if (m > 1 & length_training > (2*m)){
   # require(forecTheta)
   tryCatch({
     forecastTheta <- forecTheta::stheta(training,h=h, s='additive')$mean
-  }, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
+  }, error=function(e){
+    forecastTheta <-forecast::thetaf(training,h=length(test))$mean})
   tryCatch({
     THETAaccuracy <- ACCURACY(forecast=forecastTheta, test=test, training=training)
   }, error=function(e){return(list(THETAaccuracy=rep(NA, length_out), thetafcast=rep(NA, h)))})
