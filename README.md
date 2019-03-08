@@ -47,18 +47,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5414.824  5849.847  6274.976  6852.495  7581.164  8341.471  8981.470
-#>  [8]  9489.206  9981.326 10400.895 10615.609 10779.351 10983.763 11303.596
-#> [15] 11601.199 11900.172 11895.055 11975.461 11854.085 11779.720
+#>  [1]  5464.827  5902.187  6442.644  6908.958  7202.292  7671.566  8173.108
+#>  [8]  8761.339  9465.591 10201.156 10929.415 11635.461 12270.271 12827.586
+#> [15] 13409.706 14033.361 14632.764 15149.639 15649.574 16056.525
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5683.771  6526.538  7369.359  8067.270  8813.194  9727.176 10460.120
-#>  [8] 11197.024 12002.582 12727.626 13442.375 14330.396 15205.693 15997.787
-#> [15] 16902.844 17896.689 18795.435 19758.570 20807.634 21987.036
+#>  [1]  5498.075  6007.107  6458.201  6966.290  7429.232  7804.580  8131.435
+#>  [8]  8498.989  8830.887  9235.359  9609.953  9896.353 10111.283 10255.153
+#> [15] 10406.580 10597.906 10635.718 10577.563 10401.453 10284.765
 #> 
 #> 
 #> $N0002
@@ -67,18 +67,19 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  4646.422  4726.857  5260.344  5091.632  5673.381  5628.838  6361.066
-#>  [8]  7375.407  8435.575  8402.207  9475.625  8876.801  9208.429 10445.490
-#> [15]  9547.164  9276.327  8328.395  8787.262  9135.295  9412.538
+#>  [1] 4541.153 5470.961 4886.893 4493.034 4122.049 3480.587 3957.074
+#>  [8] 3516.629 4821.164 3431.285 3289.053 4489.372 5164.195 6454.086
+#> [15] 6070.865 5423.209 6816.185 7027.567 8394.392 8585.479
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4275.957 4739.504 4536.228 4018.092 3635.428 3391.039 2986.189
-#>  [8] 2398.418 3204.863 3629.517 4528.906 4528.221 4321.681 3997.003
-#> [15] 3138.987 4025.984 3786.563 4276.186 3619.138 2633.617
+#>  [1] 4404.775359 4543.192644 4566.651716 4188.331809 3683.852145
+#>  [6] 3476.441894 3651.758352 3473.134298 2867.911347 2639.430436
+#> [11] 3043.863901 2136.372313 2558.955505  785.804579  729.020128
+#> [16]   -3.632481 -192.596688 1699.120245 1240.403817 1838.996308
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on ETS models.
@@ -122,10 +123,10 @@ do.call(rbind, fea_sim)
 #> # A tibble: 4 x 25
 #>   entropy lumpiness stability hurst trend spikiness linearity curvature
 #> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.769         0         0 0.973 0.996  8.11e- 8     3.49    -0.495 
-#> 2   0.769         0         0 0.973 1.000  6.26e-10     3.61     0.0187
-#> 3   0.805         0         0 0.968 0.965  9.87e- 6     3.51     0.291 
-#> 4   0.885         0         0 0.914 0.664  1.35e- 3    -0.369    2.24  
+#> 1   0.770         0         0 0.973 0.999   6.14e-9     3.59      0.289
+#> 2   0.770         0         0 0.973 0.999   1.96e-8     3.58     -0.314
+#> 3   0.972         0         0 0.759 0.628   1.21e-3     0.785     2.21 
+#> 4   0.850         0         0 0.941 0.873   2.63e-4    -3.32     -0.252
 #> # ... with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
 #> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
 #> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
@@ -149,8 +150,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3420008
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2798183
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.4564600
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2799259
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -206,12 +207,12 @@ accuracy_info
 #> 
 #> $forecasts$nn
 #>          [,1]     [,2]
-#> [1,] 5518.298 4791.063
-#> [2,] 6084.593 5061.035
-#> [3,] 6580.239 5151.663
-#> [4,] 6965.695 5177.523
-#> [5,] 7234.111 5184.522
-#> [6,] 7405.202 5186.388
+#> [1,] 5514.520 4790.690
+#> [2,] 6071.929 5060.641
+#> [3,] 6553.419 5151.411
+#> [4,] 6922.014 5177.364
+#> [5,] 7174.531 5184.403
+#> [6,] 7333.055 5186.283
 ```
 
 **4. Construct a dataframe of input:features and output:lables to train a random forest**
@@ -273,13 +274,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    63                     0                     0 
+#>                    73                     1                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     3                    34                    13 
+#>                     4                    41                    11 
 #>                    rw                   rwd                 theta 
-#>                     4                   521                     5 
+#>                     3                   498                    11 
 #>                    wn 
-#>                     2
+#>                     3
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
@@ -300,17 +301,71 @@ forecasts$mean
 
 # to obtain lower boundary of 95% prediction intervals
 forecasts$lower
-#>          [,1]     [,2]     [,3]     [,4]     [,5]      [,6]
-#> [1,] 4984.162 4893.098 4629.135 4199.745 3606.858 2848.8735
-#> [2,] 2890.401 2366.671 1959.916 1608.186 1288.666  990.2221
+#>          [,1]     [,2]     [,3]     [,4]      [,5]      [,6]
+#> [1,] 4984.162 4893.098 4629.135 4199.745 3606.8577 2848.8735
+#> [2,] 2886.231 2282.484 1769.324 1294.985  841.7082  401.3586
 
 # to obtain upper boundary of 95% prediction intervals
 forecasts$upper
-#>          [,1]     [,2]     [,3]      [,4]      [,5]      [,6]
-#> [1,] 5988.696 7178.632 8541.467 10069.729 11761.488 13618.344
-#> [2,] 5914.053 6782.236 7533.445  8229.629  8893.603  9536.501
+#>          [,1]     [,2]     [,3]      [,4]      [,5]     [,6]
+#> [1,] 5988.696 7178.632 8541.467 10069.729 11761.488 13618.34
+#> [2,] 5918.223 6866.424 7724.037  8542.831  9340.561 10125.36
 
 # to obtain MASE
 forecasts$accuracy
 #> [1] 1.5636089 0.6123443
+```
+
+#### Notes
+
+**Calculation of features for daily series**
+
+``` r
+library(M4comp2018)
+# extract first two daily time series
+M4_daily <- Filter(function(l) l$period == "Daily", M4)[1:2]
+# convert daily series into msts objects
+M4_daily_msts <- lapply(M4_daily, function(temp){
+  temp$x <- convert_msts(temp$x, "daily")
+  return(temp)
+})
+# calculate features
+cal_features(M4_daily_msts, seasonal=TRUE, h=14, m=7, lagmax=8L, database="M4", highfreq=TRUE)
+#> Warning: Unknown columns: `seasonal_strength`
+#> # A tibble: 2 x 26
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
+#> 1   0.327   0.00214     0.621 1.000 0.993  1.09e-10      31.1      3.09
+#> 2   0.369   0.331       0.446 1.000 0.865  2.53e- 8      24.7      1.35
+#> # ... with 18 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
+#> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
+#> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   seas_pacf <dbl>, seasonal_strength1 <dbl>, seasonal_strength2 <dbl>,
+#> #   sediff_acf1 <dbl>, sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>,
+#> #   y_acf5 <dbl>, diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
+```
+
+**Calculation of features for hourly series**
+
+``` r
+M4_hourly <- Filter(function(l) l$period == "Hourly", M4)[1:2]
+## convert data into msts object
+hourlym4_msts <- lapply(M4_hourly, function(temp){
+    temp$x <- convert_msts(temp$x, "hourly")
+    return(temp)
+})
+cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L, 
+                                                         database="M4", highfreq = TRUE)
+#> Warning: Unknown columns: `seasonal_strength`
+#> # A tibble: 2 x 26
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
+#> 1   0.524    0.0110    0.0899 0.999 0.626   1.92e-8      5.33    -3.51 
+#> 2   0.540    0.0505    0.109  0.999 0.790   6.39e-9      7.85    -0.152
+#> # ... with 18 more variables: e_acf1 <dbl>, y_acf1 <dbl>,
+#> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
+#> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   seas_pacf <dbl>, seasonal_strength1 <dbl>, seasonal_strength2 <dbl>,
+#> #   sediff_acf1 <dbl>, sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>,
+#> #   y_acf5 <dbl>, diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
 ```

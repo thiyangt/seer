@@ -72,6 +72,7 @@ M3yearly_features <- seer::cal_features(yearly_m3, database="M3", h=6, highfreq 
 head(M3yearly_features)
 ```
 
+
 **Calculate features from the simulated time series in the step 1**
 
 ```{r features_simulated}
@@ -159,3 +160,37 @@ forecasts$upper
 # to obtain MASE
 forecasts$accuracy
 ```
+
+#### Notes
+
+**Calculation of features for daily series**
+
+```{r}
+library(M4comp2018)
+# extract first two daily time series
+M4_daily <- Filter(function(l) l$period == "Daily", M4)[1:2]
+# convert daily series into msts objects
+M4_daily_msts <- lapply(M4_daily, function(temp){
+  temp$x <- convert_msts(temp$x, "daily")
+  return(temp)
+})
+# calculate features
+cal_features(M4_daily_msts, seasonal=TRUE, h=14, m=7, lagmax=8L, database="M4", highfreq=TRUE)
+```
+
+**Calculation of features for hourly series**
+
+```{r}
+M4_hourly <- Filter(function(l) l$period == "Hourly", M4)[1:2]
+## convert data into msts object
+hourlym4_msts <- lapply(M4_hourly, function(temp){
+	temp$x <- convert_msts(temp$x, "hourly")
+	return(temp)
+})
+cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L, 
+														 database="M4", highfreq = TRUE)
+
+```
+
+
+
