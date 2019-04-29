@@ -6,3 +6,5 @@ cache: packages
 r_github_packages:
  - robjhyndman/forecast
  - robjhyndman/tsfeatures
+
+TRAVIS_R_VERSION=3.6.0
