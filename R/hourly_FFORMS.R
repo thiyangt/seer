@@ -1,7 +1,7 @@
 #' pre-trained random forest classifier for hourly data
 #'
 #' @description hourly random forest trained to forecast hourly M4-competition data
-#' @format list of 19 entries
+#' @format randomForest 19 entries
 #' \describe{
 #' \item{call}{the original call to randomForest}
 #' \item{type}{classification}
@@ -23,8 +23,4 @@
 #' \item{inbag}{NULL}
 #' \item{terms}{variable attributes}
 #' }
-#' @examples
-#' data(hourly_fforms)
-#' data(features_M4H)
-#' predicted_fcast_models <- predict(hourly_fforms, features_M4H)
 "hourly_fforms"
