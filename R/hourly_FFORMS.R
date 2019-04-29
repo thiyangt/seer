@@ -26,5 +26,5 @@
 #' @examples
 #' data(hourly_fforms)
 #' data(features_M4H)
-#' predicted_fcast_models <- predict(hourly_fforms, features_M4Y)
+#' predicted_fcast_models <- predict(hourly_fforms, features_M4H)
 "hourly_fforms"

@@ -190,5 +190,16 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
 
 ```
 
+# Pre-trained classifiers (WIP)
 
+
+## Hourly data
+
+```{r}
+data("hourly_fforms")
+data("features_M4H")
+fcast.models <- predict(hourly_fforms, features_M4H)
+table(fcast.models)
+
+```
 

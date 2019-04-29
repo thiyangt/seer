@@ -1,11 +1,20 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
-r:
-  - devel
 sudo: false
 cache: packages
 r_github_packages:
  - robjhyndman/forecast
  - robjhyndman/tsfeatures
 
+env:
+ global:
+   - CRAN: http://cran.rstudio.com
+
+notifications:
+  email:
+    on_success: true
+    on_failure: true
+
+after_success:
+  - Rscript -e 'library(covr);coveralls()'
