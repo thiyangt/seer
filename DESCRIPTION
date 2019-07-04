@@ -1,7 +1,7 @@
 Package: seer
 Type: Package
 Title: Feature-based FORecast-Model Selection (FFORMS)
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: c(
     person("Thiyanga", "Talagala", email = "thiyanga.talagala@monash.edu", role = c("aut", "cre")),
     person("Rob", "Hyndman", role = c("aut", "ths")),
