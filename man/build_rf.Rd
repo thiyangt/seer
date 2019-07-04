@@ -4,20 +4,20 @@
 \alias{build_rf}
 \title{build random forest classifier}
 \usage{
-build_rf(training_set, testset, rf_type = c("ru", "rcp"), ntree, seed,
-  import = FALSE, mtry = 8)
+build_rf(training_set, testset = NA, rf_type = c("ru", "rcp"), ntree,
+  seed, import = FALSE, mtry = 8)
 }
 \arguments{
 \item{training_set}{data frame of features and class labels}
 
-\item{testset}{features of new time series}
+\item{testset}{features of new time series, default NA if a testset is not available}
 
 \item{rf_type}{whether ru(random forest based on unbiased sample) or rcp(random
 forest based on class priors)}
 
 \item{ntree}{number of trees in the forest}
 
-\item{seed}{a vlue for seed}
+\item{seed}{a value for seed}
 
 \item{import}{Should importance of predictors be assessed?, TRUE of FALSE}
 
