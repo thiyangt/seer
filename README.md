@@ -62,18 +62,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5552.521  6283.830  6917.197  7511.413  7932.583  8409.637  8966.233
-#>  [8]  9445.609  9934.702 10386.301 10960.339 11629.648 12251.874 12867.656
-#> [15] 13466.231 13960.570 14491.647 15028.212 15548.044 16186.287
+#>  [1]  5525.767  6203.492  6973.682  7880.993  8890.682 10005.418 11093.425
+#>  [8] 12288.786 13364.407 14511.662 15778.430 17000.143 18242.130 19354.045
+#> [15] 20272.461 21071.418 21858.376 22788.859 23835.544 24949.337
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5556.009  6214.859  6896.640  7548.290  8068.859  8746.076  9345.807
-#>  [8] 10158.135 10951.584 11783.344 12629.741 13469.948 14272.381 15056.673
-#> [15] 16003.566 16982.539 17906.531 18733.324 19728.357 20825.286
+#>  [1]  5453.940  6057.126  6583.162  7164.027  7716.639  8271.248  8790.539
+#>  [8]  9282.700  9944.595 10678.084 11273.675 11884.281 12570.123 13271.081
+#> [15] 13795.748 14337.545 14958.044 15529.797 16174.760 16826.680
 #> 
 #> 
 #> $N0002
@@ -82,18 +82,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4167.1137 4416.1850 4539.6454 4202.9651 3579.6230 3248.3517 3301.8857
-#>  [8] 2980.7191 3128.8979 3269.3229 2262.5605 1472.4406 1878.2641 1740.1912
-#> [15] 1638.8622 1127.4410 1174.5247 1847.9641  628.2464 1007.5145
+#>  [1] 4893.1463 3773.0323 3157.7752 1938.6916  972.7754  280.2241  349.7987
+#>  [8] 1584.6445 1450.9492 1377.3345 1474.0432 2226.8964 2043.8141 2303.1611
+#> [15] 1472.6410  623.2629  514.1970  810.8299 1028.5454  490.9743
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 3535.264 2559.980 2927.298 2619.078 3425.943 3733.680 4588.101
-#>  [8] 4325.612 4017.581 4974.511 3628.634 5044.058 5526.808 6438.506
-#> [15] 7657.079 7773.860 7927.424 8764.263 9382.973 8288.867
+#>  [1] 4810.5844 4186.9358 3969.2141 3549.5192 3167.4704 2344.3900 2242.9286
+#>  [8] 2348.4306 1751.1591 2864.7136 2166.9483 1521.0750 1974.0565 1649.9344
+#> [15] 1590.3226 1969.7044  991.1808 2248.6719 1480.7826 2170.2401
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on
@@ -141,10 +141,10 @@ do.call(rbind, fea_sim)
 #> # A tibble: 4 x 25
 #>   entropy lumpiness stability hurst trend spikiness linearity curvature
 #> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.769         0         0 0.972 0.999   1.04e-8      3.63    0.0349
-#> 2   0.769         0         0 0.973 1.000   2.01e-9      3.60    0.179 
-#> 3   0.801         0         0 0.961 0.894   1.39e-4     -3.35   -0.143 
-#> 4   0.890         0         0 0.920 0.801   5.22e-4      3.15    0.490 
+#> 1   0.769         0         0 0.973 1.000   1.87e-9      3.58     0.183
+#> 2   0.768         0         0 0.973 1.000   2.07e-9      3.61     0.121
+#> 3   0.836         0         0 0.938 0.895   1.10e-4     -1.73     2.51 
+#> 4   0.852         0         0 0.949 0.908   1.57e-4     -3.20     0.981
 #> # … with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
 #> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
 #> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, lmres_acf1 <dbl>, ur_pp <dbl>,
@@ -184,8 +184,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3914747
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2796711
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.4428906
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2799233
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -241,12 +241,12 @@ accuracy_info
 #> 
 #> $forecasts$nn
 #>          [,1]     [,2]
-#> [1,] 5515.962 4791.623
-#> [2,] 6078.174 5061.626
-#> [3,] 6567.997 5152.057
-#> [4,] 6946.720 5177.790
-#> [5,] 7208.731 5184.736
-#> [6,] 7374.631 5186.583
+#> [1,] 5512.007 4790.683
+#> [2,] 6068.398 5060.651
+#> [3,] 6551.800 5151.412
+#> [4,] 6925.192 5177.356
+#> [5,] 7183.863 5184.390
+#> [6,] 7348.211 5186.269
 ```
 
 **4. Construct a dataframe of input:features and output:lables to train
@@ -320,13 +320,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    72                     1                     0 
+#>                    69                     0                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     3                    22                    14 
+#>                     3                    30                    22 
 #>                    rw                   rwd                 theta 
-#>                     4                   514                    10 
+#>                     3                   509                     5 
 #>                    wn 
-#>                     5
+#>                     4
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
@@ -370,9 +370,9 @@ forecasts$accuracy
 **Calculation of features for daily series**
 
 ``` r
-library(M4comp2018)
+data(M4)
 # extract first two daily time series
-M4_daily <- Filter(function(l) l$period == "Daily", M4)[1:2]
+M4_daily <- subset(M4, "daily")
 # convert daily series into msts objects
 M4_daily_msts <- lapply(M4_daily, function(temp){
   temp$x <- convert_msts(temp$x, "daily")
@@ -380,24 +380,33 @@ M4_daily_msts <- lapply(M4_daily, function(temp){
 })
 # calculate features
 seer::cal_features(M4_daily_msts, seasonal=TRUE, h=14, m=7, lagmax=8L, database="M4", highfreq=TRUE)
-#> Warning: Unknown columns: `seasonal_strength`
-#> # A tibble: 2 x 26
-#>   entropy lumpiness stability hurst trend spikiness linearity curvature
-#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.327   0.00214     0.621 1.000 0.993  1.09e-10      31.1      3.09
-#> 2   0.369   0.331       0.446 1.000 0.865  2.53e- 8      24.7      1.35
-#> # … with 18 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
-#> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
-#> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, seas_pacf <dbl>,
-#> #   seasonal_strength1 <dbl>, seasonal_strength2 <dbl>, sediff_acf1 <dbl>,
-#> #   sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>, y_acf5 <dbl>,
-#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
+#> # A tibble: 4,227 x 26
+#>    entropy lumpiness stability hurst trend spikiness linearity curvature
+#>      <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
+#>  1   0.327   0.00214     0.621 1.000 0.993  1.09e-10     31.1      3.09 
+#>  2   0.369   0.331       0.446 1.000 0.865  2.53e- 8     24.7      1.35 
+#>  3   0.659   0.755       0.761 0.999 0.917  4.49e- 6      3.82     4.89 
+#>  4   0.819   0.168       0.821 0.996 0.841  3.86e- 6      1.87     6.38 
+#>  5   0.512   0.0140      0.991 1.000 0.988  4.64e- 8     11.3      0.878
+#>  6   0.328   0.00136     0.242 1.000 0.989  1.90e-10     29.8      8.27 
+#>  7   0.498   0.247       0.697 0.999 0.845  2.38e- 8     24.1      1.96 
+#>  8   0.365   0.0189      1.01  1.000 0.968  2.31e- 9     30.1     -4.98 
+#>  9   0.384   0.0275      1.07  1.000 0.954  4.69e- 9     29.3     -6.67 
+#> 10   0.509   0.00110     0.974 1.000 0.989  8.77e-10     18.3     -3.60 
+#> # … with 4,217 more rows, and 18 more variables: e_acf1 <dbl>,
+#> #   y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
+#> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   seas_pacf <dbl>, seasonal_strength1 <dbl>, seasonal_strength2 <dbl>,
+#> #   sediff_acf1 <dbl>, sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>,
+#> #   y_acf5 <dbl>, diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
 ```
 
 **Calculation of features for hourly series**
 
 ``` r
-M4_hourly <- Filter(function(l) l$period == "Hourly", M4)[1:2]
+data(M4)
+# extract first two daily time series
+M4_hourly <- subset(M4, "hourly")[1:2]
 ## convert data into msts object
 hourlym4_msts <- lapply(M4_hourly, function(temp){
     temp$x <- convert_msts(temp$x, "hourly")
@@ -419,7 +428,7 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
 #> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
 ```
 
-# Pre-trained classifiers (WIP)
+# Pre-trained classifiers
 
 ## Forecast hourly time series in the M4-competition data
 
