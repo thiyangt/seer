@@ -24,7 +24,7 @@ fforms_ensemble <- function(votematrix, threshold=0.5){
     {
       x.sort.sum[i] <- sum(x.sort[seq_len(i)])
       if (x.sort.sum[i] >=threshold){
-        model.names <- names(x.sort[1:i])
+        model.names <- x.sort[1:i]
         return(model.names)
       }
     }
