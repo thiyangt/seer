@@ -209,3 +209,15 @@ table(fcast.models)
 
 ```
 
+
+# Forecast combination based on FFORMS
+
+```{r}
+# extract only the values for two time series just for illustration
+votes.matrix <- rf$randomforest$votes[1:2,]
+tslist <- yearly_m1[1:2]
+# To identify models and weights for forecast combination
+models_and_weights_for_combinations <- fforms_ensemble(votes.matrix, threshold=0.6)
+# Compute combination forecast
+fforms_combinationforecast(models_and_weights_for_combinations, tslist, "M1", 6)
+```
