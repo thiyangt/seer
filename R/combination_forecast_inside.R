@@ -1,0 +1,141 @@
+#' This function is call to be inside fforms_combination
+#'
+#' Given weights and time series in a two seperate vectors calculate combination forecast
+#' @param fforms.ensemble a list output from fforms_ensemble function
+#' @param x weights and names of models
+#' @param y time series values
+#' @return list of combination forecasts corresponds to point, lower and upper
+#' @author Thiyanga Talagala
+#' @export
+  combination_forecast_inside <- function(x, y){
+    # x - list containing the forecast models and weight (ensemble)
+    # y - list of time series (train_test)
+
+    training <- y$training
+    test <-  y$test
+    h <- length(test)
+    m <- frequency(training)
+
+    predictions <- names(x) ## model names
+    length.x <- length(predictions)
+
+    fcast <- list()
+    forecast_mean <- matrix(NA, ncol=h, nrow = length.x)
+    forecast_lower <- matrix(NA, ncol=h, nrow = length.x)
+    forecast_upper <- matrix(NA, ncol=h, nrow = length.x)
+
+    for (i in 1:length.x){
+
+      if (predictions[i] == "ARIMA") {
+        fit_arima <- auto.arima(training, seasonal = FALSE)
+        fcast[[i]] <- forecast(fit_arima,h, level=c(95))
+
+      } else if (predictions[i] == "ARMA/AR/MA") {
+        fit_arma <- auto.arima(training,d=0, stationary=TRUE, seasonal = FALSE)
+        fcast[[i]] <- forecast(fit_arma,h, level=c(95))
+
+      }else if (predictions[i] == "SARIMA") {
+        fit_sarima <- auto.arima(training, seasonal=TRUE)
+        fcast[[i]] <- forecast(fit_sarima,h, level=c(95))
+
+      }  else if (predictions[i] == "ETS-dampedtrend") {
+        fit_ets <- ets(training, model= "ZZN", damped = TRUE)
+        fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+
+      } else if (predictions[i] == "ETS-notrendnoseasonal") {
+        fit_ets <- ets(training, model= "ZNN", damped = FALSE)
+        fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+
+      } else if (predictions[i] == "ETS-trend") {
+        fit_ets <- ets(training, model= "ZZN", damped = FALSE)
+        fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+
+      } else if (predictions[i] == "ETS-trendseasonal") {
+        fit_ets <- ets(training, model= "ZZZ", damped = FALSE)
+        fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+
+      }else if (predictions[i] == "ETS-dampedtrendseasonal") {
+        fit_ets <- ets(training, model= "ZZZ", damped = TRUE)
+        fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+
+      }else if (predictions[i] == "ETS-seasonal") {
+        fit_ets <- ets(training, model= "ZNZ")
+        fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+
+      }else if (predictions[i] == "snaive") {
+        fcast[[i]] <- snaive(training, h=h, level=c(95))
+
+      }else if (predictions[i] == "rw") {
+        fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+
+      } else if (predictions[i] == "rwd") {
+        fcast[[i]] <- rwf(training, drift = TRUE, h=h, level=c(95))
+
+      } else if (predictions[i] == "stlar") {
+
+        if(frequency(training)==1 | length(training) <= 2*frequency(training)){
+          fcast[[i]] <- forecast(auto.arima(training, max.q=0), h=h, level=c(95))
+        } else {
+          fit_stlm <- stlm(training, modelfunction=ar)
+          fcast[[i]] <- forecast(fit_stlm, h=h, level=c(95))
+        }
+
+      } else if (predictions[i] == "theta") {
+        if (m > 1){
+          # using stheta method with seasonal adjustment
+          # require(forecTheta)
+          fitTheta <- forecTheta::stm(training,h=h,  s='additive', level=c(80, 90, 95))
+          fcast[[i]] <- list(mean=fitTheta$mean, lower = fitTheta$lower[,3], upper = fitTheta$upper[,3])
+        }else{
+          # using thetaf method
+          fcast[[i]] <-forecast::thetaf(training,h=h, level=c(95))
+        }
+      } else if (predictions[i] == "nn"){
+        fit_nnetar <- forecast::nnetar(training)
+        fcast[[i]] <- forecast(fit_nnetar, PI=TRUE, h=h, level=c(95))
+
+      } else if (predictions[i] == "mstl"| predictions[i] == "mstlets"){
+        # if(frequency(training)==1 | length(training) <= 2*frequency(training)){
+        #   fit_ets <- ets(training)
+        #   fcast <- forecast(fit_ets,h, level=c(95))
+        # } else {
+        fit_mstl <- stlf(training, level=c(95))
+        fcast[[i]] <- forecast(fit_mstl, h=h)
+        #  }
+
+      } else if (predictions[i] == "mstlarima"){
+        # if(frequency(training)==1 | length(training) <= 2*frequency(training)){
+        #    fit_ets <- ets(training)
+        #   fcast <- forecast(fit_ets,h, level=c(95))
+        #  } else {
+        fit_mstl <- stlf(training, method="arima", level=c(95))
+        fcast[[i]] <- forecast(fit_mstl, h=h)
+        #  }
+
+      } else if (predictions[i] == "tbats"){
+        fit_tbats <- forecast::tbats(training)
+        fcast[[i]] <- forecast(fit_tbats, h=h, level=c(95))
+
+      } else {
+        fit_wn <- Arima(training,order=c(0,0,0))
+        fcast[[i]] <- forecast(fit_wn,h, level=c(95))
+      }
+
+
+      forecast_mean[i,] <- as.vector(fcast[[i]]$mean)
+      forecast_lower[i,] <- as.vector(fcast[[i]]$lower)
+      forecast_upper[i,] <- as.vector(fcast[[i]]$upper)
+
+    }
+    #normalize.weights <- x/sum(x)
+    weights <- matrix(x, ncol=length.x)
+    weightedmean <- weights %*% forecast_mean
+    weightedlower <- weights %*% forecast_lower
+    weightedupper <- weights %*% forecast_upper
+
+    forecast_results <- list(mean = weightedmean, lower=weightedlower, upper=weightedupper)
+    forecast_results
+  }
+
+
+
