@@ -23,6 +23,7 @@ Imports:
         forecTheta,
         stringr,
         tibble,
+        purrr,
         ForeCA
 Remotes: robjhyndman/tsfeatures
 Encoding: UTF-8
