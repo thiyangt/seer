@@ -1,0 +1,68 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`M4`'
+  - '`Mcomp.sub`'
+  - '`accuracy_arima`'
+  - '`accuracy_ets`'
+  - '`accuracy_mstl`'
+  - '`accuracy_nn`'
+  - '`accuracy_rw`'
+  - '`accuracy_rwd`'
+  - '`accuracy_snaive`'
+  - '`accuracy_stlar`'
+  - '`accuracy_tbats`'
+  - '`accuracy_theta`'
+  - '`accuracy_wn`'
+  - '`acf5`'
+  - '`acf_seasonalDiff`'
+  - '`build_rf`'
+  - '`cal_MASE`'
+  - '`cal_WA`'
+  - '`cal_features`'
+  - '`cal_m4measures`'
+  - '`cal_medianscaled`'
+  - '`cal_sMAPE`'
+  - '`classify_labels`'
+  - '`classlabel`'
+  - '`combination_forecast_inside`'
+  - '`convert_msts`'
+  - '`e_acf1`'
+  - '`fcast_accuracy`'
+  - '`features_M4H`'
+  - '`fforms_combinationforecast`'
+  - '`fforms_ensemble`'
+  - '`head_ts`'
+  - '`holtWinter_parameters`'
+  - '`holt_parameters`'
+  - '`hourly_fforms`'
+  - '`prepare_trainingset`'
+  - '`rf_forecast`'
+  - '`sim_arimabased`'
+  - '`sim_etsbased`'
+  - '`sim_mstlbased`'
+  - '`split_names`'
+  - '`stlar`'
+  - '`subset.Mcomp`'
+  - '`tail_ts`'
+  - '`unitroot`'
+
