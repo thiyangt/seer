@@ -23,7 +23,7 @@ fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h){
   #accuracyFun <- match.fun(function_name)
 
 
-Map(combination_forecast_inside, ensemble, train_test)
+purrr::map2(ensemble, train_test, combination_forecast_inside)
 
 
 }
