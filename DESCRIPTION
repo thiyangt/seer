@@ -29,3 +29,5 @@ Remotes: robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 LazyDate: true
+Suggests: 
+    testthat
