@@ -210,7 +210,7 @@ table(fcast.models)
 ```
 
 
-# Forecast combination based on FFORMS
+# Forecast combinations based on FFORMS
 
 ```{r}
 # extract only the values for two time series just for illustration
