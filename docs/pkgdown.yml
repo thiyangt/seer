@@ -1,0 +1,8 @@
+pandoc: 2.3.1
+pkgdown: 1.4.1.9000
+pkgdown_sha: dfae44ecfcc5b0ac51f9489993ddd79ad6c707c3
+articles: []
+urls:
+  reference: thiyangt.github.io/seer//reference
+  article: thiyangt.github.io/seer//articles
+
