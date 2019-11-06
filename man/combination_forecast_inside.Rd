@@ -4,12 +4,14 @@
 \alias{combination_forecast_inside}
 \title{This function is call to be inside fforms_combination}
 \usage{
-combination_forecast_inside(x, y)
+combination_forecast_inside(x, y, h)
 }
 \arguments{
 \item{x}{weights and names of models}
 
 \item{y}{time series values}
+
+\item{h}{forecast horizon}
 
 \item{fforms.ensemble}{a list output from fforms_ensemble function}
 }

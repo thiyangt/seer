@@ -214,7 +214,8 @@ table(fcast.models)
 
 ```{r}
 # extract only the values for two time series just for illustration
-votes.matrix <- rf$randomforest$votes[1:2,]
+yearly_m1_features <- features_m1[1:2,]
+votes.matrix <- predict(rf$randomforest, yearly_m1_features, type="vote")
 tslist <- yearly_m1[1:2]
 # To identify models and weights for forecast combination
 models_and_weights_for_combinations <- fforms_ensemble(votes.matrix, threshold=0.6)

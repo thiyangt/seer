@@ -4,16 +4,18 @@
 #' @param fforms.ensemble a list output from fforms_ensemble function
 #' @param x weights and names of models
 #' @param y time series values
+#' @param h forecast horizon
 #' @return list of combination forecasts corresponds to point, lower and upper
 #' @author Thiyanga Talagala
 #' @export
-  combination_forecast_inside <- function(x, y){
+  combination_forecast_inside <- function(x, y, h){
     # x - list containing the forecast models and weight (ensemble)
     # y - list of time series (train_test)
 
     training <- y$training
     test <-  y$test
-    h <- length(test)
+    if(is.na(h) == TRUE){
+    h <- length(test)}
     m <- frequency(training)
 
     predictions <- names(x) ## model names
