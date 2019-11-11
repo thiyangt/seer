@@ -24,7 +24,9 @@ Imports:
         stringr,
         tibble,
         purrr,
-        ForeCA
+        ForeCA,
+        furrr,
+        future
 Remotes: robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 6.1.1

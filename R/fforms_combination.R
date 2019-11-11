@@ -5,11 +5,15 @@
 #' @param tslist list of new time series
 #' @param database whethe the time series is from mcom or other
 #' @param h length of the forecast horizon
+#' @param parallel If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
+#' when there are a large number of time series.
 #' @return a list containing, point forecast, confidence interval, accuracy measure
 #' @importFrom purrr map2
+#' @importFrom furrr future_map2
+#' @importFrom future plan
 #' @author Thiyanga Talagala
 #' @export
-fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h){
+fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h, parallel=FALSE){
 
   ## tslist
   if (database == "other") {
@@ -21,9 +25,14 @@ fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h){
   ensemble <- lapply(fforms.ensemble, function(temp){round(temp/sum(temp),2)})
 
   #accuracyFun <- match.fun(function_name)
+  if (parallel==TRUE) {
+    future::plan(future::multiprocess)
+    furrr::future_map2(ensemble, train_test, seer::combination_forecast_inside, h=h)
+  } else {
+    purrr::map2(ensemble, train_test, seer::combination_forecast_inside, h=h)
+  }
 
 
-purrr::map2(ensemble, train_test, combination_forecast_inside, h=h)
 
 
 }
