@@ -7,13 +7,11 @@
 combination_forecast_inside(x, y, h)
 }
 \arguments{
-\item{x}{weights and names of models}
+\item{x}{weights and names of models (output based on fforms.ensemble)}
 
 \item{y}{time series values}
 
 \item{h}{forecast horizon}
-
-\item{fforms.ensemble}{a list output from fforms_ensemble function}
 }
 \value{
 list of combination forecasts corresponds to point, lower and upper
