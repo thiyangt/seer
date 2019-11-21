@@ -18,7 +18,7 @@
     m <- frequency(training)
 
     predictions <- names(x) ## model names
-    length.x <- length(predictions)
+    length.x <- length(x)
 
     fcast <- list()
     forecast_mean <- matrix(NA, ncol=h, nrow = length.x)

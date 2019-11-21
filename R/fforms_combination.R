@@ -24,12 +24,14 @@ fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h, par
   ## fforms.ensemble, normalize the weights
   ensemble <- lapply(fforms.ensemble, function(temp){round(temp/sum(temp),2)})
 
+  possible_forecast <- purrr::possibly(combination_forecast_inside, otherwise = NA_real_)
+
   #accuracyFun <- match.fun(function_name)
   if (parallel==TRUE) {
     future::plan(future::multiprocess)
-    furrr::future_map2(ensemble, train_test, seer::combination_forecast_inside, h=h)
+    furrr::future_map2(ensemble, train_test, possible_forecast, h=h)
   } else {
-    purrr::map2(ensemble, train_test, seer::combination_forecast_inside, h=h)
+    purrr::map2(ensemble, train_test, possible_forecast, h=h)
   }
 
 
