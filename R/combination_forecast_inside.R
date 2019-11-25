@@ -28,162 +28,162 @@
     for (i in 1:length.x){
 
       if (predictions[i] == "ARIMA") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_arima <- auto.arima(training, seasonal = FALSE)
-          fcast[[i]] <- forecast(fit_arima,h, level=c(95))
+          forecast(fit_arima,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))})
+          rwf(training, drift = FALSE, h=h, level=c(95))})
 
       } else if (predictions[i] == "ARMA/AR/MA") {
-          tryCatch({
+        fcast[[i]] <-  tryCatch({
           fit_arma <- auto.arima(training,d=0, stationary=TRUE, seasonal = FALSE)
-          fcast[[i]] <- forecast(fit_arma,h, level=c(95))
+          forecast(fit_arma,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       }else if (predictions[i] == "SARIMA") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_sarima <- auto.arima(training, seasonal=TRUE)
-          fcast[[i]] <- forecast(fit_sarima,h, level=c(95))
+          forecast(fit_sarima,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       }  else if (predictions[i] == "ETS-dampedtrend") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_ets <- ets(training, model= "ZZN", damped = TRUE)
-          fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+          forecast(fit_ets,h, level=c(95))
           }, error=function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "ETS-notrendnoseasonal") {
-          tryCatch({
+        fcast[[i]] <-  tryCatch({
           fit_ets <- ets(training, model= "ZNN", damped = FALSE)
-          fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+          forecast(fit_ets,h, level=c(95))
           }, error=function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "ETS-trend") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_ets <- ets(training, model= "ZZN", damped = FALSE)
-          fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+          forecast(fit_ets,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "ETS-trendseasonal") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_ets <- ets(training, model= "ZZZ", damped = FALSE)
-          fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+          forecast(fit_ets,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       }else if (predictions[i] == "ETS-dampedtrendseasonal") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_ets <- ets(training, model= "ZZZ", damped = TRUE)
-          fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+          forecast(fit_ets,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       }else if (predictions[i] == "ETS-seasonal") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
           fit_ets <- ets(training, model= "ZNZ")
-          fcast[[i]] <- forecast(fit_ets,h, level=c(95))
+          forecast(fit_ets,h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       }else if (predictions[i] == "snaive") {
-          tryCatch({
-          fcast[[i]] <- snaive(training, h=h, level=c(95))
+        fcast[[i]] <- tryCatch({
+          snaive(training, h=h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
            })
 
       }else if (predictions[i] == "rw") {
-          tryCatch({
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+        fcast[[i]] <- tryCatch({
+          rwf(training, drift = FALSE, h=h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "rwd") {
-          tryCatch({
-          fcast[[i]] <- rwf(training, drift = TRUE, h=h, level=c(95))
+        fcast[[i]] <- tryCatch({
+          rwf(training, drift = TRUE, h=h, level=c(95))
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+          rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "stlar") {
-          tryCatch({
+        fcast[[i]] <- tryCatch({
             if(frequency(training)==1 | length(training) <= 2*frequency(training)){
-            fcast[[i]] <- forecast(auto.arima(training, max.q=0), h=h, level=c(95))
+            forecast(auto.arima(training, max.q=0), h=h, level=c(95))
             } else {
             fit_stlm <- stlm(training, modelfunction=ar)
-            fcast[[i]] <- forecast(fit_stlm, h=h, level=c(95))
+            forecast(fit_stlm, h=h, level=c(95))
             }
           }, error = function(e){
-            fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+            rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "theta") {
-           tryCatch({
+        fcast[[i]] <- tryCatch({
                 if (m > 1){
                 # using stheta method with seasonal adjustment
                 # require(forecTheta)
                 fitTheta <- forecTheta::stm(training,h=h,  s='additive', level=c(80, 90, 95))
-                fcast[[i]] <- list(mean=fitTheta$mean, lower = fitTheta$lower[,3], upper = fitTheta$upper[,3])
+                list(mean=fitTheta$mean, lower = fitTheta$lower[,3], upper = fitTheta$upper[,3])
                 }else{
                 # using thetaf method
-                fcast[[i]] <-forecast::thetaf(training,h=h, level=c(95))
+                forecast::thetaf(training,h=h, level=c(95))
                 }
              }, error = function(e){
-                  fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+                rwf(training, drift = FALSE, h=h, level=c(95))
              })
 
       } else if (predictions[i] == "nn"){
-          tryCatch({
+        fcast[[i]] <- tryCatch({
               fit_nnetar <- forecast::nnetar(training)
-              fcast[[i]] <- forecast(fit_nnetar, PI=TRUE, h=h, level=c(95))
+              forecast(fit_nnetar, PI=TRUE, h=h, level=c(95))
           }, error = function(e){
-              fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+              rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "mstl"| predictions[i] == "mstlets"){
-          tryCatch({
+          fcast[[i]] <- tryCatch({
             fit_mstl <- stlf(training, level=c(95))
-            fcast[[i]] <- forecast(fit_mstl, h=h)
+            forecast(fit_mstl, h=h)
           }, error = function(e){
-            fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+            rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "mstlarima"){
-          tryCatch({
-            fit_mstl <- stlf(training, method="arima", level=c(95))
-            fcast[[i]] <- forecast(fit_mstl, h=h)
+        fcast[[i]] <- tryCatch({
+              fit_mstl <- stlf(training, method="arima", level=c(95))
+             forecast(fit_mstl, h=h)
           }, error = function(e){
-          fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+            rwf(training, drift = FALSE, h=h, level=c(95))
           })
 
       } else if (predictions[i] == "tbats"){
-          tryCatch({
+        fcast[[i]] <- tryCatch({
             fit_tbats <- forecast::tbats(training)
-            fcast[[i]] <- forecast(fit_tbats, h=h, level=c(95))
+            forecast(fit_tbats, h=h, level=c(95))
             }, error = function(e){
-            fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+            rwf(training, drift = FALSE, h=h, level=c(95))
             })
 
       } else {
-          tryCatch({
+        fcast[[i]] <-  tryCatch({
             fit_wn <- Arima(training,order=c(0,0,0))
-            fcast[[i]] <- forecast(fit_wn,h, level=c(95))
+            forecast(fit_wn,h, level=c(95))
             }, error = function(e){
-            fcast[[i]] <- rwf(training, drift = FALSE, h=h, level=c(95))
+            rwf(training, drift = FALSE, h=h, level=c(95))
           })
       }
       forecast_mean[i,] <- as.vector(fcast[[i]]$mean)
