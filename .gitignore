@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+^data_pretrained_fforms$
 ^logo$
 ^cran-comments\.md$
 ^\.travis\.yml$
