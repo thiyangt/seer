@@ -62,18 +62,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5443.585  5830.329  6157.507  6654.600  7068.950  7443.835  7743.382
-#>  [8]  8180.413  8736.506  9250.370  9959.441 10664.407 11506.473 12449.311
-#> [15] 13378.067 14202.240 15054.063 15948.050 16704.419 17322.093
+#>  [1]  5577.054  6314.914  6930.201  7445.365  8073.958  8648.504  9057.448
+#>  [8]  9532.566 10004.548 10566.347 11101.992 11707.897 12234.434 12684.991
+#> [15] 13026.486 13376.674 13546.241 13657.485 13706.537 13575.017
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 5570.811 5948.132 6274.314 6548.900 6927.723 7210.086 7450.547
-#>  [8] 7571.963 7589.104 7548.222 7489.507 7462.012 7385.782 7430.123
-#> [15] 7377.290 7316.448 7127.993 6965.209 6599.798 6167.235
+#>  [1]  5448.285  6258.390  7017.284  7803.623  8690.582  9718.464 10820.735
+#>  [8] 11952.967 12953.427 13910.981 14980.452 15876.716 16765.762 17521.602
+#> [15] 18039.325 18541.224 19007.008 19444.040 19921.496 20471.177
 #> 
 #> 
 #> $N0002
@@ -82,18 +82,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  3468.662  4823.579  4927.655  5222.240  5853.833  4680.637  4684.963
-#>  [8]  4439.328  5612.233  6715.704  8338.688 10498.971 10353.913 10980.326
-#> [15]  8810.169  9931.004  9638.999 10063.560  9333.655 10558.432
+#>  [1] 3385.234 3436.448 4715.207 4386.325 4412.782 5005.277 4524.114
+#>  [8] 5132.613 5058.598 4381.116 4706.906 5875.084 3982.196 4656.483
+#> [15] 4453.654 3405.535 3036.869 2363.306 2555.072 3264.096
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4629.357 6228.879 6294.677 7723.871 8037.572 6761.297 7579.713
-#>  [8] 8605.854 8169.177 7216.051 7349.928 6609.993 7316.051 7633.437
-#> [15] 7549.975 7436.424 6045.366 5903.970 5432.606 5476.448
+#>  [1] 4402.968 4236.893 5576.135 5783.337 5594.921 5357.459 6249.231
+#>  [8] 6617.208 7399.424 7016.746 7850.106 8256.088 7485.709 7960.742
+#> [15] 7801.552 6860.931 6804.804 5385.238 5649.501 4375.603
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on
@@ -141,10 +141,10 @@ do.call(rbind, fea_sim)
 #> # A tibble: 4 x 25
 #>   entropy lumpiness stability hurst trend spikiness linearity curvature
 #> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.770         0         0 0.971 0.998   2.31e-8      3.60     0.463
-#> 2   0.779         0         0 0.966 0.989   7.84e-7      3.06    -1.62 
-#> 3   0.802         0         0 0.961 0.929   4.76e-5      3.15     1.08 
-#> 4   0.947         0         0 0.825 0.658   6.31e-4      2.08    -1.69 
+#> 1   0.768         0         0 0.972 0.999   2.62e-9      3.61   -0.0777
+#> 2   0.769         0         0 0.974 0.999   1.92e-9      3.57    0.0512
+#> 3   0.997         0         0 0.584 0.486   3.68e-3      1.91   -1.26  
+#> 4   0.853         0         0 0.958 0.916   3.90e-5      3.39   -0.287 
 #> # … with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
 #> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
 #> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, lmres_acf1 <dbl>, ur_pp <dbl>,
@@ -184,8 +184,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.2642206
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797767
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.4351110
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2799816
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -241,12 +241,12 @@ accuracy_info
 #> 
 #> $forecasts$nn
 #>          [,1]     [,2]
-#> [1,] 5522.520 4791.250
-#> [2,] 6096.511 5061.237
-#> [3,] 6602.096 5151.806
-#> [4,] 6997.215 5177.629
-#> [5,] 7272.998 5184.612
-#> [6,] 7448.706 5186.473
+#> [1,] 5515.890 4790.583
+#> [2,] 6075.555 5060.580
+#> [3,] 6559.721 5151.404
+#> [4,] 6930.749 5177.384
+#> [5,] 7185.034 5184.433
+#> [6,] 7344.637 5186.317
 ```
 
 **4. Construct a dataframe of input:features and output:lables to train
@@ -320,13 +320,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    64                     0                     0 
+#>                    65                     1                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     3                    34                    11 
+#>                     3                    24                    14 
 #>                    rw                   rwd                 theta 
-#>                     5                   521                     2 
+#>                     6                   528                     1 
 #>                    wn 
-#>                     5
+#>                     3
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
@@ -350,15 +350,15 @@ forecasts$mean
 
 # to obtain lower boundary of 95% prediction intervals
 forecasts$lower
-#>          [,1]     [,2]     [,3]     [,4]      [,5]      [,6]
-#> [1,] 4984.162 4893.098 4629.135 4199.745 3606.8577 2848.8735
-#> [2,] 2886.231 2282.484 1769.324 1294.985  841.7082  401.3586
+#>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
+#> [1,] 4984.162 4893.098 4629.135 4199.745 3606.858 2848.873
+#> [2,] 2941.377 2430.512 2028.738 1677.572 1355.680 1052.743
 
 # to obtain upper boundary of 95% prediction intervals
 forecasts$upper
 #>          [,1]     [,2]     [,3]      [,4]      [,5]     [,6]
 #> [1,] 5988.696 7178.632 8541.467 10069.729 11761.488 13618.34
-#> [2,] 5918.223 6866.424 7724.037  8542.831  9340.561 10125.36
+#> [2,] 5863.077 6718.396 7464.623  8160.243  8826.589  9473.98
 
 # to obtain MASE
 forecasts$accuracy
@@ -367,12 +367,16 @@ forecasts$accuracy
 
 #### Notes
 
-**Calculation of features for daily series**
+**Calculation of features for daily
+series**
 
 ``` r
+# install.packages("https://github.com/carlanetto/M4comp2018/releases/download/0.2.0/M4comp2018_0.2.0.tar.gz",
+#                 repos=NULL)
+library(M4comp2018)
 data(M4)
 # extract first two daily time series
-M4_daily <- subset(M4, "daily")
+M4_daily <- Filter(function(l) l$period == "Daily", M4)
 # convert daily series into msts objects
 M4_daily_msts <- lapply(M4_daily, function(temp){
   temp$x <- convert_msts(temp$x, "daily")
@@ -406,7 +410,7 @@ seer::cal_features(M4_daily_msts, seasonal=TRUE, h=14, m=7, lagmax=8L, database=
 ``` r
 data(M4)
 # extract first two daily time series
-M4_hourly <- subset(M4, "hourly")[1:2]
+M4_hourly <- Filter(function(l) l$period == "Hourly", M4)[1:2]
 ## convert data into msts object
 hourlym4_msts <- lapply(M4_hourly, function(temp){
     temp$x <- convert_msts(temp$x, "hourly")
@@ -433,19 +437,11 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
 ## Forecast hourly time series in the M4-competition data
 
 ``` r
-data("hourly_fforms")
+get_fforms("hourly") # This step takes some time to execute.
 data("features_M4H")
 fcast.models <- predict(hourly_fforms, features_M4H)
 head(fcast.models)
-#>     1     2     3     4     5     6 
-#> tbats    nn stlar stlar    nn    nn 
-#> Levels: mstlarima mstlets nn rw rwd snaive stlar tbats theta wn
 table(fcast.models)
-#> fcast.models
-#> mstlarima   mstlets        nn        rw       rwd    snaive     stlar 
-#>        93        54       119         0         0        50        39 
-#>     tbats     theta        wn 
-#>        58         0         1
 ```
 
 # Forecast combinations based on FFORMS
@@ -479,10 +475,10 @@ fforms_combinationforecast(models_and_weights_for_combinations, tslist, "M1", 6)
 #> [1,] 400921.2 417802.4 434683.5 451564.7 468445.9 485327.1
 #> 
 #> [[2]]$lower
-#>        [,1]   [,2]     [,3]     [,4]     [,5]     [,6]
-#> [1,] 356650 352528 351602.9 352141.8 353518.6 355432.8
+#>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
+#> [1,] 357623.1 355193.4 356354.4 359252.9 363194.2 367833.3
 #> 
 #> [[2]]$upper
 #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
-#> [1,] 445192.4 483076.7 517764.2 550987.6 583373.2 615221.3
+#> [1,] 444219.3 480411.3 513012.7 543876.6 573697.6 602820.9
 ```

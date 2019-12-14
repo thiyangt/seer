@@ -167,9 +167,12 @@ forecasts$accuracy
 **Calculation of features for daily series**
 
 ```{r}
+# install.packages("https://github.com/carlanetto/M4comp2018/releases/download/0.2.0/M4comp2018_0.2.0.tar.gz",
+#                 repos=NULL)
+library(M4comp2018)
 data(M4)
 # extract first two daily time series
-M4_daily <- subset(M4, "daily")
+M4_daily <- Filter(function(l) l$period == "Daily", M4)
 # convert daily series into msts objects
 M4_daily_msts <- lapply(M4_daily, function(temp){
   temp$x <- convert_msts(temp$x, "daily")
@@ -184,7 +187,7 @@ seer::cal_features(M4_daily_msts, seasonal=TRUE, h=14, m=7, lagmax=8L, database=
 ```{r}
 data(M4)
 # extract first two daily time series
-M4_hourly <- subset(M4, "hourly")[1:2]
+M4_hourly <- Filter(function(l) l$period == "Hourly", M4)[1:2]
 ## convert data into msts object
 hourlym4_msts <- lapply(M4_hourly, function(temp){
     temp$x <- convert_msts(temp$x, "hourly")
@@ -200,8 +203,8 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
 
 ## Forecast hourly time series in the M4-competition data
 
-```{r}
-data("hourly_fforms")
+```{r, eval=FALSE}
+get_fforms("hourly") # This step takes some time to execute.
 data("features_M4H")
 fcast.models <- predict(hourly_fforms, features_M4H)
 head(fcast.models)
