@@ -11,8 +11,8 @@ if (require(testthat)) {
     z <- fforms_combinationforecast(wmat, tslist, database="M1", h=6)
     expect_equal(length(z), 1L)
     expect_equal(as.vector(z[[1]]$mean), c(579581, 605761.9, 631942.9, 658123.8, 684304.8, 710485.7), tolerance=1e-4)
-    expect_equal(as.vector(z[[1]]$lower), c(517115.7, 513494.5, 514324.6, 517183.1, 521197.6, 525951), tolerance=1e-4)
-    expect_equal(as.vector(z[[1]]$upper), c(642046.3, 698029.3, 749561.1, 799064.5, 847412, 895020.4), tolerance=1e-4)
+    expect_equal(as.vector(z[[1]]$lower), c(518551.8, 517422.6, 521318.2, 527638.1, 535408.9, 544148.4), tolerance=1e-4)
+    expect_equal(as.vector(z[[1]]$upper), c(640610.1, 694101.2, 742567.5, 788609.6, 833200.6, 876823.1), tolerance=1e-4)
   })
 }
 
