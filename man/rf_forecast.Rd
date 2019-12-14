@@ -27,3 +27,6 @@ a list containing, point forecast, confidence interval, accuracy measure
 Given the prediction results of random forest calculate point forecast, 95\% confidence intervals,
 forecast-accuracy for the test set
 }
+\author{
+Thiyanga Talagala
+}

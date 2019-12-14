@@ -11,11 +11,13 @@
 #' accuracy function should be training period, test period and forecast
 #' @param h length of the forecast horizon
 #' @return a list containing, point forecast, confidence interval, accuracy measure
+#' @importFrom utils head tail
+#' @author Thiyanga Talagala
 #' @export
 rf_forecast <- function(predictions, tslist, database, function_name, h, accuracy){
 
   if (database == "other") {
-    train_test <- lapply(tslist, function(temp){list(training=head_ts(temp,h), test=tail_ts(temp, h))})
+    train_test <- lapply(tslist, function(temp){list(training=head(temp,(length(temp)-h)), test=tail(temp, h))})
   } else {
     train_test <- lapply(tslist, function(temp){list(training=temp$x, test=temp$xx)})
   }
@@ -143,3 +145,12 @@ rf_forecast <- function(predictions, tslist, database, function_name, h, accurac
   return(forecast_results)
 
 }
+#'@example
+#'library(Mcomp)
+#'data(M1)
+#'y1 <- subset(M1, "yearly")
+#'rf_forecast(predictions="rw", tslist=y1[[1]]$x, database="other", function_name=cal_MASE, h=6, accuracy=TRUE)
+#'m1 <- subset(M1, "monthly")
+#'rf_forecast(predictions="rw", tslist=m1[[1]]$x, database="other", function_name=cal_MASE, h=8, accuracy=TRUE)
+
+

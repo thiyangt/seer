@@ -10,6 +10,7 @@
 #' @param length_out number of measures calculated by a single function
 #' @param fcast_save if the argument is TRUE, forecasts from each series are saved
 #' @return a list with accuracy matrix, vector of arima models and vector of ets models
+#' @importFrom utils head tail
 #' @author Thiyanga Talagala
 #' @export
 fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
@@ -20,7 +21,7 @@ fcast_accuracy <- function(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
   ets_models <- NA
 
   if (database == "other") {
-   train_test <- lapply(tslist, function(temp){list(training=head_ts(temp,h), test=tail_ts(temp, h))})
+   train_test <- lapply(tslist, function(temp){list(training=head(temp,(length(temp)-h)), test=tail(temp, h))})
   } else {
    train_test <- lapply(tslist, function(temp){list(training=temp$x, test=temp$xx)})
   }
