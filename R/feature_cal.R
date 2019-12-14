@@ -11,6 +11,7 @@
 #' @return dataframe: each column represent a feature and each row represent a time series
 #' @importFrom magrittr %>%
 #' @importFrom utils head tail
+#' @importFrom stats ts start frequency acf ar complete.cases is.ts median model.matrix na.pass
 #' @author Thiyanga Talagala
 #' @export
 cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, highfreq){ # tslist = yearly_m1,
@@ -38,14 +39,14 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
   index_diff1_acf1 <- which(is.na(ts_features_pkg$diff1_acf1))
   if(length(index_diff1_acf1) > 0){
   for (i in 1:length(index_diff1_acf1)){
-    ts_features_pkg$diff1_acf1[index_diff1_acf1[i]] = acf( diff(train[[index_diff1_acf1[i]]], differences = 1),
+    ts_features_pkg$diff1_acf1[index_diff1_acf1[i]] = stats::acf( diff(train[[index_diff1_acf1[i]]], differences = 1),
              plot = FALSE, na.action = na.pass)$acf[-1L][1L]
   }}
 
   index_diff2_acf1 <- which(is.na(ts_features_pkg$diff2_acf1))
   if(length(index_diff2_acf1) > 0){
   for (i in 1:length(index_diff2_acf1)){
-    ts_features_pkg$diff2_acf1[index_diff2_acf1[i]] = acf(diff(train[[index_diff2_acf1[i]]], differences = 2),
+    ts_features_pkg$diff2_acf1[index_diff2_acf1[i]] = stats::acf(diff(train[[index_diff2_acf1[i]]], differences = 2),
                                                       plot = FALSE, na.action = na.pass)$acf[-1L][1L]
   }
   }

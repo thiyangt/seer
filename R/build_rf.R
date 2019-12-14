@@ -33,7 +33,7 @@ build_rf <- function(training_set, testset=FALSE, rf_type=c("ru", "rcp"), ntree,
   if (testset==FALSE){
   predictions <- NA
   } else {
-  predictions <- predict(rf, testset)}
+  predictions <- stats::predict(rf, testset)}
 
   out <- list(randomforest=rf, predictions=predictions)
   return(out)

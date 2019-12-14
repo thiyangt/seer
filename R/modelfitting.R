@@ -116,7 +116,7 @@ accuracy_theta <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
-m <- frequency(training)
+m <- stats::frequency(training)
 ACCURACY <- match.fun(function_name)
 length_training <- length(training)
 tryCatch({
@@ -195,7 +195,7 @@ accuracy_snaive <- function(ts_info, function_name, length_out){
 training <- ts_info$training
 test <- ts_info$test
 h <- length(test)
-m <- frequency(training)
+m <- forecast::findfrequency(training)
 tryCatch({
 forecastSNAIVE <- forecast::snaive(training, h=length(test))$mean
 ACCURACY <- match.fun(function_name)

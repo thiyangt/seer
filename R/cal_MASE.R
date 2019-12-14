@@ -8,7 +8,7 @@
 #'@author Thiyanga Talagala
 #'@export
 cal_MASE <- function(training, test, forecast){
- m <- frequency(training)
+ m <- stats::frequency(training)
  q_t <- abs(test-forecast)/mean(abs(diff(training, lag=m)))
  return(mean(q_t))
 }

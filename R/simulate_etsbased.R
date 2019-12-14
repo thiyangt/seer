@@ -14,6 +14,7 @@
 #' @param Length length of the simulated time series. If future = FALSE, the Length agument should be NA.
 #' @param extralength extra length need to be added for simulated time series
 #' @return A list of time series.
+#' @importFrom stats simulate ts.union
 #' @author Thiyanga Talagala
 #' @export
 sim_etsbased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA){

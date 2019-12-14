@@ -15,6 +15,7 @@
 #' @param extralength extra length need to be added for simulated time series
 #' @return A list of time series.
 #' @author Thiyanga Talagala
+#' @importFrom stats simulate
 #' @export
 sim_arimabased <- function(y, Nsim, Combine=TRUE, M=TRUE, Future=FALSE, Length=NA, extralength=NA){
     if (M ==TRUE){
