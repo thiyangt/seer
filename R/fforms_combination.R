@@ -17,7 +17,7 @@ fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h, par
 
   ## tslist
   if (database == "other") {
-    train_test <- lapply(tslist, function(temp){list(training=head_ts(temp,h), test=tail_ts(temp, h))})
+    train_test <- lapply(tslist, function(temp){list(training=head(temp,(length(temp)-h)), test=tail(temp, h))})
   } else {
     train_test <- lapply(tslist, function(temp){list(training=temp$x, test=temp$xx)})
   }

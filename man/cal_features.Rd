@@ -14,7 +14,7 @@ cal_features(tslist, seasonal = FALSE, m = 1, lagmax = 2L, database,
 
 \item{m}{frequency of the time series or minimum frequency in the case of msts objects}
 
-\item{lagmax}{maximum lag at which to calculate the acf (quarterly series-5L and monthly-13L)}
+\item{lagmax}{maximum lag at which to calculate the acf (quarterly series-5L, monthly-13L, weekly-53L, daily-8L, hourly-25L)}
 
 \item{database}{whether the time series is from mcomp or other}
 

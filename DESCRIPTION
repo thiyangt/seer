@@ -4,8 +4,8 @@ Title: Feature-based FORecast-Model Selection (FFORMS)
 Version: 1.1.4
 Authors@R: c(
     person("Thiyanga", "Talagala", email = "thiyanga.talagala@monash.edu", role = c("aut", "cre")),
-    person("Rob", "Hyndman", role = c("aut", "ths")),
-    person("George", "Athanasopoulos", role = c("aut", "ths")))
+    person("Rob J", "Hyndman", role = c("ths")),
+    person("George", "Athanasopoulos", role = c("ths")))
 Maintainer: Thiyanga Talagala <thiyanga.talagala@monash.edu>
 Description: Meta-learning framework for forecast model selection.
 License: GPL-3
@@ -26,7 +26,8 @@ Imports:
         purrr,
         ForeCA,
         future,
-        furrr
+        furrr,
+        utils
 Remotes: robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 6.1.1

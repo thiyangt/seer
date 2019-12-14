@@ -101,15 +101,12 @@ acf_seasonalDiff <- function(y,m, lagmax){ # monthly lagmax=13L, quarterly lagma
 #' @return a vector of 2 values: alpha, beta.
 #' @author Thiyanga Talagala
 #' @export
-holt_parameters <- function(x){
-  # parameter estimates of holt linear trend model
- # tryCatch({
-    fit <- forecast::holt(x)
-    output <- c(alpha = unname(fit$model$par["alpha"]),
-                beta = unname(fit$model$par["beta"]))
-    return(output)
-#  }, error=function(e){return(c(alpha=NA, beta=NA))})
-}
+#holt_parameters <- function(x){
+#    fit <- forecast::holt(x)
+#    output <- c(alpha = unname(fit$model$par["alpha"]),
+#                beta = unname(fit$model$par["beta"]))
+#    return(output)
+#}
 
 
 
