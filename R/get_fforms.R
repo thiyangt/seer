@@ -24,5 +24,11 @@ get_fforms <- function(frequency){
 return(fforms)
 }
 #'@example
-#' #Do not run
-#' #get_fforms("hourly")
+#'\donttest{
+#' get_fforms("hourly")
+#' features_M4H <- cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
+#' database="M4", highfreq = TRUE)
+#' fcast.models <- predict(hourly_fforms, features_M4H)
+#' head(fcast.models)
+#' table(fcast.models)
+#' }
