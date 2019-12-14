@@ -33,4 +33,5 @@ Encoding: UTF-8
 RoxygenNote: 6.1.1
 LazyDate: true
 Suggests: 
-    testthat
+    testthat (>= 2.1.0),
+    covr

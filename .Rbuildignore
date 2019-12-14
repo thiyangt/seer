@@ -9,3 +9,4 @@
 ^revdep$
 ^docs$
 ^data_pretrained_fforms$
+^codecov\.yml$
