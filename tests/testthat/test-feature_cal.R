@@ -37,9 +37,19 @@ if (require(testthat)) {
 if (require(testthat)) {
   context("Tests on output")
   test_that("test for feature_calfor a monthly series", {
-    library(Mcomp)
-    monthly_subset <- subset(M3, "monthly")
-    example_series <- monthly_subset[[600]]$x
+    #library(Mcomp)
+   # monthly_subset <- subset(M3, "monthly")
+    example_series <- ts(c(4160, 3960, 4170, 6180, 5520, 3750, 3400, 5170, 3890, 3580, 3130, 4950,
+                        4310, 3830, 5430, 4580, 6270, 4740, 3260, 5970, 6910, 6380, 6460, 4570,
+                        5660, 5100, 4140, 5380, 6560, 3650, 2970, 8360, 6240, 4260, 3740, 5980,
+                        6300, 4370, 4490, 7600, 6920, 3200, 2280, 5440, 5450, 4340, 2690, 6550,
+                        7650, 3870, 4290, 8530, 6200, 2260, 1600, 3580, 5480, 2990, 3260, 5490,
+                        7520, 4730, 5710, 7680, 4860, 5920, 2260, 4400, 5520, 4000, 3660, 5770,
+                        6990, 4220, 4360, 6880, 5360, 3920, 2800, 4670, 3470, 4400, 4470, 5480,
+                        5790, 3440, 4010, 7310, 6370, 2380, 2560, 5290, 4090, 4890, 4140, 7620,
+                        5600, 3650, 4540, 7090, 6320, 3270, 2750, 6630, 3080, 4180, 4410, 5490,
+                        6020, 3270, 3930, 7400, 7350, 2270, 2360, 6870, 3460, 3880, 3040, 4540,
+                        6800, 4060, 5620, 7790, 8480, 2610), frequency = 12)
     z <- cal_features(example_series, database="other", h=8, highfreq = FALSE, seasonal = TRUE, lagmax = 13L)
     expect_equal(length(z), 30L)
     expect_equal(z$entropy, 0.9037579, tolerance=1e-3)
