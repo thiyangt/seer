@@ -1,9 +1,9 @@
 Package: seer
 Type: Package
-Title: Feature-based FORecast-Model Selection (FFORMS)
+Title: Feature-based forecast model selection (FFORMS)
 Version: 1.1.4
 Authors@R: c(
-    person("Thiyanga", "Talagala", email = "thiyanga.talagala@monash.edu", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-0656-9789")),
+    person("Thiyanga", "Talagala", email = "tstalagala@gmail.com", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-0656-9789")),
     person("Rob J", "Hyndman", role = c("ths", "aut"), comment = c(ORCID = "0000-0002-2140-5352")),
     person("George", "Athanasopoulos", role = c("ths", "aut")))
 Maintainer: Thiyanga Talagala <tstalagala@gmail.com>
