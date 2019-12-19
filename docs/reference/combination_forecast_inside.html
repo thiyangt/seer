@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -109,22 +109,22 @@
     <p>Given weights and time series in a two seperate vectors calculate combination forecast</p>
     </div>
 
-    <pre class="usage"><span class='fu'>combination_forecast_inside</span>(<span class='no'>x</span>, <span class='no'>y</span>)</pre>
+    <pre class="usage"><span class='fu'>combination_forecast_inside</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>h</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>weights and names of models</p></td>
+      <td><p>weights and names of models (output based on fforms.ensemble)</p></td>
     </tr>
     <tr>
       <th>y</th>
       <td><p>time series values</p></td>
     </tr>
     <tr>
-      <th>fforms.ensemble</th>
-      <td><p>a list output from fforms_ensemble function</p></td>
+      <th>h</th>
+      <td><p>forecast horizon</p></td>
     </tr>
     </table>
 
@@ -148,7 +148,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thiyanga Talagala, Rob Hyndman, George Athanasopoulos.</p>
+  <p>Developed by Thiyanga Talagala, Rob J Hyndman, George Athanasopoulos.</p>
 </div>
 
 <div class="pkgdown">

@@ -199,20 +199,6 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
 
 ```
 
-# Pre-trained classifiers 
-
-
-## Forecast hourly time series in the M4-competition data
-
-```{r, eval=FALSE}
-get_fforms("hourly") # This step takes some time to execute.
-features_M4H <- cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L, 
-                                                         database="M4", highfreq = TRUE)
-fcast.models <- predict(hourly_fforms, features_M4H)
-head(fcast.models)
-table(fcast.models)
-
-```
 
 
 # Forecast combinations based on FFORMS

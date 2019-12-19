@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">seer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -133,8 +133,7 @@
     <p>returns a single value: mean on MASE and sMAPE</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>Mcomp</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='input'><span class='no'>ts</span> <span class='kw'>&lt;-</span> <span class='no'>M3</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>x</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>Mcomp</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Mcomp</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: forecast</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: magrittr</span></div><div class='input'><span class='no'>ts</span> <span class='kw'>&lt;-</span> <span class='no'>M3</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>x</span>
 <span class='no'>fcast_arima</span> <span class='kw'>&lt;-</span> <span class='fu'>auto.arima</span>(<span class='no'>ts</span>) <span class='kw'>%&gt;%</span> <span class='fu'>forecast</span>(<span class='kw'>h</span><span class='kw'>=</span><span class='fl'>6</span>)
 <span class='fu'>cal_m4measures</span>(<span class='no'>M3</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>x</span>, <span class='no'>M3</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>xx</span>, <span class='no'>fcast_arima</span>$<span class='no'>mean</span>)</div><div class='output co'>#&gt;     MASE    sMAPE 
 #&gt; 1.566974 6.260296 </div></pre>
@@ -155,7 +154,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Thiyanga Talagala, Rob Hyndman, George Athanasopoulos.</p>
+  <p>Developed by Thiyanga Talagala, Rob J Hyndman, George Athanasopoulos.</p>
 </div>
 
 <div class="pkgdown">

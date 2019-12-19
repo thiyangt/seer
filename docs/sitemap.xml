@@ -4,12 +4,6 @@
     <loc>thiyangt.github.io/seer//index.html</loc>
   </url>
   <url>
-    <loc>thiyangt.github.io/seer//reference/M4.html</loc>
-  </url>
-  <url>
-    <loc>thiyangt.github.io/seer//reference/Mcomp.sub.html</loc>
-  </url>
-  <url>
     <loc>thiyangt.github.io/seer//reference/accuracy_arima.html</loc>
   </url>
   <url>
@@ -97,16 +91,7 @@
     <loc>thiyangt.github.io/seer//reference/fforms_ensemble.html</loc>
   </url>
   <url>
-    <loc>thiyangt.github.io/seer//reference/head_ts.html</loc>
-  </url>
-  <url>
     <loc>thiyangt.github.io/seer//reference/holtWinter_parameters.html</loc>
-  </url>
-  <url>
-    <loc>thiyangt.github.io/seer//reference/holt_parameters.html</loc>
-  </url>
-  <url>
-    <loc>thiyangt.github.io/seer//reference/hourly_fforms.html</loc>
   </url>
   <url>
     <loc>thiyangt.github.io/seer//reference/prepare_trainingset.html</loc>
@@ -128,12 +113,6 @@
   </url>
   <url>
     <loc>thiyangt.github.io/seer//reference/stlar.html</loc>
-  </url>
-  <url>
-    <loc>thiyangt.github.io/seer//reference/subset.Mcomp.html</loc>
-  </url>
-  <url>
-    <loc>thiyangt.github.io/seer//reference/tail_ts.html</loc>
   </url>
   <url>
     <loc>thiyangt.github.io/seer//reference/unitroot.html</loc>
