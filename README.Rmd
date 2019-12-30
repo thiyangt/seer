@@ -201,7 +201,7 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
 
 
 
-# Forecast combinations based on FFORMS
+# Forecast combinations based on FFORMS algorithm
 
 ```{r}
 # extract only the values for two time series just for illustration
