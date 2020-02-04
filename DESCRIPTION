@@ -1,6 +1,6 @@
 Package: seer
 Type: Package
-Title: Feature-based forecast model selection (FFORMS)
+Title: Feature-based Forecast Model Selection (FFORMS)
 Version: 1.1.4
 Authors@R: c(
     person("Thiyanga", "Talagala", email = "tstalagala@gmail.com", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-0656-9789")),
