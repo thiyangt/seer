@@ -28,8 +28,7 @@ Imports:
         future,
         furrr,
         utils,
-        repmis,
-        tsfeatures
+        repmis
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Suggests: 
