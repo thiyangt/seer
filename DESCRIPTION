@@ -7,7 +7,7 @@ Authors@R: c(
     person("Rob J", "Hyndman", role = c("ths", "aut"), comment = c(ORCID = "0000-0002-2140-5352")),
     person("George", "Athanasopoulos", role = c("ths", "aut")))
 Maintainer: Thiyanga Talagala <tstalagala@gmail.com>
-Description: The seer package provides implementations of a novel meta-learning framework for forecast model selection using time series features. We call this framework FFORMS (Feature-based FORecast Model Selection). For more details see our paper at <https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp06-2018.pdf>.
+Description: A novel meta-learning framework for forecast model selection using time series features. Many applications require a large number of time series to be forecast. Providing better forecasts for these time series is important in decision and policy making. We propose a classification framework which selects forecast models based on features calculated from the time series. We call this framework FFORMS (Feature-based FORecast Model Selection). FFORMS builds a mapping that relates the features of time series to the best forecast model using a random forest. 'seer' package is the implementation of the FFORMS algorithm. For more details see our paper at <https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp06-2018.pdf>.
 License: GPL-3
 Depends:
     R (>= 3.2.3),
