@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feature-based FORecast-Model Selection (FFORMS) • seer</title>
+<title>Feature-Based Forecast Model Selection  • seer</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Feature-based FORecast-Model Selection (FFORMS)">
-<meta property="og:description" content="Meta-learning framework for forecast model selection.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Feature-Based Forecast Model Selection ">
+<meta property="og:description" content="A novel meta-learning framework for forecast model selection using time series features. Many applications require a large number of time series to be forecast. Providing better forecasts for these time series is important in decision and policy making. We propose a classification framework which selects forecast models based on features calculated from the time series. We call this framework FFORMS (Feature-based FORecast Model Selection). FFORMS builds a mapping that relates the features of time series to the best forecast model using a random forest. seer package is the implementation of the FFORMS algorithm. For more details see our paper at &lt;https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp06-2018.pdf&gt;.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -97,18 +97,18 @@
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; Start = 1989 </span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; End = 2008 </span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; Frequency = 1 </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  [1]  5553.357  6067.306  6592.498  6915.033  7231.669  7570.659  7858.771</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  [8]  8268.451  8721.501  9166.854  9738.535 10378.976 10996.773 11632.093</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; [15] 12338.044 13096.534 13688.195 14277.199 14964.192 15638.286</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  [1] 5369.544 5729.079 6149.873 6507.199 6843.924 7252.749 7621.885 8017.953</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  [9] 8294.018 8583.317 8767.881 8720.994 8725.451 8684.899 8639.299 8443.937</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; [17] 8149.241 7884.076 7659.592 7350.185</span></a>
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; $N0001[[2]]</span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; Time Series:</span></a>
 <a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; Start = 1989 </span></a>
 <a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; End = 2008 </span></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; Frequency = 1 </span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  [1]  5477.669  6150.038  6905.799  7680.037  8496.023  9223.622 10027.209</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  [8] 10730.627 11485.497 12360.598 13180.878 14122.278 15175.301 16358.491</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; [15] 17640.110 18859.992 20017.460 21156.348 22395.500 23582.422</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  [1]  5393.368  5795.287  6117.000  6446.731  6684.484  7058.328  7514.408</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  [8]  7950.910  8302.960  8665.244  9097.967  9549.965  9907.980 10437.311</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; [15] 10861.756 11256.578 11881.738 12366.993 12779.508 12997.572</span></a>
 <a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; $N0002</span></a>
@@ -117,18 +117,18 @@
 <a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; Start = 1989 </span></a>
 <a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; End = 2008 </span></a>
 <a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; Frequency = 1 </span></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;  [1] 4280.834 3898.332 3427.523 4238.465 4299.266 5250.991 5426.072</span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  [8] 5911.753 6409.214 7187.432 7632.871 7481.721 7326.671 8207.351</span></a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; [15] 8197.393 7373.304 8415.911 8752.583 9267.436 8566.574</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt;  [1] 4561.972 4814.660 4633.310 4686.417 5085.693 5123.139 4834.242 4418.133</span></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31"><span class="co">#&gt;  [9] 5186.091 5277.434 4563.678 4050.867 4189.216 5336.151 6466.374 8109.297</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">#&gt; [17] 9391.749 9687.012 9382.672 7839.268</span></a>
 <a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-34" data-line-number="34"><span class="co">#&gt; $N0002[[2]]</span></a>
 <a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt; Time Series:</span></a>
 <a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt; Start = 1989 </span></a>
 <a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">#&gt; End = 2008 </span></a>
 <a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt; Frequency = 1 </span></a>
-<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="co">#&gt;  [1] 4353.0663 3518.6949 3610.8589 3509.6135 3919.0933 3669.0019 3919.8088</span></a>
-<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="co">#&gt;  [8] 3156.3107 3113.5921 3862.1649 2674.7364 1179.8494 1546.0183  407.8915</span></a>
-<a class="sourceLine" id="cb3-41" data-line-number="41"><span class="co">#&gt; [15]  254.5333  812.9707  851.1446 1223.9160 1221.2984  919.8235</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="co">#&gt;  [1] 4328.984 5473.594 6121.650 5553.658 5631.551 5830.288 5427.147 5322.990</span></a>
+<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="co">#&gt;  [9] 5968.188 6473.501 6192.066 5953.731 5994.102 4523.225 4488.522 5208.188</span></a>
+<a class="sourceLine" id="cb3-41" data-line-number="41"><span class="co">#&gt; [17] 5264.165 4867.870 4324.461 3389.217</span></a></code></pre></div>
 <p>Similarly, <code>sim_etsbased</code> can be used to simulate time series based on ETS models.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">simulated_ets &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(m3y, sim_etsbased, <span class="dt">Future=</span><span class="ot">TRUE</span>, <span class="dt">Nsim=</span><span class="dv">2</span>, <span class="dt">extralength=</span><span class="dv">6</span>, <span class="dt">Combine=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">simulated_ets</a></code></pre></div>
@@ -138,36 +138,34 @@
 <a class="sourceLine" id="cb5-2" data-line-number="2">M3yearly_features &lt;-<span class="st"> </span>seer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/seer/man/cal_features.html">cal_features</a></span>(yearly_m3, <span class="dt">database=</span><span class="st">"M3"</span>, <span class="dt">h=</span><span class="dv">6</span>, <span class="dt">highfreq =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(M3yearly_features)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; # A tibble: 6 x 25</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 1   0.773         0         0 0.971 0.995   2.37e-7     3.58      0.424</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 2   0.837         0         0 0.947 0.869   1.79e-4     2.05     -2.08 </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 3   0.825         0         0 0.949 0.865   1.93e-4     1.75     -2.26 </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 4   0.854         0         0 0.949 0.853   3.68e-4     2.87     -1.25 </span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 5   0.899         0         0 0.855 0.586   1.27e-3    -0.765    -1.77 </span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 6   0.798         0         0 0.964 0.964   2.17e-5     3.56     -0.574</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; # … with 17 more variables: e_acf1 &lt;dbl&gt;, y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; #   diff2y_acf1 &lt;dbl&gt;, y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; #   diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;, lmres_acf1 &lt;dbl&gt;, ur_pp &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; #   ur_kpss &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;, diff1y_acf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; #   diff2y_acf5 &lt;dbl&gt;, alpha &lt;dbl&gt;, beta &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature e_acf1</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 1   0.773         0         0 0.971 0.995   2.37e-7     3.58      0.424  0.412</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 2   0.837         0         0 0.947 0.869   1.79e-4     2.05     -2.08   0.324</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 3   0.825         0         0 0.949 0.865   1.93e-4     1.75     -2.26   0.457</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 4   0.854         0         0 0.949 0.853   3.68e-4     2.87     -1.25   0.281</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 5   0.899         0         0 0.855 0.586   1.27e-3    -0.765    -1.77   0.192</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 6   0.798         0         0 0.964 0.964   2.17e-5     3.56     -0.574  0.181</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; # … with 16 more variables: y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;, diff2y_acf1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; #   y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;, diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; #   lmres_acf1 &lt;dbl&gt;, ur_pp &lt;dbl&gt;, ur_kpss &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; #   diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;, alpha &lt;dbl&gt;, beta &lt;dbl&gt;</span></a></code></pre></div>
 <p><strong>Calculate features from the simulated time series in the step 1</strong></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">features_simulated_arima &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(simulated_arima, <span class="cf">function</span>(temp){</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(temp, cal_features, <span class="dt">h=</span><span class="dv">6</span>, <span class="dt">database=</span><span class="st">"other"</span>, <span class="dt">highfreq=</span><span class="ot">FALSE</span>)})</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">fea_sim &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(features_simulated_arima, <span class="cf">function</span>(temp){<span class="kw"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(rbind, temp)})</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(rbind, fea_sim)</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; # A tibble: 4 x 25</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; *   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1   0.769         0         0 0.971 0.998   3.06e-8      3.62     0.319</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 2   0.768         0         0 0.972 0.999   4.15e-9      3.62     0.163</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 3   0.807         0         0 0.969 0.955   2.07e-5      3.40     0.250</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 4   0.841         0         0 0.934 0.855   3.34e-4     -3.19    -1.19 </span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; # … with 17 more variables: e_acf1 &lt;dbl&gt;, y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; #   diff2y_acf1 &lt;dbl&gt;, y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; #   diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;, lmres_acf1 &lt;dbl&gt;, ur_pp &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; #   ur_kpss &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;, diff1y_acf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; #   diff2y_acf5 &lt;dbl&gt;, alpha &lt;dbl&gt;, beta &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   entropy lumpiness stability hurst  trend spikiness linearity curvature e_acf1</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; *   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1   0.775         0         0 0.973 0.995    2.33e-7    3.41      -0.729 0.600 </span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 2   0.767         0         0 0.973 0.999    6.71e-9    3.62       0.140 0.237 </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 3   0.986         0         0 0.500 0.0584   7.30e-3   -0.0925    -0.713 0.0383</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 4   0.986         0         0 0.500 0.383    3.33e-3    0.512     -1.35  0.0357</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; # … with 16 more variables: y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;, diff2y_acf1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; #   y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;, diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; #   lmres_acf1 &lt;dbl&gt;, ur_pp &lt;dbl&gt;, ur_kpss &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; #   diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;, alpha &lt;dbl&gt;, beta &lt;dbl&gt;</span></a></code></pre></div>
 <p><strong>3. Calculate forecast accuracy measure(s)</strong></p>
 <p><code>fcast_accuracy</code> function can be used to calculate forecast error measure (in the following example MASE) from each candidate model. This step is the most computationally intensive and time-consuming, as each candidate model has to be estimated on each series. In the following example ARIMA(arima), ETS(ets), random walk(rw), random walk with drift(rwd), standard theta method(theta) and neural network time series forecasts(nn) are used as possible models. In addition to these models following models can also be used in the case of handling seasonal time series,</p>
 <ul>
@@ -182,8 +180,8 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3">accuracy_info</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; $accuracy</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;         arima       ets       rw       rwd    theta        nn</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5408796</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797441</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5621289</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2803508</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; $ARIMA</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"</span></a>
@@ -239,12 +237,12 @@
 <a class="sourceLine" id="cb7-60" data-line-number="60"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-61" data-line-number="61"><span class="co">#&gt; $forecasts$nn</span></a>
 <a class="sourceLine" id="cb7-62" data-line-number="62"><span class="co">#&gt;          [,1]     [,2]</span></a>
-<a class="sourceLine" id="cb7-63" data-line-number="63"><span class="co">#&gt; [1,] 5508.025 4791.397</span></a>
-<a class="sourceLine" id="cb7-64" data-line-number="64"><span class="co">#&gt; [2,] 6056.273 5061.414</span></a>
-<a class="sourceLine" id="cb7-65" data-line-number="65"><span class="co">#&gt; [3,] 6527.626 5151.932</span></a>
-<a class="sourceLine" id="cb7-66" data-line-number="66"><span class="co">#&gt; [4,] 6887.316 5177.717</span></a>
-<a class="sourceLine" id="cb7-67" data-line-number="67"><span class="co">#&gt; [5,] 7133.450 5184.683</span></a>
-<a class="sourceLine" id="cb7-68" data-line-number="68"><span class="co">#&gt; [6,] 7288.078 5186.538</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-63" data-line-number="63"><span class="co">#&gt; [1,] 5509.039 4788.626</span></a>
+<a class="sourceLine" id="cb7-64" data-line-number="64"><span class="co">#&gt; [2,] 6056.784 5058.294</span></a>
+<a class="sourceLine" id="cb7-65" data-line-number="65"><span class="co">#&gt; [3,] 6525.291 5149.697</span></a>
+<a class="sourceLine" id="cb7-66" data-line-number="66"><span class="co">#&gt; [4,] 6880.236 5176.092</span></a>
+<a class="sourceLine" id="cb7-67" data-line-number="67"><span class="co">#&gt; [5,] 7121.104 5183.325</span></a>
+<a class="sourceLine" id="cb7-68" data-line-number="68"><span class="co">#&gt; [6,] 7271.150 5185.277</span></a></code></pre></div>
 <p><strong>4. Construct a dataframe of input:features and output:lables to train a random forest</strong></p>
 <p><code>prepare_trainingset</code> can be used to create a data frame of input:features and output: labels.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># steps 3 and 4 applied to yearly series of M1 competition</span></a>
@@ -259,19 +257,19 @@
 <a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co"># provides the training set to build a rf classifier</span></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(prep_tset<span class="op">$</span>trainingset)</a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; # A tibble: 6 x 26</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 1   0.683   0.0400      0.977 0.985 0.985   1.32e-6      4.46    0.705 </span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 2   0.711   0.0790      0.894 0.988 0.989   1.54e-6      4.47    0.613 </span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 3   0.716   0.0160      0.858 0.987 0.989   1.13e-6      4.60    0.695 </span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 4   0.761   0.00201     1.32  0.982 0.957   8.96e-6      4.48    0.0735</span></a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 5   0.628   0.00112     0.446 0.993 0.973   1.80e-6      5.77    1.21  </span></a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 6   0.708   0.00774     0.578 0.986 0.975   3.31e-6      4.75    0.748 </span></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; # … with 18 more variables: e_acf1 &lt;dbl&gt;, y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; #   diff2y_acf1 &lt;dbl&gt;, y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; #   diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;, lmres_acf1 &lt;dbl&gt;, ur_pp &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; #   ur_kpss &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;, diff1y_acf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; #   diff2y_acf5 &lt;dbl&gt;, alpha &lt;dbl&gt;, beta &lt;dbl&gt;, classlabels &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature  e_acf1</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 1   0.683   0.0400      0.977 0.985 0.985   1.32e-6      4.46    0.705  -0.0603</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 2   0.711   0.0790      0.894 0.988 0.989   1.54e-6      4.47    0.613   0.272 </span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 3   0.716   0.0160      0.858 0.987 0.989   1.13e-6      4.60    0.695   0.172 </span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 4   0.761   0.00201     1.32  0.982 0.957   8.96e-6      4.48    0.0735 -0.396 </span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 5   0.628   0.00112     0.446 0.993 0.973   1.80e-6      5.77    1.21    0.0113</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 6   0.708   0.00774     0.578 0.986 0.975   3.31e-6      4.75    0.748  -0.385 </span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; # … with 17 more variables: y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;, diff2y_acf1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; #   y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;, diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; #   lmres_acf1 &lt;dbl&gt;, ur_pp &lt;dbl&gt;, ur_kpss &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; #   diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;, alpha &lt;dbl&gt;, beta &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; #   classlabels &lt;chr&gt;</span></a>
 <a class="sourceLine" id="cb8-26" data-line-number="26"></a>
 <a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co"># provides additional information about the fitted models</span></a>
 <a class="sourceLine" id="cb8-28" data-line-number="28"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(prep_tset<span class="op">$</span>modelinfo)</a>
@@ -291,21 +289,21 @@
 <p><strong>5. Train a random forest and predict class labels for new series (FFORMS: online phase)</strong></p>
 <p><code>build_rf</code> in the <code>seer</code> package enables the training of a random forest model and predict class labels (“best” forecast-model) for new time series. In the following example we use only yearly series of the M1 and M3 competitions to illustrate the code. A random forest classifier is build based on the yearly series on M1 data and predicted class labels for yearly series in the M3 competition. Users can further add the features and classlabel information calculated based on the simulated time series.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">rf &lt;-<span class="st"> </span><span class="kw"><a href="reference/build_rf.html">build_rf</a></span>(<span class="dt">training_set =</span> prep_tset<span class="op">$</span>trainingset, <span class="dt">testset=</span>M3yearly_features,  <span class="dt">rf_type=</span><span class="st">"rcp"</span>, <span class="dt">ntree=</span><span class="dv">100</span>, <span class="dt">seed=</span><span class="dv">1</span>, <span class="dt">import=</span><span class="ot">FALSE</span>, <span class="dt">mtry =</span> <span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Warning in if (testset == FALSE) {: the condition has length &gt; 1 and only</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; the first element will be used</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Warning in if (testset == FALSE) {: the condition has length &gt; 1 and only the</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; first element will be used</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># to get the predicted class labels</span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6">predictedlabels_m3 &lt;-<span class="st"> </span>rf<span class="op">$</span>predictions</a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(predictedlabels_m3)</a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; predictedlabels_m3</span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;                 ARIMA            ARMA/AR/MA       ETS-dampedtrend </span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;                    69                     2                     0 </span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;                    63                     3                     0 </span></a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; ETS-notrendnoseasonal             ETS-trend                    nn </span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;                     3                    29                    12 </span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;                     4                    22                    11 </span></a>
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;                    rw                   rwd                 theta </span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;                     8                   518                     1 </span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;                     5                   528                     5 </span></a>
 <a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;                    wn </span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt;                     3</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt;                     4</span></a>
 <a class="sourceLine" id="cb9-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co"># to obtain the random forest for future use</span></a>
 <a class="sourceLine" id="cb9-19" data-line-number="19">randomforest &lt;-<span class="st"> </span>rf<span class="op">$</span>randomforest</a></code></pre></div>
@@ -355,24 +353,24 @@
 <a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co"># calculate features</span></a>
 <a class="sourceLine" id="cb11-13" data-line-number="13">seer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/seer/man/cal_features.html">cal_features</a></span>(M4_daily_msts, <span class="dt">seasonal=</span><span class="ot">TRUE</span>, <span class="dt">h=</span><span class="dv">14</span>, <span class="dt">m=</span><span class="dv">7</span>, <span class="dt">lagmax=</span>8L, <span class="dt">database=</span><span class="st">"M4"</span>, <span class="dt">highfreq=</span><span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt; # A tibble: 4,227 x 26</span></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt;    entropy lumpiness stability hurst trend spikiness linearity curvature</span></a>
-<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt;  1   0.327   0.00214     0.621 1.000 0.993  1.09e-10     31.1      3.09 </span></a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt;  2   0.369   0.331       0.446 1.000 0.865  2.53e- 8     24.7      1.35 </span></a>
-<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt;  3   0.659   0.755       0.761 0.999 0.917  4.49e- 6      3.82     4.89 </span></a>
-<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt;  4   0.819   0.168       0.821 0.996 0.841  3.86e- 6      1.87     6.38 </span></a>
-<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt;  5   0.512   0.0140      0.991 1.000 0.988  4.64e- 8     11.3      0.878</span></a>
-<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt;  6   0.328   0.00136     0.242 1.000 0.989  1.90e-10     29.8      8.27 </span></a>
-<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt;  7   0.498   0.247       0.697 0.999 0.845  2.38e- 8     24.1      1.96 </span></a>
-<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt;  8   0.365   0.0189      1.01  1.000 0.968  2.31e- 9     30.1     -4.98 </span></a>
-<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt;  9   0.384   0.0275      1.07  1.000 0.954  4.69e- 9     29.3     -6.67 </span></a>
-<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; 10   0.509   0.00110     0.974 1.000 0.989  8.77e-10     18.3     -3.60 </span></a>
-<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; # … with 4,217 more rows, and 18 more variables: e_acf1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; #   y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;, diff2y_acf1 &lt;dbl&gt;, y_pacf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; #   diff1y_pacf5 &lt;dbl&gt;, diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; #   seas_pacf &lt;dbl&gt;, seasonal_strength1 &lt;dbl&gt;, seasonal_strength2 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; #   sediff_acf1 &lt;dbl&gt;, sediff_seacf1 &lt;dbl&gt;, sediff_acf5 &lt;dbl&gt;, N &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb11-32" data-line-number="32"><span class="co">#&gt; #   y_acf5 &lt;dbl&gt;, diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt;    entropy lumpiness stability hurst trend spikiness linearity curvature e_acf1</span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt;  1   0.327   0.00214     0.621 1.00  0.993  1.09e-10     31.1      3.09   0.976</span></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt;  2   0.369   0.331       0.446 1.00  0.865  2.53e- 8     24.7      1.35   0.986</span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt;  3   0.659   0.755       0.761 0.999 0.917  4.49e- 6      3.82     4.89   0.318</span></a>
+<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt;  4   0.819   0.168       0.821 0.996 0.841  3.86e- 6      1.87     6.38   0.290</span></a>
+<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt;  5   0.512   0.0140      0.991 1.00  0.988  4.64e- 8     11.3      0.878  0.376</span></a>
+<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt;  6   0.328   0.00136     0.242 1.00  0.989  1.90e-10     29.8      8.27   0.973</span></a>
+<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt;  7   0.498   0.247       0.697 0.999 0.845  2.38e- 8     24.1      1.96   0.809</span></a>
+<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt;  8   0.365   0.0189      1.01  1.00  0.968  2.31e- 9     30.1     -4.98   0.963</span></a>
+<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt;  9   0.384   0.0275      1.07  1.00  0.954  4.69e- 9     29.3     -6.67   0.963</span></a>
+<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; 10   0.509   0.00110     0.974 1.00  0.989  8.77e-10     18.3     -3.60   0.346</span></a>
+<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; # … with 4,217 more rows, and 17 more variables: y_acf1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; #   diff1y_acf1 &lt;dbl&gt;, diff2y_acf1 &lt;dbl&gt;, y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; #   diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;, seas_pacf &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; #   seasonal_strength1 &lt;dbl&gt;, seasonal_strength2 &lt;dbl&gt;, sediff_acf1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; #   sediff_seacf1 &lt;dbl&gt;, sediff_acf5 &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb11-32" data-line-number="32"><span class="co">#&gt; #   diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;</span></a></code></pre></div>
 <p><strong>Calculation of features for hourly series</strong></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(M4)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co"># extract first two daily time series</span></a>
@@ -386,22 +384,21 @@
 <a class="sourceLine" id="cb12-10" data-line-number="10">                                                         <span class="dt">database=</span><span class="st">"M4"</span>, <span class="dt">highfreq =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; Warning: Unknown columns: `seasonal_strength`</span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; # A tibble: 2 x 26</span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature</span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 1   0.524    0.0110    0.0899 0.999 0.626   1.92e-8      5.33    -3.51 </span></a>
-<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; 2   0.540    0.0505    0.109  0.999 0.790   6.39e-9      7.85    -0.152</span></a>
-<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; # … with 18 more variables: e_acf1 &lt;dbl&gt;, y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; #   diff2y_acf1 &lt;dbl&gt;, y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; #   diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;, seas_pacf &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; #   seasonal_strength1 &lt;dbl&gt;, seasonal_strength2 &lt;dbl&gt;, sediff_acf1 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt; #   sediff_seacf1 &lt;dbl&gt;, sediff_acf5 &lt;dbl&gt;, N &lt;int&gt;, y_acf5 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; #   diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;   entropy lumpiness stability hurst trend spikiness linearity curvature e_acf1</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 1   0.524    0.0110    0.0899 0.999 0.626   1.92e-8      5.33    -3.51   0.958</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; 2   0.540    0.0505    0.109  0.999 0.790   6.39e-9      7.85    -0.152  0.974</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; # … with 17 more variables: y_acf1 &lt;dbl&gt;, diff1y_acf1 &lt;dbl&gt;, diff2y_acf1 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; #   y_pacf5 &lt;dbl&gt;, diff1y_pacf5 &lt;dbl&gt;, diff2y_pacf5 &lt;dbl&gt;, nonlinearity &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; #   seas_pacf &lt;dbl&gt;, seasonal_strength1 &lt;dbl&gt;, seasonal_strength2 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; #   sediff_acf1 &lt;dbl&gt;, sediff_seacf1 &lt;dbl&gt;, sediff_acf5 &lt;dbl&gt;, N &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt; #   y_acf5 &lt;dbl&gt;, diff1y_acf5 &lt;dbl&gt;, diff2y_acf5 &lt;dbl&gt;</span></a></code></pre></div>
 </div>
 </div>
 </div>
-<div id="forecast-combinations-based-on-fforms" class="section level1">
+<div id="forecast-combinations-based-on-fforms-algorithm" class="section level1">
 <h1 class="hasAnchor">
-<a href="#forecast-combinations-based-on-fforms" class="anchor"></a>Forecast combinations based on FFORMS</h1>
+<a href="#forecast-combinations-based-on-fforms-algorithm" class="anchor"></a>Forecast combinations based on FFORMS algorithm</h1>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># extract only the values for two time series just for illustration</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">yearly_m1_features &lt;-<span class="st"> </span>features_m1[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,]</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">votes.matrix &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(rf<span class="op">$</span>randomforest, yearly_m1_features, <span class="dt">type=</span><span class="st">"vote"</span>)</a>

@@ -110,7 +110,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>fforms_combinationforecast</span>(<span class='no'>fforms.ensemble</span>, <span class='no'>tslist</span>, <span class='no'>database</span>, <span class='no'>h</span>,
-  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>holdout</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,6 +130,10 @@
     <tr>
       <th>h</th>
       <td><p>length of the forecast horizon</p></td>
+    </tr>
+    <tr>
+      <th>holdout</th>
+      <td><p>if holdout=TRUE take a holdout sample from your data to caldulate forecast accuracy measure, if FALSE all of the data will be used for forecasting. Default is TRUE</p></td>
     </tr>
     <tr>
       <th>parallel</th>

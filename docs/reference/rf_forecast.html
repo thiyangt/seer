@@ -111,7 +111,8 @@ forecast-accuracy for the test set" />
 forecast-accuracy for the test set</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rf_forecast</span>(<span class='no'>predictions</span>, <span class='no'>tslist</span>, <span class='no'>database</span>, <span class='no'>function_name</span>, <span class='no'>h</span>, <span class='no'>accuracy</span>)</pre>
+    <pre class="usage"><span class='fu'>rf_forecast</span>(<span class='no'>predictions</span>, <span class='no'>tslist</span>, <span class='no'>database</span>, <span class='no'>function_name</span>, <span class='no'>h</span>, <span class='no'>accuracy</span>,
+  <span class='kw'>holdout</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,8 +131,8 @@ forecast-accuracy for the test set</p>
     </tr>
     <tr>
       <th>function_name</th>
-      <td><p>to calculate accuracy measure, the arguments for the
-accuracy function should be training period, test period and forecast</p></td>
+      <td><p>specify the name of the accuracy function (for eg., cal_MASE, etc.) to calculate accuracy measure, ( if a user written function the arguments for the
+accuracy function should be training period, test period and forecast).</p></td>
     </tr>
     <tr>
       <th>h</th>
@@ -140,6 +141,10 @@ accuracy function should be training period, test period and forecast</p></td>
     <tr>
       <th>accuracy</th>
       <td><p>if true a accuaracy measure will be calculated</p></td>
+    </tr>
+    <tr>
+      <th>holdout</th>
+      <td><p>if holdout=TRUE take a holdout sample from your data to caldulate forecast accuracy measure, if FALSE all of the data will be used for forecasting. Default is TRUE</p></td>
     </tr>
     </table>
 
