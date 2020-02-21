@@ -65,18 +65,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5429.514  5910.818  6485.791  7215.982  7918.746  8595.141  9147.987
-#>  [8]  9698.474 10228.459 10884.192 11691.318 12506.187 13171.947 13773.456
-#> [15] 14425.336 15139.638 15866.310 16698.362 17645.485 18591.196
+#>  [1] 5369.544 5729.079 6149.873 6507.199 6843.924 7252.749 7621.885 8017.953
+#>  [9] 8294.018 8583.317 8767.881 8720.994 8725.451 8684.899 8639.299 8443.937
+#> [17] 8149.241 7884.076 7659.592 7350.185
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5522.095  6190.843  6852.843  7482.100  8026.487  8623.366  9387.807
-#>  [8] 10196.637 11034.950 11606.070 12211.267 12955.781 13704.424 14339.423
-#> [15] 14978.855 15632.256 16303.088 17002.430 17698.575 18353.612
+#>  [1]  5393.368  5795.287  6117.000  6446.731  6684.484  7058.328  7514.408
+#>  [8]  7950.910  8302.960  8665.244  9097.967  9549.965  9907.980 10437.311
+#> [15] 10861.756 11256.578 11881.738 12366.993 12779.508 12997.572
 #> 
 #> 
 #> $N0002
@@ -85,19 +85,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  4063.73728  3247.79136  3146.83304  2821.23474  3245.01151
-#>  [6]  2885.85146  2422.58845  1899.89887  1381.48352  1992.30318
-#> [11]   891.41036    74.43478  -403.70525 -1568.80474 -2180.45751
-#> [16] -2553.53696 -2198.43115 -2058.09596  -754.00635    85.19724
+#>  [1] 4561.972 4814.660 4633.310 4686.417 5085.693 5123.139 4834.242 4418.133
+#>  [9] 5186.091 5277.434 4563.678 4050.867 4189.216 5336.151 6466.374 8109.297
+#> [17] 9391.749 9687.012 9382.672 7839.268
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4705.040 5519.737 5971.846 4722.106 4904.005 4680.825 5040.672
-#>  [8] 5921.444 4832.704 4427.923 4929.897 6048.425 7608.317 7876.193
-#> [15] 8449.591 9737.523 9785.943 9407.830 8829.863 8043.277
+#>  [1] 4328.984 5473.594 6121.650 5553.658 5631.551 5830.288 5427.147 5322.990
+#>  [9] 5968.188 6473.501 6192.066 5953.731 5994.102 4523.225 4488.522 5208.188
+#> [17] 5264.165 4867.870 4324.461 3389.217
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on
@@ -120,19 +119,18 @@ library(tsfeatures)
 M3yearly_features <- seer::cal_features(yearly_m3, database="M3", h=6, highfreq = FALSE)
 head(M3yearly_features)
 #> # A tibble: 6 x 25
-#>   entropy lumpiness stability hurst trend spikiness linearity curvature
-#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.773         0         0 0.971 0.995   2.37e-7     3.58      0.424
-#> 2   0.837         0         0 0.947 0.869   1.79e-4     2.05     -2.08 
-#> 3   0.825         0         0 0.949 0.865   1.93e-4     1.75     -2.26 
-#> 4   0.854         0         0 0.949 0.853   3.68e-4     2.87     -1.25 
-#> 5   0.899         0         0 0.855 0.586   1.27e-3    -0.765    -1.77 
-#> 6   0.798         0         0 0.964 0.964   2.17e-5     3.56     -0.574
-#> # … with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
-#> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
-#> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, lmres_acf1 <dbl>, ur_pp <dbl>,
-#> #   ur_kpss <dbl>, N <int>, y_acf5 <dbl>, diff1y_acf5 <dbl>,
-#> #   diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature e_acf1
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>  <dbl>
+#> 1   0.773         0         0 0.971 0.995   2.37e-7     3.58      0.424  0.412
+#> 2   0.837         0         0 0.947 0.869   1.79e-4     2.05     -2.08   0.324
+#> 3   0.825         0         0 0.949 0.865   1.93e-4     1.75     -2.26   0.457
+#> 4   0.854         0         0 0.949 0.853   3.68e-4     2.87     -1.25   0.281
+#> 5   0.899         0         0 0.855 0.586   1.27e-3    -0.765    -1.77   0.192
+#> 6   0.798         0         0 0.964 0.964   2.17e-5     3.56     -0.574  0.181
+#> # … with 16 more variables: y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>,
+#> #   y_pacf5 <dbl>, diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   lmres_acf1 <dbl>, ur_pp <dbl>, ur_kpss <dbl>, N <int>, y_acf5 <dbl>,
+#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>
 ```
 
 **Calculate features from the simulated time series in the step 1**
@@ -143,17 +141,16 @@ features_simulated_arima <- lapply(simulated_arima, function(temp){
 fea_sim <- lapply(features_simulated_arima, function(temp){do.call(rbind, temp)})
 do.call(rbind, fea_sim)
 #> # A tibble: 4 x 25
-#>   entropy lumpiness stability hurst trend spikiness linearity curvature
-#> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.770         0         0 0.973 0.999   6.79e-9      3.58    0.0652
-#> 2   0.770         0         0 0.973 0.999   6.54e-9      3.59    0.0602
-#> 3   0.801         0         0 0.962 0.959   2.12e-5     -3.56   -0.709 
-#> 4   0.926         0         0 0.890 0.728   5.96e-4      2.33    1.79  
-#> # … with 17 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
-#> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
-#> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, lmres_acf1 <dbl>, ur_pp <dbl>,
-#> #   ur_kpss <dbl>, N <int>, y_acf5 <dbl>, diff1y_acf5 <dbl>,
-#> #   diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>
+#>   entropy lumpiness stability hurst  trend spikiness linearity curvature e_acf1
+#> *   <dbl>     <dbl>     <dbl> <dbl>  <dbl>     <dbl>     <dbl>     <dbl>  <dbl>
+#> 1   0.775         0         0 0.973 0.995    2.33e-7    3.41      -0.729 0.600 
+#> 2   0.767         0         0 0.973 0.999    6.71e-9    3.62       0.140 0.237 
+#> 3   0.986         0         0 0.500 0.0584   7.30e-3   -0.0925    -0.713 0.0383
+#> 4   0.986         0         0 0.500 0.383    3.33e-3    0.512     -1.35  0.0357
+#> # … with 16 more variables: y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>,
+#> #   y_pacf5 <dbl>, diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   lmres_acf1 <dbl>, ur_pp <dbl>, ur_kpss <dbl>, N <int>, y_acf5 <dbl>,
+#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>
 ```
 
 **3. Calculate forecast accuracy measure(s)**
@@ -188,8 +185,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3486019
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797405
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.5621289
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2803508
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -245,12 +242,12 @@ accuracy_info
 #> 
 #> $forecasts$nn
 #>          [,1]     [,2]
-#> [1,] 5518.348 4791.385
-#> [2,] 6084.598 5061.393
-#> [3,] 6579.667 5151.910
-#> [4,] 6963.771 5177.695
-#> [5,] 7230.283 5184.662
-#> [6,] 7399.396 5186.517
+#> [1,] 5509.039 4788.626
+#> [2,] 6056.784 5058.294
+#> [3,] 6525.291 5149.697
+#> [4,] 6880.236 5176.092
+#> [5,] 7121.104 5183.325
+#> [6,] 7271.150 5185.277
 ```
 
 **4. Construct a dataframe of input:features and output:lables to train
@@ -272,19 +269,19 @@ prep_tset <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = featu
 # provides the training set to build a rf classifier
 head(prep_tset$trainingset)
 #> # A tibble: 6 x 26
-#>   entropy lumpiness stability hurst trend spikiness linearity curvature
-#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.683   0.0400      0.977 0.985 0.985   1.32e-6      4.46    0.705 
-#> 2   0.711   0.0790      0.894 0.988 0.989   1.54e-6      4.47    0.613 
-#> 3   0.716   0.0160      0.858 0.987 0.989   1.13e-6      4.60    0.695 
-#> 4   0.761   0.00201     1.32  0.982 0.957   8.96e-6      4.48    0.0735
-#> 5   0.628   0.00112     0.446 0.993 0.973   1.80e-6      5.77    1.21  
-#> 6   0.708   0.00774     0.578 0.986 0.975   3.31e-6      4.75    0.748 
-#> # … with 18 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
-#> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
-#> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, lmres_acf1 <dbl>, ur_pp <dbl>,
-#> #   ur_kpss <dbl>, N <int>, y_acf5 <dbl>, diff1y_acf5 <dbl>,
-#> #   diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>, classlabels <chr>
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature  e_acf1
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>   <dbl>
+#> 1   0.683   0.0400      0.977 0.985 0.985   1.32e-6      4.46    0.705  -0.0603
+#> 2   0.711   0.0790      0.894 0.988 0.989   1.54e-6      4.47    0.613   0.272 
+#> 3   0.716   0.0160      0.858 0.987 0.989   1.13e-6      4.60    0.695   0.172 
+#> 4   0.761   0.00201     1.32  0.982 0.957   8.96e-6      4.48    0.0735 -0.396 
+#> 5   0.628   0.00112     0.446 0.993 0.973   1.80e-6      5.77    1.21    0.0113
+#> 6   0.708   0.00774     0.578 0.986 0.975   3.31e-6      4.75    0.748  -0.385 
+#> # … with 17 more variables: y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>,
+#> #   y_pacf5 <dbl>, diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   lmres_acf1 <dbl>, ur_pp <dbl>, ur_kpss <dbl>, N <int>, y_acf5 <dbl>,
+#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>, alpha <dbl>, beta <dbl>,
+#> #   classlabels <chr>
 
 # provides additional information about the fitted models
 head(prep_tset$modelinfo)
@@ -316,19 +313,19 @@ series.
 
 ``` r
 rf <- build_rf(training_set = prep_tset$trainingset, testset=M3yearly_features,  rf_type="rcp", ntree=100, seed=1, import=FALSE, mtry = 8)
-#> Warning in if (testset == FALSE) {: the condition has length > 1 and only
-#> the first element will be used
+#> Warning in if (testset == FALSE) {: the condition has length > 1 and only the
+#> first element will be used
 
 # to get the predicted class labels
 predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    69                     1                     0 
+#>                    63                     3                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     5                    22                    17 
+#>                     4                    22                    11 
 #>                    rw                   rwd                 theta 
-#>                    10                   516                     1 
+#>                     5                   528                     5 
 #>                    wn 
 #>                     4
 
@@ -389,24 +386,24 @@ M4_daily_msts <- lapply(M4_daily, function(temp){
 # calculate features
 seer::cal_features(M4_daily_msts, seasonal=TRUE, h=14, m=7, lagmax=8L, database="M4", highfreq=TRUE)
 #> # A tibble: 4,227 x 26
-#>    entropy lumpiness stability hurst trend spikiness linearity curvature
-#>      <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#>  1   0.327   0.00214     0.621 1.000 0.993  1.09e-10     31.1      3.09 
-#>  2   0.369   0.331       0.446 1.000 0.865  2.53e- 8     24.7      1.35 
-#>  3   0.659   0.755       0.761 0.999 0.917  4.49e- 6      3.82     4.89 
-#>  4   0.819   0.168       0.821 0.996 0.841  3.86e- 6      1.87     6.38 
-#>  5   0.512   0.0140      0.991 1.000 0.988  4.64e- 8     11.3      0.878
-#>  6   0.328   0.00136     0.242 1.000 0.989  1.90e-10     29.8      8.27 
-#>  7   0.498   0.247       0.697 0.999 0.845  2.38e- 8     24.1      1.96 
-#>  8   0.365   0.0189      1.01  1.000 0.968  2.31e- 9     30.1     -4.98 
-#>  9   0.384   0.0275      1.07  1.000 0.954  4.69e- 9     29.3     -6.67 
-#> 10   0.509   0.00110     0.974 1.000 0.989  8.77e-10     18.3     -3.60 
-#> # … with 4,217 more rows, and 18 more variables: e_acf1 <dbl>,
-#> #   y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>,
-#> #   diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
-#> #   seas_pacf <dbl>, seasonal_strength1 <dbl>, seasonal_strength2 <dbl>,
-#> #   sediff_acf1 <dbl>, sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>,
-#> #   y_acf5 <dbl>, diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
+#>    entropy lumpiness stability hurst trend spikiness linearity curvature e_acf1
+#>      <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>  <dbl>
+#>  1   0.327   0.00214     0.621 1.00  0.993  1.09e-10     31.1      3.09   0.976
+#>  2   0.369   0.331       0.446 1.00  0.865  2.53e- 8     24.7      1.35   0.986
+#>  3   0.659   0.755       0.761 0.999 0.917  4.49e- 6      3.82     4.89   0.318
+#>  4   0.819   0.168       0.821 0.996 0.841  3.86e- 6      1.87     6.38   0.290
+#>  5   0.512   0.0140      0.991 1.00  0.988  4.64e- 8     11.3      0.878  0.376
+#>  6   0.328   0.00136     0.242 1.00  0.989  1.90e-10     29.8      8.27   0.973
+#>  7   0.498   0.247       0.697 0.999 0.845  2.38e- 8     24.1      1.96   0.809
+#>  8   0.365   0.0189      1.01  1.00  0.968  2.31e- 9     30.1     -4.98   0.963
+#>  9   0.384   0.0275      1.07  1.00  0.954  4.69e- 9     29.3     -6.67   0.963
+#> 10   0.509   0.00110     0.974 1.00  0.989  8.77e-10     18.3     -3.60   0.346
+#> # … with 4,217 more rows, and 17 more variables: y_acf1 <dbl>,
+#> #   diff1y_acf1 <dbl>, diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
+#> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, seas_pacf <dbl>,
+#> #   seasonal_strength1 <dbl>, seasonal_strength2 <dbl>, sediff_acf1 <dbl>,
+#> #   sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>, y_acf5 <dbl>,
+#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
 ```
 
 **Calculation of features for hourly series**
@@ -424,16 +421,15 @@ cal_features(hourlym4_msts, seasonal=TRUE, m=24, lagmax=25L,
                                                          database="M4", highfreq = TRUE)
 #> Warning: Unknown columns: `seasonal_strength`
 #> # A tibble: 2 x 26
-#>   entropy lumpiness stability hurst trend spikiness linearity curvature
-#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>
-#> 1   0.524    0.0110    0.0899 0.999 0.626   1.92e-8      5.33    -3.51 
-#> 2   0.540    0.0505    0.109  0.999 0.790   6.39e-9      7.85    -0.152
-#> # … with 18 more variables: e_acf1 <dbl>, y_acf1 <dbl>, diff1y_acf1 <dbl>,
-#> #   diff2y_acf1 <dbl>, y_pacf5 <dbl>, diff1y_pacf5 <dbl>,
-#> #   diff2y_pacf5 <dbl>, nonlinearity <dbl>, seas_pacf <dbl>,
-#> #   seasonal_strength1 <dbl>, seasonal_strength2 <dbl>, sediff_acf1 <dbl>,
-#> #   sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>, y_acf5 <dbl>,
-#> #   diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
+#>   entropy lumpiness stability hurst trend spikiness linearity curvature e_acf1
+#>     <dbl>     <dbl>     <dbl> <dbl> <dbl>     <dbl>     <dbl>     <dbl>  <dbl>
+#> 1   0.524    0.0110    0.0899 0.999 0.626   1.92e-8      5.33    -3.51   0.958
+#> 2   0.540    0.0505    0.109  0.999 0.790   6.39e-9      7.85    -0.152  0.974
+#> # … with 17 more variables: y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>,
+#> #   y_pacf5 <dbl>, diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
+#> #   seas_pacf <dbl>, seasonal_strength1 <dbl>, seasonal_strength2 <dbl>,
+#> #   sediff_acf1 <dbl>, sediff_seacf1 <dbl>, sediff_acf5 <dbl>, N <int>,
+#> #   y_acf5 <dbl>, diff1y_acf5 <dbl>, diff2y_acf5 <dbl>
 ```
 
 # Forecast combinations based on FFORMS algorithm

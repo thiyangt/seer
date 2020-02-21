@@ -171,7 +171,7 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
 #'@example
 #'myts <- list(ts(rnorm(20)), ts(rnorm(25)))
 #'cal_features(myts, database="other", h=6, highfreq=FALSE)
-#'@examplr
+#'@example
 #'set.seed(2122020)
 #'a <- rnorm(11)
 #'a <- ts(cumsum(a))
