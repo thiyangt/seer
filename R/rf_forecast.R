@@ -18,7 +18,7 @@
 rf_forecast <- function(predictions, tslist, database, function_name, h, accuracy, holdout=TRUE){
 
   if (database == "other") {
-    if (holdout==FALSE) {
+    if (holdout == FALSE) {
       train_test <- lapply(tslist, function(temp){list(training=temp)})
     } else {
     train_test <- lapply(tslist, function(temp){list(training=head(temp,(length(temp)-h)), test=tail(temp, h))})
