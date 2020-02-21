@@ -5,7 +5,7 @@
 \title{Combination forecast based on fforms}
 \usage{
 fforms_combinationforecast(fforms.ensemble, tslist, database, h,
-  parallel = FALSE)
+  holdout = TRUE, parallel = FALSE)
 }
 \arguments{
 \item{fforms.ensemble}{a list output from fforms_ensemble function}
@@ -15,6 +15,8 @@ fforms_combinationforecast(fforms.ensemble, tslist, database, h,
 \item{database}{whethe the time series is from mcom or other}
 
 \item{h}{length of the forecast horizon}
+
+\item{holdout}{if holdout=TRUE take a holdout sample from your data to caldulate forecast accuracy measure, if FALSE all of the data will be used for forecasting. Default is TRUE}
 
 \item{parallel}{If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 when there are a large number of time series.}

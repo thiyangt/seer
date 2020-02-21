@@ -4,7 +4,8 @@
 \alias{rf_forecast}
 \title{function to calculate point forecast, 95\% confidence intervals, forecast-accuracy for new series}
 \usage{
-rf_forecast(predictions, tslist, database, function_name, h, accuracy)
+rf_forecast(predictions, tslist, database, function_name, h, accuracy,
+  holdout = TRUE)
 }
 \arguments{
 \item{predictions}{prediction results obtained from  random forest classifier}
@@ -13,12 +14,14 @@ rf_forecast(predictions, tslist, database, function_name, h, accuracy)
 
 \item{database}{whethe the time series is from mcom or other}
 
-\item{function_name}{to calculate accuracy measure, the arguments for the
-accuracy function should be training period, test period and forecast}
+\item{function_name}{specify the name of the accuracy function (for eg., cal_MASE, etc.) to calculate accuracy measure, ( if a user written function the arguments for the
+accuracy function should be training period, test period and forecast).}
 
 \item{h}{length of the forecast horizon}
 
 \item{accuracy}{if true a accuaracy measure will be calculated}
+
+\item{holdout}{if holdout=TRUE take a holdout sample from your data to caldulate forecast accuracy measure, if FALSE all of the data will be used for forecasting. Default is TRUE}
 }
 \value{
 a list containing, point forecast, confidence interval, accuracy measure

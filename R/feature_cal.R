@@ -17,7 +17,11 @@
 cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, highfreq){ # tslist = yearly_m1,
 
   if (database == "other") {
+    if (h==0) {
+    train_test <- lapply(tslist, function(temp){list(training=temp)})
+    } else {
     train_test <- lapply(tslist, function(temp){list(training=head(temp,(length(temp)-h)), test=tail(temp, h))})
+    }
   } else {
     train_test <- lapply(tslist, function(temp){list(training=temp$x, test=temp$xx)})
   }
@@ -167,5 +171,10 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
 #'@example
 #'myts <- list(ts(rnorm(20)), ts(rnorm(25)))
 #'cal_features(myts, database="other", h=6, highfreq=FALSE)
+#'@examplr
+#'set.seed(2122020)
+#'a <- rnorm(11)
+#'a <- ts(cumsum(a))
+#'cal_features(a, database="other", h=0, highfreq=FALSE)
 
 

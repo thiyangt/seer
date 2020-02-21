@@ -7,28 +7,36 @@
 #' @param tslist list of new time series
 #' @param database whethe the time series is from mcom or other
 #' @param accuracy if true a accuaracy measure will be calculated
-#' @param  function_name to calculate accuracy measure, the arguments for the
-#' accuracy function should be training period, test period and forecast
+#' @param  function_name specify the name of the accuracy function (for eg., cal_MASE, etc.) to calculate accuracy measure, ( if a user written function the arguments for the
+#' accuracy function should be training period, test period and forecast).
 #' @param h length of the forecast horizon
+#' @param holdout if holdout=TRUE take a holdout sample from your data to caldulate forecast accuracy measure, if FALSE all of the data will be used for forecasting. Default is TRUE
 #' @return a list containing, point forecast, confidence interval, accuracy measure
 #' @importFrom utils head tail
 #' @author Thiyanga Talagala
 #' @export
-rf_forecast <- function(predictions, tslist, database, function_name, h, accuracy){
+rf_forecast <- function(predictions, tslist, database, function_name, h, accuracy, holdout=TRUE){
 
   if (database == "other") {
+    if (holdout==FALSE) {
+      train_test <- lapply(tslist, function(temp){list(training=temp)})
+    } else {
     train_test <- lapply(tslist, function(temp){list(training=head(temp,(length(temp)-h)), test=tail(temp, h))})
+    }
   } else {
     train_test <- lapply(tslist, function(temp){list(training=temp$x, test=temp$xx)})
   }
 
   total_ts <- length(train_test)
   accuracy_value <- numeric(total_ts)
+
   forecast_mean <- matrix(NA, nrow=total_ts, ncol=h)
   forecast_lower <- matrix(NA, nrow=total_ts, ncol=h)
   forecast_upper <- matrix(NA, nrow=total_ts, ncol=h)
 
+  if(accuracy==TRUE|holdout==FALSE){
   accuracyFun <- match.fun(function_name)
+  }
 
   for (i in 1:total_ts){
 
@@ -135,7 +143,7 @@ rf_forecast <- function(predictions, tslist, database, function_name, h, accurac
     forecast_lower[i,] <- as.vector(fcast$lower)
     forecast_upper[i,] <- as.vector(fcast$upper)
 
-    if(accuracy==TRUE){
+    if(accuracy==TRUE|holdout==TRUE){
       accuracy_value[i] <- accuracyFun(forecast=fcast$mean, training=training, test=test)
     }
 
@@ -152,5 +160,12 @@ rf_forecast <- function(predictions, tslist, database, function_name, h, accurac
 #'rf_forecast(predictions="rw", tslist=y1[[1]]$x, database="other", function_name=cal_MASE, h=6, accuracy=TRUE)
 #'m1 <- subset(M1, "monthly")
 #'rf_forecast(predictions="rw", tslist=m1[[1]]$x, database="other", function_name=cal_MASE, h=8, accuracy=TRUE)
+#'@example
+#'set.seed(2122020)
+#'a <- rnorm(11)
+#'a <- ts(cumsum(a))
+#'rf_forecast(predictions="rw", tslist=a, database="other", function_name=cal_MASE, h=6, accuracy=FALSE, holdout=FALSE)
+
+
 
 
