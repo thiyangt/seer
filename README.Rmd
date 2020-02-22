@@ -3,6 +3,7 @@ output: github_document
 ---
 # seer <img src="logo/seer.png" align="right" height="200"/>
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/seer)](https://CRAN.R-project.org/package=seer)
 [![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/thiyangt/seer.svg?branch=master)](https://travis-ci.org/thiyangt/seer)
 [![Codecov test coverage](https://codecov.io/gh/thiyangt/seer/branch/master/graph/badge.svg)](https://codecov.io/gh/thiyangt/seer?branch=master)
@@ -23,7 +24,13 @@ The `seer` package provides implementations of a novel framework for forecast mo
 
 ## Installation
 
-You can install seer from github with:
+You could install the stable version on CRAN:
+
+```{r, eval = FALSE}
+install.packages("seer")
+```
+
+You could install the development version from Github using
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
