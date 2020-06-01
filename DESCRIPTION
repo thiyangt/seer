@@ -10,12 +10,11 @@ Maintainer: Thiyanga Talagala <tstalagala@gmail.com>
 Description: A novel meta-learning framework for forecast model selection using time series features. Many applications require a large number of time series to be forecast. Providing better forecasts for these time series is important in decision and policy making. We propose a classification framework which selects forecast models based on features calculated from the time series. We call this framework FFORMS (Feature-based FORecast Model Selection). FFORMS builds a mapping that relates the features of time series to the best forecast model using a random forest. 'seer' package is the implementation of the FFORMS algorithm. For more details see our paper at <https://www.monash.edu/business/econometrics-and-business-statistics/research/publications/ebs/wp06-2018.pdf>.
 License: GPL-3
 Depends:
-    R (>= 3.6.0),
+    R (>= 3.2.3),
 Imports:
         stats,
         urca,
         forecast (>= 8.3),
-        tsfeatures,
         dplyr,
         magrittr,
         randomForest,
@@ -26,14 +25,14 @@ Imports:
         future,
         furrr,
         utils,
+        tsfeatures,
         RcppRoll (>= 0.2.2),
         ForeCA,
-        Mcomp,
-        repmis,
-        ifultools
+        Mcomp
+Remotes:
+       robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0),
-    covr,
-    tidyr
+    covr
