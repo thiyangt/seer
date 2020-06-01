@@ -19,18 +19,19 @@ Imports:
         dplyr,
         magrittr,
         randomForest,
-        Mcomp,
         forecTheta,
         stringr,
         tibble,
         purrr,
         future,
-        ForeCA,
         furrr,
         utils,
-        repmis
+        repmis,
+        RcppRoll (>= 0.2.2)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0),
-    covr
+    covr,
+    tidyr,
+    Mcomp
