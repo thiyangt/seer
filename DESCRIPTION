@@ -27,8 +27,7 @@ Imports:
         utils,
         tsfeatures,
         RcppRoll (>= 0.2.2),
-        Mcomp
-Remotes: github::robjhyndman/tsfeatures
+        Mcomp 
 Encoding: UTF-8
 RoxygenNote: 7.1.0
 Suggests: 
