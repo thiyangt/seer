@@ -4,8 +4,15 @@
 \alias{sim_arimabased}
 \title{Simulate time series based on ARIMA models}
 \usage{
-sim_arimabased(y, Nsim, Combine = TRUE, M = TRUE, Future = FALSE,
-  Length = NA, extralength = NA)
+sim_arimabased(
+  y,
+  Nsim,
+  Combine = TRUE,
+  M = TRUE,
+  Future = FALSE,
+  Length = NA,
+  extralength = NA
+)
 }
 \arguments{
 \item{y}{a time series or M-competition data time series (Mcomp)}

@@ -4,8 +4,16 @@
 \alias{sim_mstlbased}
 \title{Simulate time series based on multiple seasonal decomposition}
 \usage{
-sim_mstlbased(y, Nsim, Combine = TRUE, M = TRUE, Future = FALSE,
-  Length = NA, extralength = NA, mtd = "ets")
+sim_mstlbased(
+  y,
+  Nsim,
+  Combine = TRUE,
+  M = TRUE,
+  Future = FALSE,
+  Length = NA,
+  extralength = NA,
+  mtd = "ets"
+)
 }
 \arguments{
 \item{y}{a time series or M-competition data time series (Mcomp object)}

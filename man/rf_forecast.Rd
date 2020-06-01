@@ -4,8 +4,15 @@
 \alias{rf_forecast}
 \title{function to calculate point forecast, 95\% confidence intervals, forecast-accuracy for new series}
 \usage{
-rf_forecast(predictions, tslist, database, function_name, h, accuracy,
-  holdout = TRUE)
+rf_forecast(
+  predictions,
+  tslist,
+  database,
+  function_name,
+  h,
+  accuracy,
+  holdout = TRUE
+)
 }
 \arguments{
 \item{predictions}{prediction results obtained from  random forest classifier}

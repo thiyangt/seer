@@ -4,9 +4,16 @@
 \alias{fcast_accuracy}
 \title{calculate forecast accuracy from different forecasting methods}
 \usage{
-fcast_accuracy(tslist, models = c("ets", "arima", "rw", "rwd", "wn",
-  "theta", "stlar", "nn", "snaive", "mstlarima", "mstlets", "tbats"),
-  database, accuracyFun, h, length_out, fcast_save)
+fcast_accuracy(
+  tslist,
+  models = c("ets", "arima", "rw", "rwd", "wn", "theta", "stlar", "nn", "snaive",
+    "mstlarima", "mstlets", "tbats"),
+  database,
+  accuracyFun,
+  h,
+  length_out,
+  fcast_save
+)
 }
 \arguments{
 \item{tslist}{a list of time series}

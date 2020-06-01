@@ -4,8 +4,15 @@
 \alias{sim_etsbased}
 \title{Simulate time series based on ETS models}
 \usage{
-sim_etsbased(y, Nsim, Combine = TRUE, M = TRUE, Future = FALSE,
-  Length = NA, extralength = NA)
+sim_etsbased(
+  y,
+  Nsim,
+  Combine = TRUE,
+  M = TRUE,
+  Future = FALSE,
+  Length = NA,
+  extralength = NA
+)
 }
 \arguments{
 \item{y}{a time series or M-competition data time series (Mcomp)}

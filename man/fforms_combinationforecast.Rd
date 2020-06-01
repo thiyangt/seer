@@ -4,8 +4,14 @@
 \alias{fforms_combinationforecast}
 \title{Combination forecast based on fforms}
 \usage{
-fforms_combinationforecast(fforms.ensemble, tslist, database, h,
-  holdout = TRUE, parallel = FALSE)
+fforms_combinationforecast(
+  fforms.ensemble,
+  tslist,
+  database,
+  h,
+  holdout = TRUE,
+  parallel = FALSE
+)
 }
 \arguments{
 \item{fforms.ensemble}{a list output from fforms_ensemble function}

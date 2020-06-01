@@ -4,8 +4,15 @@
 \alias{build_rf}
 \title{build random forest classifier}
 \usage{
-build_rf(training_set, testset = FALSE, rf_type = c("ru", "rcp"),
-  ntree, seed, import = FALSE, mtry = 8)
+build_rf(
+  training_set,
+  testset = FALSE,
+  rf_type = c("ru", "rcp"),
+  ntree,
+  seed,
+  import = FALSE,
+  mtry = 8
+)
 }
 \arguments{
 \item{training_set}{data frame of features and class labels}
