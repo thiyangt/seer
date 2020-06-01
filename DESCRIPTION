@@ -28,6 +28,8 @@ Imports:
         furrr,
         utils,
         repmis
+Remotes:
+    robjhyndman/tsfeatures
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Suggests: 
