@@ -26,12 +26,14 @@ Imports:
         future,
         furrr,
         utils,
+        RcppRoll (>= 0.2.2),
+        ForeCA,
+        Mcomp,
         repmis,
-        RcppRoll (>= 0.2.2)
+        ifultools
 Encoding: UTF-8
 RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0),
     covr,
-    tidyr,
-    Mcomp
+    tidyr
