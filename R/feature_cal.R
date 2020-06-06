@@ -161,12 +161,12 @@ cal_features <- function(tslist, seasonal=FALSE, m=1, lagmax=2L, database, h, hi
 #'@examples
 #'require(Mcomp)
 #'data(M3)
-#'yearly_m3 <- subset(M3, "yearly")
+#'yearly_m3 <- subset(Mcomp::M3, "yearly")
 #'cal_features(yearly_m3[1:3], database="M3", h=6, highfreq=FALSE)
 #'@examples
 #'require(Mcomp)
 #'data(M3)
-#'quarterly_m3 <- subset(M3, "quarterly")
+#'quarterly_m3 <- subset(Mcomp::M3, "quarterly")
 #'cal_features(quarterly_m3[1:3], seasonal=TRUE, m=4, lagmax=5L, database="M3", h=8, highfreq=FALSE)
 #'@example
 #'myts <- list(ts(rnorm(20)), ts(rnorm(25)))

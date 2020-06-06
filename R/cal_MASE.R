@@ -16,7 +16,7 @@ cal_MASE <- function(training, test, forecast){
 #'require(Mcomp)
 #'require(seer)
 #'require(magrittr)
-#'ts <- M3[[1]]$x
+#'ts <- Mcomp::M3[[1]]$x
 #'fcast_arima <- auto.arima(ts) %>% forecast(h=6)
 #'cal_MASE(M3[[1]]$x, M3[[1]]$xx, fcast_arima$mean)
 

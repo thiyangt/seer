@@ -22,7 +22,7 @@ Calculate MASE and sMAPE for an individual time series
 \examples{
 require(Mcomp)
 require(magrittr)
-ts <- M3[[1]]$x
+ts <- Mcomp::M3[[1]]$x
 fcast_arima <- auto.arima(ts) \%>\% forecast(h=6)
 cal_m4measures(M3[[1]]$x, M3[[1]]$xx, fcast_arima$mean)
 }
