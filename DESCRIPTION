@@ -1,7 +1,7 @@
 Package: seer
 Type: Package
 Title: Feature-Based Forecast Model Selection 
-Version: 1.1.5
+Version: 1.1.6
 Authors@R: c(
     person("Thiyanga", "Talagala", email = "tstalagala@gmail.com", role = c("aut", "cre"), comment=c(ORCID = "0000-0002-0656-9789")),
     person("Rob J", "Hyndman", role = c("ths", "aut"), comment = c(ORCID = "0000-0002-2140-5352")),
@@ -28,7 +28,7 @@ Imports:
         tsfeatures,
         MASS
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 2.1.0),
     covr,
