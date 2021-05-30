@@ -4,10 +4,10 @@ output: github_document
 # seer <img src="logo/seer.png" align="right" height="200"/>
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/seer)](https://CRAN.R-project.org/package=seer)
-[![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/)
 [![Build Status](https://travis-ci.org/thiyangt/seer.svg?branch=master)](https://travis-ci.org/thiyangt/seer)
 [![Codecov test coverage](https://codecov.io/gh/thiyangt/seer/branch/master/graph/badge.svg)](https://codecov.io/gh/thiyangt/seer?branch=master)
-[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
 [![Downloads](http://cranlogs.r-pkg.org/badges/seer)](https://cran.r-project.org/package=seer)
 
