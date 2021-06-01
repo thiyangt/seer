@@ -1,18 +1,6 @@
 
 # seer <img src="logo/seer.png" align="right" height="200"/>
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/seer)](https://CRAN.R-project.org/package=seer)
-[![Project Status: Active ? The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/)
-[![Build
-Status](https://travis-ci.org/thiyangt/seer.svg?branch=master)](https://travis-ci.org/thiyangt/seer)
-[![Codecov test
-coverage](https://codecov.io/gh/thiyangt/seer/branch/master/graph/badge.svg)](https://codecov.io/gh/thiyangt/seer?branch=master)
-[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-
-[![Downloads](http://cranlogs.r-pkg.org/badges/seer)](https://cran.r-project.org/package=seer)
-
 -----
 
 The `seer` package provides implementations of a novel framework for
@@ -74,18 +62,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 5534.099 5995.760 6302.127 6536.581 6776.046 6918.663 7080.150 7169.312
-#>  [9] 7340.848 7534.329 7663.929 7764.886 7849.713 7804.574 7615.224 7505.023
-#> [17] 7344.680 7281.240 7116.566 6906.528
+#>  [1] 5250.625 5712.954 6104.263 6334.452 6451.587 6631.049 6892.326 7084.455
+#>  [9] 7106.546 7128.279 7033.692 7147.769 7206.443 7285.990 7489.372 7699.149
+#> [17] 8064.242 8429.848 8778.885 9034.438
 #> 
 #> $N0001[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1]  5508.345  6158.141  6946.140  7794.654  8515.908  9282.426  9955.063
-#>  [8] 10593.672 11405.297 12095.897 12678.783 13214.190 13665.467 13901.732
-#> [15] 14115.241 14359.307 14611.216 14887.513 15265.617 15609.553
+#>  [1]  5510.096  6093.238  6746.888  7525.771  8308.890  9187.684 10218.533
+#>  [8] 11235.409 12141.275 13094.103 14044.905 14960.304 15924.745 16948.186
+#> [15] 17981.709 19150.732 20370.531 21614.823 22827.625 24072.370
 #> 
 #> 
 #> $N0002
@@ -94,18 +82,18 @@ simulated_arima
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 5088.146 5885.185 6845.827 6322.167 7306.801 8461.032 8863.206 8657.404
-#>  [9] 9196.772 9631.682 9830.043 9064.453 8912.493 8957.574 8857.515 7650.728
-#> [17] 7434.835 8542.394 8442.969 7380.074
+#>  [1] 3465.620 3191.829 4304.698 3847.379 3602.237 3915.753 3494.527 4362.448
+#>  [9] 4035.779 3747.029 4624.970 4118.961 2934.112 3181.819 2989.654 3371.835
+#> [17] 3140.430 1889.399 2725.146 2660.041
 #> 
 #> $N0002[[2]]
 #> Time Series:
 #> Start = 1989 
 #> End = 2008 
 #> Frequency = 1 
-#>  [1] 4460.817 3875.687 4421.132 4160.590 4533.950 4246.915 4234.774 4285.818
-#>  [9] 4193.622 5746.810 5825.214 4901.483 4370.983 5563.797 4338.189 3745.741
-#> [17] 4776.466 5415.168 6318.543 5896.778
+#>  [1] 3353.043 4117.149 3383.415 3937.489 3738.965 3843.712 4469.110 4458.730
+#>  [9] 4813.231 5545.400 5543.881 4300.503 3622.531 3639.930 3532.176 2749.227
+#> [17] 2969.335 3553.993 3839.163 4763.522
 ```
 
 Similarly, `sim_etsbased` can be used to simulate time series based on
@@ -150,12 +138,12 @@ features_simulated_arima <- lapply(simulated_arima, function(temp){
 fea_sim <- lapply(features_simulated_arima, function(temp){do.call(rbind, temp)})
 do.call(rbind, fea_sim)
 #> # A tibble: 4 x 25
-#>   entropy lumpiness stability hurst trend  spikiness linearity curvature  e_acf1
-#> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>      <dbl>     <dbl>     <dbl>   <dbl>
-#> 1   0.468         0         0 0.970 0.992    8.21e-7      3.53    -0.659 0.107  
-#> 2   0.426         0         0 0.973 0.999    1.28e-8      3.56    -0.234 0.292  
-#> 3   0.144         0         0 0.961 0.946    2.04e-5      3.00    -1.25  0.00722
-#> 4   0.967         0         0 0.733 0.426    3.75e-3      2.21     0.621 0.0380 
+#>   entropy lumpiness stability hurst trend   spikiness linearity curvature e_acf1
+#> *   <dbl>     <dbl>     <dbl> <dbl> <dbl>       <dbl>     <dbl>     <dbl>  <dbl>
+#> 1   0.579         0         0 0.965 0.980     3.22e-6     3.39     -1.10   0.344
+#> 2   0.342         0         0 0.973 1.00      1.44e-9     3.58      0.153  0.466
+#> 3   1             0         0 0.500 0.345     3.28e-3    -0.300    -1.51  -0.195
+#> 4   0.796         0         0 0.869 0.695     1.06e-3     1.04     -1.82   0.174
 #> # … with 16 more variables: y_acf1 <dbl>, diff1y_acf1 <dbl>, diff2y_acf1 <dbl>,
 #> #   y_pacf5 <dbl>, diff1y_pacf5 <dbl>, diff2y_pacf5 <dbl>, nonlinearity <dbl>,
 #> #   lmres_acf1 <dbl>, ur_pp <dbl>, ur_kpss <dbl>, N <int>, y_acf5 <dbl>,
@@ -194,8 +182,8 @@ accuracy_info <- fcast_accuracy(tslist=tslist, models= c("arima","ets","rw","rwd
 accuracy_info
 #> $accuracy
 #>         arima       ets       rw       rwd    theta        nn
-#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.3901616
-#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2800797
+#> [1,] 1.566974 1.5636089 7.703518 4.2035176 6.017236 2.4105916
+#> [2,] 1.698388 0.9229687 1.698388 0.6123443 1.096000 0.2797229
 #> 
 #> $ARIMA
 #> [1] "ARIMA(0,2,0)" "ARIMA(0,1,0)"
@@ -251,12 +239,12 @@ accuracy_info
 #> 
 #> $forecasts$nn
 #>          [,1]     [,2]
-#> [1,] 5517.188 4789.839
-#> [2,] 6080.367 5059.654
-#> [3,] 6570.262 5150.664
-#> [4,] 6948.022 5176.791
-#> [5,] 7208.472 5183.907
-#> [6,] 7372.778 5185.816
+#> [1,] 5513.254 4791.525
+#> [2,] 6072.331 5061.562
+#> [3,] 6559.748 5152.046
+#> [4,] 6937.694 5177.808
+#> [5,] 7200.498 5184.764
+#> [6,] 7368.014 5186.615
 ```
 
 **4. Construct a dataframe of input:features and output:lables to train
@@ -330,13 +318,13 @@ predictedlabels_m3 <- rf$predictions
 table(predictedlabels_m3)
 #> predictedlabels_m3
 #>                 ARIMA            ARMA/AR/MA       ETS-dampedtrend 
-#>                    64                     0                     0 
+#>                    67                     1                     0 
 #> ETS-notrendnoseasonal             ETS-trend                    nn 
-#>                     3                    23                    11 
+#>                     4                    16                     8 
 #>                    rw                   rwd                 theta 
-#>                     4                   528                     7 
+#>                     3                   532                     8 
 #>                    wn 
-#>                     5
+#>                     6
 
 # to obtain the random forest for future use
 randomforest <- rf$randomforest
@@ -355,24 +343,24 @@ forecasts <- rf_forecast(predictions=predictedlabels_m3[1:2], tslist=yearly_m3[1
 # to obtain point forecasts
 forecasts$mean
 #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
-#> [1,] 5486.429 6035.865 6585.301 7134.737 7684.173 8233.609
+#> [1,] 5486.100 6035.210 6584.320 7133.430 7682.540 8231.650
 #> [2,] 4402.227 4574.454 4746.681 4918.908 5091.135 5263.362
 
 # to obtain lower boundary of 95% prediction intervals
 forecasts$lower
 #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
-#> [1,] 4984.162 4893.098 4629.135 4199.745 3606.858 2848.873
+#> [1,] 5298.756 5616.295 5883.342 6107.303 6293.158 6444.500
 #> [2,] 2941.377 2430.512 2028.738 1677.572 1355.680 1052.743
 
 # to obtain upper boundary of 95% prediction intervals
 forecasts$upper
-#>          [,1]     [,2]     [,3]      [,4]      [,5]     [,6]
-#> [1,] 5988.696 7178.632 8541.467 10069.729 11761.488 13618.34
-#> [2,] 5863.077 6718.396 7464.623  8160.243  8826.589  9473.98
+#>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
+#> [1,] 5673.444 6454.125 7285.298 8159.557 9071.922 10018.80
+#> [2,] 5863.077 6718.396 7464.623 8160.243 8826.589  9473.98
 
 # to obtain MASE
 forecasts$accuracy
-#> [1] 1.5636089 0.6123443
+#> [1] 1.5669735 0.6123443
 ```
 
 #### Notes
