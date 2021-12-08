@@ -8,13 +8,15 @@
 #' @param parallel If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 #' when there are a large number of time series.
 #' @param holdout if holdout=TRUE take a holdout sample from your data to caldulate forecast accuracy measure, if FALSE all of the data will be used for forecasting. Default is TRUE
+#' @param multiprocess The function from the \code{future} package to use for parallel processing. Either
+#' \code{\link[future]{multisession}} or \code{\link[future]{multicore}}. The latter is preferred for Linux and MacOS.
 #' @return a list containing, point forecast, confidence interval, accuracy measure
 #' @importFrom purrr map2
 #' @importFrom furrr future_map2
 #' @importFrom future plan
 #' @author Thiyanga Talagala
 #' @export
-fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h, holdout=TRUE, parallel=FALSE){
+fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h, holdout=TRUE, parallel=FALSE, multiprocess = future::multisession){
 
   ## tslist
   if (database == "other") {
@@ -33,7 +35,8 @@ fforms_combinationforecast <- function(fforms.ensemble, tslist, database, h, hol
 
   #accuracyFun <- match.fun(function_name)
   if (parallel==TRUE) {
-    future::plan(future::multiprocess)
+    old_plan <- future::plan(multiprocess)
+    on.exit(future::plan(old_plan))
     furrr::future_map2(ensemble, train_test, possible_forecast, h=h)
   } else {
     purrr::map2(ensemble, train_test, possible_forecast, h=h)

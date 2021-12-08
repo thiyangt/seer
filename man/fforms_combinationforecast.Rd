@@ -10,7 +10,8 @@ fforms_combinationforecast(
   database,
   h,
   holdout = TRUE,
-  parallel = FALSE
+  parallel = FALSE,
+  multiprocess = future::multisession
 )
 }
 \arguments{
@@ -26,6 +27,9 @@ fforms_combinationforecast(
 
 \item{parallel}{If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 when there are a large number of time series.}
+
+\item{multiprocess}{The function from the \code{future} package to use for parallel processing. Either
+\code{\link[future]{multisession}} or \code{\link[future]{multicore}}. The latter is preferred for Linux and MacOS.}
 }
 \value{
 a list containing, point forecast, confidence interval, accuracy measure
